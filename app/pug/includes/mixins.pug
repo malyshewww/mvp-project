@@ -1,0 +1,61 @@
+mixin breadcrumbs(items, last)
+	div.breadcrumbs
+		ul.breadcrumbs__list
+			each item in items
+				li.breadcrumbs__item
+					a(href="/" title=item)= item
+			if last 
+				li.breadcrumbs__item.breadcrumbs__item--last= last
+mixin menu([...items])
+	ul.menu__list
+		each item, index in items
+			li.menu__item(class={active: item.title == pageTitle})
+				a.menu__link(href=item.link)= item.title
+				if item.submenu 
+					span.menu__arrow 
+					div.submenu
+						ul.submenu__list 
+							each submenuItem, submenuIndex in item.submenu 
+								li.submenu__item(class={active: submenuItem.title == pageTitle})
+									a.submenu__link(href=submenuItem.link)= submenuItem.title
+mixin svgsprite(name)
+	svg(class=`svg-svg-${name}-dims`)&attributes(attributes)
+		use(xlink:href=`./images/icons/icons.svg#svg-${name}`)
+mixin detailFormGroup(label, inputName)
+	.detail-form__group
+		.detail-form__label= label
+		if inputName === "validity"
+			.detail-form__dates.detail-date
+				.detail-date__item.form-item
+					.detail-date__text от
+					input(type="text" placeholder="__.__.__" name=`${inputName}-from` maxlength="10").detail-form__input.form-input
+				.detail-date__item.form-item
+					.detail-date__text до
+					input(type="text" placeholder="__.__.__" name=`${inputName}-to` maxlength="10").detail-form__input.form-input
+		else
+			.form-item
+				input(type="text" placeholder="Введите значение").detail-form__input.form-input
+		.detail-form__actions 
+			.checkbox-item
+				.form-item
+					input(type="checkbox", name=inputName id=inputName)
+					label(for=inputName)
+						span 
+						| Исключить
+			button(type="button").detail-form__btn-delete.icon-close-sm Удалить условие
+		.detail-form__radiobuttons  
+			.detail-form__radiobutton.radiobutton-item
+				.form-item
+					input(type="radio", name=inputName id=`${inputName}-and` value="and" checked)
+					label(for=`${inputName}-and`) И
+			.detail-form__radiobutton.radiobutton-item
+				.form-item
+					input(type="radio", name=inputName id=`${inputName}-or` value="or")
+					label(for=`${inputName}-or`) Или
+mixin checkbox(inputLabel, inputName)
+	.checkbox-item
+		.form-item
+			input(type="checkbox", name=inputName id=inputName)
+			label(for=inputName)
+				span 
+				| #{inputLabel}

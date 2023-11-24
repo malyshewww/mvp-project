@@ -1,0 +1,29 @@
+header.header#header
+	.header__body
+		.header__left
+			.header__logo 
+				a.logo(href="/")
+					img(src="images/logo.svg", alt="логотип")
+			nav.header__links
+				a(href="").header__link Список товарных знаков
+				a(href="").header__link Необходимо продление в ближайшее время
+		.header__actions 
+			.header__language.language-header
+				.language-header__current.icon-arrow-down Ru
+				.language-header__choice
+					ul.language-header__list 
+						li.language-header__item 
+							a(href="#").language-header__link English
+						li.language-header__item 
+							a(href="#").language-header__link.current Russian
+			a(href="#").header__link Помощь
+			.header__user.user-header
+				.user-header__data managerwebs@yandex.ru
+				.user-header__dropdown 
+					.user-header__top managerwebs@yandex.ru
+					ul.user-header__list 
+						li.user-header__item 
+							a(href="#").user-header__link.icon-settings Настройки профиля
+						li.user-header__item 
+							a(href="#").user-header__link.icon-exit Выйти
+

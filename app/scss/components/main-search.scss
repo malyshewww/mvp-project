@@ -1,0 +1,114 @@
+.main-search {
+    &__header {
+        margin-bottom: 30px;
+        & .form-item {
+            position: relative;
+            width: 100%;
+        }
+    }
+    &__form {
+    }
+    &__input {
+        border-radius: 6px;
+        border: 1px solid $gray;
+        background: $white;
+        padding: 11px;
+        min-height: 46px;
+        color: $black;
+        font-family: "Noto Sans", sans-serif;
+        font-size: 16px;
+        line-height: 120%;
+        width: 100%;
+        padding-right: 50px;
+        &::placeholder {
+            color: $gray_light;
+            font-family: "Noto Sans", sans-serif;
+            font-size: 16px;
+        }
+    }
+    &__btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 48px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &::before {
+            color: $red;
+            font-size: 22px;
+        }
+    }
+    &__result {
+    }
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: $black;
+        font-size: 26px;
+        font-weight: 600;
+    }
+    &__title {
+        line-height: 120%;
+        font-size: inherit;
+    }
+    &__count {
+        line-height: 120%;
+        color: $red;
+    }
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    &__button {
+    }
+    &__clear {
+        color: $text_gray;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        gap: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 120%;
+        &::before {
+            color: currentColor;
+            font-size: 14px;
+        }
+    }
+}
+.form-item {
+}
+.form-input {
+}
+.icon-search {
+}
+.result-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    &__data {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    &__top {
+    }
+    &__bottom {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        & .main-search__info {
+            font-size: 18px;
+        }
+    }
+}
+.btn-black {
+}
+.icon-clear {
+}

@@ -1,0 +1,136 @@
+.header {
+    background-color: $black;
+    min-height: 107px;
+    display: flex;
+    align-items: stretch;
+    color: $white;
+    padding: 0 40px;
+    &__body {
+        display: flex;
+        justify-content: space-between;
+        flex: 1 1 auto;
+    }
+    &__left {
+        display: flex;
+        gap: 0 60px;
+    }
+    &__logo {
+    }
+    &__links {
+        display: flex;
+    }
+    &__link {
+        display: grid;
+        place-items: center;
+        padding: 40px 24px;
+        color: $white;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 120%;
+        transition: background-color 0.3s ease-in-out 0s;
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: $red;
+            }
+        }
+    }
+    &__actions {
+        display: flex;
+    }
+
+    &__language {
+    }
+
+    &__user {
+    }
+}
+.logo {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    background-color: $red;
+}
+.language-header {
+    padding: 40px 24px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out 0s;
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: $red;
+        }
+    }
+    &__current {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        font-size: 18px;
+        line-height: 120%;
+        &::before {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 8px;
+        }
+    }
+    &__choice {
+        display: none;
+    }
+
+    &__list {
+    }
+
+    &__item {
+    }
+
+    &__link {
+    }
+}
+.current {
+}
+.user-header {
+    padding: 40px 24px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    line-height: 120%;
+    transition: background-color 0.3s ease-in-out 0s;
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: $red;
+        }
+    }
+    cursor: pointer;
+    &__data {
+        display: -webkit-box;
+        -webkit-box-orient: horizontal;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        max-width: 187px;
+    }
+
+    &__dropdown {
+        display: none;
+    }
+
+    &__top {
+    }
+
+    &__list {
+    }
+
+    &__item {
+    }
+
+    &__link {
+    }
+}
+.icon-settings {
+}
+.icon-exit {
+}

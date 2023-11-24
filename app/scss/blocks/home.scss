@@ -1,0 +1,96 @@
+.main {
+    &__wrapper {
+        position: relative;
+    }
+    &__body {
+        width: 100%;
+        // padding-left: $asideWidth + 20px;
+        padding-left: $asideWidth + 350px;
+        padding-right: 40px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    &__aside {
+        width: $asideWidth + 330px;
+        padding: 35px 20px;
+        border-right: 1px solid $gray;
+        background: $white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        // height: 100%;
+        min-height: 100%;
+    }
+    &__table {
+    }
+}
+.filter {
+    &__button {
+        display: flex;
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        padding: 6px;
+        background-color: $red;
+        border-radius: 6px;
+        display: none;
+        &::before {
+            color: $white;
+            font-size: 24px;
+        }
+    }
+}
+.main-search {
+    &__form {
+    }
+    &__input {
+    }
+    &__btn {
+    }
+    &__result {
+    }
+    &__info {
+    }
+    &__title {
+    }
+    &__count {
+    }
+    &__actions {
+    }
+    &__button {
+    }
+    &__clear {
+    }
+}
+.form-item {
+}
+.form-input {
+}
+.icon-search {
+}
+.result-search {
+    &__top {
+    }
+    &__bottom {
+    }
+}
+.btn-black {
+}
+.icon-clear {
+}
+.table {
+}
+.checkbox-item {
+    &__input {
+    }
+    &__label {
+    }
+}
+.button-view {
+}
+.icon-eye {
+}

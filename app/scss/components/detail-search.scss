@@ -1,0 +1,284 @@
+.detail-search {
+    padding: 53px 20px 60px;
+    position: relative;
+    &__btn-close {
+        color: $text_gray;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 120%;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        position: absolute;
+        top: 8px;
+        right: 0px;
+        &::after {
+            content: "";
+            display: block;
+            width: 11px;
+            height: 24px;
+            mask-image: url("../images/icons/arrow-left.svg");
+            mask-repeat: no-repeat;
+            mask-position: center;
+            background-color: #4a4d56;
+        }
+    }
+    &__title {
+        color: $black;
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 120%;
+        margin-bottom: 20px;
+    }
+    &__btn-doc {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        &::before {
+            content: "";
+            display: block;
+            width: 19px;
+            height: 19px;
+            background-color: $white;
+            mask-image: url("../images/icons/doc.svg");
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+    }
+
+    &__form {
+    }
+}
+.btn-black {
+}
+.detail-form {
+    padding-top: 40px;
+    &__groups {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    &__group {
+    }
+    &__label {
+        color: $black;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 120%;
+        margin-bottom: 12px;
+    }
+    &__input {
+        min-height: 43px;
+    }
+    &__actions {
+        margin: 16px 0 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &__btn-delete {
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        gap: 4px;
+        color: #868a95;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 120%;
+        transition: color 0.3s ease 0s;
+        margin-left: auto;
+        &::before {
+            width: 14px;
+            height: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+        }
+        @media (any-hover: hover) {
+            &:hover {
+                color: $red;
+            }
+        }
+    }
+    &__btn-add {
+        color: $red;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 120%;
+    }
+    &__btn-search {
+        width: 150px;
+    }
+    &__btn-clear {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        gap: 4px;
+        color: #868a95;
+        &::before {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            font-size: 14px;
+        }
+    }
+    &__radiobuttons {
+        max-width: 260px;
+        margin: 24px auto 0;
+        text-align: center;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+    }
+    &__radiobutton {
+    }
+    &__dates {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    &__bottom {
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+        &-top {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        & .detail-form__btn-add {
+            color: $black;
+        }
+    }
+}
+.detail-date {
+    & .form-input {
+        text-align: right;
+        &::placeholder {
+            text-align: right;
+        }
+    }
+    &__item {
+        position: relative;
+    }
+    &__text {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 12px;
+        color: $text_gray;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 120%;
+    }
+}
+.form-item {
+}
+.form-input {
+}
+.checkbox {
+    &__item {
+    }
+}
+.icon-close-sm {
+}
+.radiobutton-item {
+}
+.dropdown {
+    padding-bottom: 12px;
+    border-bottom: 1px solid $gray_light;
+    &.active {
+        & .dropdown__wrapper {
+            display: block;
+        }
+        & .dropdown__button {
+            &::before {
+                transform: rotate(-180deg);
+            }
+        }
+    }
+    &__button {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        align-items: center;
+        color: $black;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 120%;
+        cursor: pointer;
+        width: 100%;
+        &::before {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            font-size: 10px;
+            transition: transform 0.3s ease 0s;
+        }
+    }
+    &__wrapper {
+        margin-top: 16px;
+        width: 100%;
+        display: none;
+    }
+    &__search {
+        position: relative;
+        margin-bottom: 10px;
+        &-button {
+            position: absolute;
+            top: 0;
+            left: 12px;
+            width: 20px;
+            height: 20px;
+            &::before {
+                color: $gray_light;
+                font-size: 15px;
+            }
+        }
+    }
+    &__input {
+        width: 100%;
+        padding: 0px 12px 12px 42px;
+        font-family: "Noto Sans" sans-serif;
+        font-weight: 400;
+        line-height: 120%;
+        font-size: 15px;
+        color: $black;
+        border-bottom: 1px solid $gray_light;
+        &::placeholder {
+            font-weight: 400;
+            line-height: 120%;
+            font-size: 15px;
+            color: $gray_light;
+        }
+    }
+    &__list {
+        @include reset-list;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        overflow-y: auto;
+        height: 152px;
+    }
+    &__list-item {
+        padding: 6px 12px;
+        transition: background-color 0.3s ease 0s;
+        cursor: pointer;
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: #f1f2f7;
+            }
+        }
+    }
+}

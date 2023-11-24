@@ -1,0 +1,57 @@
+.detail-search 
+    button(type="button").detail-search__btn-close Cкрыть фильтр
+    .detail-search__title Детальный поиск по товарным знакам
+    button(type="button").detail-search__btn-doc.btn.btn-black Инструкция по работе с фильтром
+    form(action="#").detail-search__form.detail-form
+        .detail-form__groups
+            +detailFormGroup("Номер дела", "case")
+            +detailFormGroup("Номер заявки", "request")
+            +detailFormGroup("Номер регистрации", "register")
+            +detailFormGroup("Товарный знак", "trademark")
+            +detailFormGroup("Срок действия", "validity")
+            .detail-form__group
+                .dropdown
+                    button(type="button").dropdown__button.icon-arrow-down Поиск по статусу
+                    .dropdown__wrapper 
+                        .dropdown__search 
+                            input(type="text" placeholder="Поиск по статусам").dropdown__input
+                            button(type="button").dropdown__search-button.icon-search
+                        .dropdown__list 
+                            li.dropdown__list-item 
+                                +checkbox("Статус 1", "status-1")
+                            li.dropdown__list-item 
+                                +checkbox("Статус 2", "status-2")
+                            li.dropdown__list-item 
+                                +checkbox("Статус 3", "status-3")
+                            li.dropdown__list-item 
+                                +checkbox("Статус 4", "status-4")
+                .detail-form__actions 
+                    button(type="button").detail-form__btn-delete.icon-close-sm Удалить условие
+                .detail-form__radiobuttons  
+                    .detail-form__radiobutton.radiobutton-item
+                        .form-item
+                            input(type="radio", name="search-status" id=`search-status-and` value="and" checked)
+                            label(for=`search-status-and`) И
+                    .detail-form__radiobutton.radiobutton-item
+                        .form-item
+                            input(type="radio", name="search-status" id=`search-status-or` value="or")
+                            label(for=`search-status-or`) Или
+            .detail-form__group
+                .dropdown
+                    button(type="button").dropdown__button.icon-arrow-down Выберите условие
+                    .dropdown__wrapper 
+                        .dropdown__list 
+                            li.dropdown__list-item Условие 1
+                            li.dropdown__list-item Условие 2
+                            li.dropdown__list-item Условие 3
+                            li.dropdown__list-item Условие 4
+                .detail-form__actions
+                    button(type="button").detail-form__btn-add Добавить
+                    button(type="button").detail-form__btn-delete.icon-close-sm Удалить условие
+        .detail-form__bottom 
+            .detail-form__bottom-top 
+                input(type="submit", value="Найти").detail-form__btn-search.btn.btn-red
+                button(type="button").detail-form__btn-add Добавить условие
+            button(type="button").detail-form__btn-clear.icon-clear Очистить все условия
+
+
