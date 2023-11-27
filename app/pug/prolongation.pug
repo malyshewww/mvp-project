@@ -1,0 +1,16 @@
+extends includes/layout.pug
+
+append variables
+	- let pageTitle = "Необходимо продление";
+	- description += pageTitle;
+block content
+	.prolongation
+		.prolongation__body
+			.main__content
+				.prolongation__top 
+					h1.prolongation__title
+						| На данной странице отображаются товарные знаки #[span (Количество 14)], у которых до даты истечения срока осталось менее 1 года
+					.prolongation__action 
+						+checkbox("Использовать поле «Дата заявки» для вычисления срока действия, если срок действия отсутствует, либо устарел", "prolongation")
+				include ./components/main-search
+				include ./components/main-table

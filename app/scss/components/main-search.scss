@@ -79,36 +79,38 @@
             font-size: 14px;
         }
     }
-}
-.form-item {
-}
-.form-input {
-}
-.icon-search {
-}
-.result-search {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 20px;
-    &__data {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    &__top {
-    }
-    &__bottom {
+    .result-search {
         display: flex;
-        align-items: center;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
         gap: 20px;
-        & .main-search__info {
-            font-size: 18px;
+        &__data {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        &__top {
+        }
+        &__bottom {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            & .main-search__info {
+                font-size: 18px;
+            }
         }
     }
 }
-.btn-black {
-}
 .icon-clear {
+    &::before {
+        transition: transform 0.3s ease 0s;
+    }
+    @media (any-hover: hover) {
+        &:hover {
+            &::before {
+                transform: rotate(180deg);
+            }
+        }
+    }
 }

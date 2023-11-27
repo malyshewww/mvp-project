@@ -1,6 +1,9 @@
 .detail-search {
     padding: 53px 20px 60px;
     position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
     &__btn-close {
         color: $text_gray;
         font-size: 14px;
@@ -52,7 +55,9 @@
 .btn-black {
 }
 .detail-form {
-    padding-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
     &__groups {
         display: grid;
         grid-template-columns: 1fr;
@@ -142,7 +147,7 @@
         gap: 10px;
     }
     &__bottom {
-        margin-top: 40px;
+        margin-top: auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -275,6 +280,11 @@
         padding: 6px 12px;
         transition: background-color 0.3s ease 0s;
         cursor: pointer;
+        border-radius: 2px;
+        color: #4a4d56;
+        & .checkbox-item label {
+            color: inherit;
+        }
         @media (any-hover: hover) {
             &:hover {
                 background-color: #f1f2f7;

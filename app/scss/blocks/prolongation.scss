@@ -1,0 +1,45 @@
+.prolongation {
+    padding-top: 30px;
+    & .main__table {
+        & .tr {
+            grid-template-columns: 46px 91px 148px 206px 174px 111px 141px 150px 123px 161px 143px 148px 109px 89px;
+        }
+    }
+    &__body {
+        padding: 0 40px;
+    }
+    &__top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        gap: 20px 60px;
+    }
+    &__title {
+        color: $black;
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 120%;
+        max-width: 938px;
+        & span {
+            color: $red;
+        }
+    }
+    &__action {
+        max-width: 420px;
+        & .checkbox-item {
+            & label {
+                align-items: flex-start;
+                color: $black_secondary;
+                font-weight: 400;
+            }
+            & span {
+                margin-top: 4px;
+            }
+        }
+    }
+    & .main__table {
+        &::after {
+            // width: 200px;
+        }
+    }
+}

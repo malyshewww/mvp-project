@@ -176,3 +176,55 @@
         line-height: 120%;
     }
 }
+
+.main__table {
+    // simplebar
+    & .simplebar-scrollbar:before {
+        background: #868a95;
+        border-radius: 10px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+    }
+    & .simplebar-scrollbar.simplebar-visible:before {
+        opacity: 1;
+    }
+    & .simplebar-track.simplebar-horizontal {
+        height: 10px;
+        border-radius: 11px;
+        background: #f1f2f7;
+    }
+    & .simplebar-track.simplebar-horizontal .simplebar-scrollbar {
+        left: 0;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+    }
+}
+
+.page-title {
+    color: $black;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;
+}
+.btn-back {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: $red;
+    cursor: pointer;
+    &::before {
+        color: currentColor;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,44 @@
+.main__table(data-simplebar)
+    .table#mainTable
+        header.table__header
+            .tr 
+                .th.th-checkbox
+                    .checkbox-item
+                        .form-item
+                            input(type="checkbox", name="check-all" id="checkAll")
+                            label(for="checkAll")
+                                span
+                each item, index in table.head
+                    .th(class=`${item.className ? item.className : ''}`)
+                        .th-title= item.title
+                        if index > 0
+                            .sorting-buttons 
+                                button(type="button").sorting-button.sorting-button-up.icon-sort-up
+                                button(type="button").sorting-button.sorting-button-down.icon-sort-down
+                .th.th-view
+                    .th-title Просмотр
+        .table__body 
+            each item, index in table.body
+                .tr 
+                    .td.td-checkbox
+                        .checkbox-item
+                            .form-item
+                                input(type="checkbox", name=`check-${index+1}` id=index+1 value=index+1)
+                                label(for=index+1)
+                                    span
+                    .td.td-image
+                        img(src=`images/banks/${item.logo}.png`, alt="логотип банка")
+                    .td.td-case= item.caseNumber
+                    .td.td-name-sign= item.nameSign
+                    .td= item.country
+                    .td.td-classes= item.classes
+                    .td= item.owner
+                    .td.td-request-number= item.requestNumber
+                    .td= item.requestDate
+                    .td.td-register-number= item.registerNumber
+                    .td= item.registerDate
+                    .td.td-status= item.status
+                    .td.td-validity= item.validity
+                    .td.td-view 
+                        button(type="button").button-view.icon-eye
+button(type="button").main__button.btn-more Показать ещё

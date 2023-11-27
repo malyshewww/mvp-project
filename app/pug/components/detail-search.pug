@@ -1,7 +1,8 @@
 .detail-search 
     button(type="button").detail-search__btn-close Cкрыть фильтр
-    .detail-search__title Детальный поиск по товарным знакам
-    button(type="button").detail-search__btn-doc.btn.btn-black Инструкция по работе с фильтром
+    .detail-search__top
+        .detail-search__title Детальный поиск по товарным знакам
+        button(type="button").detail-search__btn-doc.btn.btn-black Инструкция по работе с фильтром
     form(action="#").detail-search__form.detail-form
         .detail-form__groups
             +detailFormGroup("Номер дела", "case")

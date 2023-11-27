@@ -1,0 +1,127 @@
+.trademark {
+    padding-top: 60px;
+    &__body {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        margin-top: 30px;
+    }
+    &__header {
+        display: grid;
+        grid-template-columns: 210px 1fr;
+        align-items: center;
+        gap: 40px;
+    }
+    &__logo {
+        padding: 49px 19px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 6px;
+        border: 1px solid #f1f2f7;
+    }
+    &__title {
+    }
+    &__wrapper {
+    }
+    &__table {
+        & .tr {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+        }
+        & .table {
+            & .th {
+                cursor: default;
+            }
+            &__body {
+                & .tr {
+                    min-height: 38px;
+                    &:first-child {
+                        & .td {
+                            border-top: 1px solid $gray;
+                            &:first-child {
+                                border-radius: 6px 0 0 0;
+                            }
+                            &:last-child {
+                                border-radius: 0px 6px 0 0;
+                            }
+                        }
+                    }
+                }
+                & .td {
+                    &:not(:last-child) {
+                        border-right: 1px solid $gray;
+                    }
+                }
+            }
+            & .td {
+                padding: 12px;
+                &-caption {
+                    font-weight: 500;
+                    color: $black;
+                }
+            }
+        }
+        &__body {
+        }
+        &__header {
+        }
+    }
+    &__table-info {
+        & .tr {
+            display: grid;
+            grid-template-columns: 255px 1fr 235px 255px;
+        }
+        & .td,
+        & .th {
+            &:first-child,
+            &:last-child {
+                justify-content: center;
+            }
+        }
+        & .table {
+            & .th {
+                color: $black;
+                font-weight: 500;
+                font-size: 16px;
+            }
+            &__header {
+                & .th {
+                    &:first-child {
+                        border-radius: 6px 0 0 0;
+                    }
+                }
+            }
+        }
+    }
+    &__bottom {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+    &__link {
+        color: $black;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 120%;
+        transition: color 0.3s ease 0s;
+        @media (any-hover: hover) {
+            &:hover {
+                color: $red;
+            }
+        }
+    }
+    &__button {
+        padding: 10px 31px;
+    }
+}
+.tr {
+}
+.td {
+}
+.td-caption {
+}
+.td-vavlue {
+}
+.th {
+}

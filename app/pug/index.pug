@@ -9,73 +9,9 @@ block content
 			button(type="button").filter__button.icon-filter
 			include ./components/detail-search
 		.main__body 
-			.main-search
-				form.main-search__form
-					.main-search__header
-						.form-item
-							input(type="text" placeholder="Общий поиск").main-search__input.form-input
-							button.main-search__btn.icon-search
-					.main-search__result.result-search
-						.result-search__data
-							.result-search__top 
-								.main-search__info
-									h2.main-search__title Результат поиска по записям:
-									span.main-search__count  34 шт.
-							.result-search__bottom
-								.main-search__info
-									h3.main-search__title Показано записей: 
-									span.main-search__count 12 шт.
-								.main-search__info
-									h3.main-search__title Выбрано записей: 
-									span.main-search__count 1 шт.
-								button(type="button").main-search__clear.icon-clear Очистить выбор
-						.main-search__actions 
-							button(type="button").main-search__button.btn.btn-black Распечатать выбранное
-							button(type="button").main-search__button.btn.btn-black Распечатать все
-			.main__table 
-				.table#mainTable
-					header.table__header
-						.tr 
-							.th.th-checkbox
-								.checkbox-item
-									.form-item
-										input(type="checkbox", name="check-all" id="checkAll")
-										label(for="checkAll")
-											span
-							each item, index in table.head
-								.th(class=`${item.className ? item.className : ''}`)
-									.th-title= item.title
-									if index > 0
-										.sorting-buttons 
-											button(type="button").sorting-button.sorting-button-up.icon-sort-up
-											button(type="button").sorting-button.sorting-button-down.icon-sort-down
-							.th.th-view
-								.th-title Просмотр
-					.table__body 
-						each item, index in table.body
-							.tr 
-								.td.td-checkbox
-									.checkbox-item
-										.form-item
-											input(type="checkbox", name=`check-${index+1}` id=index+1)
-											label(for=index+1)
-												span
-								.td
-									img(src=`images/banks/${item.logo}.png`, alt="логотип банка")
-								.td.td-case= item.caseNumber
-								.td.td-name-sign= item.nameSign
-								.td= item.country
-								.td.td-classes= item.classes
-								.td= item.owner
-								.td.td-request-number= item.requestNumber
-								.td= item.requestDate
-								.td.td-register-number= item.registerNumber
-								.td= item.registerDate
-								.td.td-status= item.status
-								.td= item.validity
-								.td.td-view 
-									button(type="button").button-view.icon-eye
-			button(type="button").main__button.btn-more Показать ещё
-prepend scripts
-	script(src="https://code.jquery.com/jquery-3.5.1.js")
-	script(src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js")
+			.main__content
+				include ./components/main-search
+				include ./components/main-table
+//- prepend scripts
+//- 	script(src="https://code.jquery.com/jquery-3.5.1.js")
+//- 	script(src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js")

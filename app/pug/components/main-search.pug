@@ -1,0 +1,23 @@
+.main-search
+    form.main-search__form
+        .main-search__header
+            .form-item
+                input(type="text" placeholder="Общий поиск").main-search__input.form-input
+                button.main-search__btn.icon-search
+        .main-search__result.result-search
+            .result-search__data
+                .result-search__top 
+                    .main-search__info
+                        h2.main-search__title Результат поиска по записям:
+                        span.main-search__count  34 шт.
+                .result-search__bottom
+                    .main-search__info
+                        h3.main-search__title Показано записей: 
+                        span.main-search__count 12 шт.
+                    .main-search__info
+                        h3.main-search__title Выбрано записей: 
+                        span.main-search__count 1 шт.
+                    button(type="button").main-search__clear.icon-clear Очистить выбор
+            .main-search__actions 
+                button(type="button").main-search__button.btn.btn-black Распечатать выбранное
+                button(type="button").main-search__button.btn.btn-black Распечатать все

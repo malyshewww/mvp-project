@@ -43,33 +43,53 @@ if (table) {
             }
         });
     });
+    if (table.scrollWidth > table.offsetWidth) {
+        table.classList.add("sticky");
+    } else {
+        table.classList.remove("sticky");
+    }
 }
 // Чекбоксы в таблице
 if (table) {
+    const buttonClear = document.querySelector(".main-search__clear");
     const checkboxAll = table.querySelector("input[name=check-all]");
     const tbody = table.querySelector(".table__body");
     const checkboxes = tbody.querySelectorAll("input[type='checkbox']");
+    let checkboxesChecked = [];
+    buttonClear.style.display = "none";
     tbody.addEventListener("change", (e) => {
-        if (e.target.tagName.toLowerCase() == "input") {
-            let checked = true;
-            for (let i = checkboxes.length; i--; )
-                if (!checkboxes[i].checked) {
-                    checked = false;
-                    break;
-                }
-            checkboxAll.checked = checked ? true : false;
+        let checked = true;
+        for (let i = checkboxes.length; i--; ) {
+            if (!checkboxes[i].checked) {
+                checked = false;
+                break;
+            }
         }
+        checkboxAll.checked = checked ? true : false;
+    });
+    checkboxes.forEach((item, index) => {
+        item.addEventListener("change", (e) => {
+            item.checked
+                ? checkboxesChecked.push(index)
+                : checkboxesChecked.splice(checkboxesChecked.indexOf(index), 1);
+            checkboxesChecked.length > 0
+                ? (buttonClear.style.display = "flex")
+                : (buttonClear.style.display = "none");
+        });
     });
     checkboxAll.addEventListener("change", checkAll);
     function checkAll(event) {
-        let arr = [];
         [...checkboxes].forEach((checkbox, index) => {
             checkbox.checked = event.target.checked ? true : false;
-            if (event.target.checked) {
-                arr.push(index);
-            } else {
-                arr = [];
+            if (checkboxesChecked.includes(index)) {
+                checkboxesChecked.splice(checkboxesChecked.indexOf(index), 1);
             }
+            event.target.checked
+                ? checkboxesChecked.push(index)
+                : (checkboxesChecked = []);
+            checkboxesChecked.length > 0
+                ? (buttonClear.style.display = "flex")
+                : (buttonClear.style.display = "none");
         });
     }
 }
@@ -157,3 +177,49 @@ function dateInputMask(parent) {
         }
     });
 });
+
+// Формирование динамического изображения в таблице при наведении на логотипы банков
+// Collect hover images
+function createImageTooltip() {
+    const picwrap = document.createElement("div");
+    const bigpic = document.createElement("img");
+    picwrap.appendChild(bigpic);
+    picwrap.className = "td-image-tooltip";
+    const collectImages = document.querySelectorAll(".td-image img");
+    if (collectImages) {
+        collectImages.forEach((item) => {
+            const imgParent = item.parentNode;
+            item.addEventListener("mouseover", (e) => {
+                imgParent.appendChild(picwrap);
+                bigpic.src = e.target.src;
+                picwrap.classList.add("show");
+            });
+            item.addEventListener("mouseout", (e) => {
+                picwrap.classList.remove("show");
+            });
+        });
+    }
+}
+createImageTooltip();
+// Подключение кастомного скроллбара
+let simplebar;
+Array.prototype.forEach.call(
+    document.querySelectorAll(".main__table[data-simplebar]"),
+    (el) => {
+        simplebar = new SimpleBar(el, {
+            autoHide: false,
+        });
+        let scrollElement = simplebar.getScrollElement();
+        scrollElement.addEventListener("scroll", function (e) {
+            let scrollPos = e.target.scrollLeft + table.clientWidth;
+            let scrollStart = e.target.scrollLeft;
+            scrollStart > 0
+                ? el.classList.add("is-shadow")
+                : el.classList.remove("is-shadow");
+            scrollPos == table.scrollWidth
+                ? el.classList.remove("is-scrolled")
+                : el.classList.add("is-scrolled");
+        });
+    }
+);
+const dataSimpleBar = document.querySelectorAll("[data-simplebar]");
