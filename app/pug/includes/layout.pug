@@ -37,12 +37,15 @@ html(lang="ru")
 			meta(name="format-detection" content="email=no")
 			meta(name="format-detection" content="date=no")
 	body
-		div.wrapper#wrapper
-			include ../components/header
-			//- include ../components/breadcrumbs
-			main.main
-				block content
-			include ../components/footer
+		if pageTitle != "Страница входа"
+			div.wrapper#wrapper
+				include ../components/header
+				//- include ../components/breadcrumbs
+				main.main
+					block content
+				include ../components/footer
+		else 
+			block content
 		block scripts
 			script(src="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.5/simplebar.min.js") 
 			script(src="scripts/main.min.js" defer)

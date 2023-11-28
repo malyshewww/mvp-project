@@ -1,0 +1,82 @@
+.auth {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    min-height: 100%;
+    background-color: #f8f8f8;
+}
+.auth-form {
+    border-radius: 10px;
+    background: $white;
+    padding: 60px;
+    width: 551px;
+    &__title {
+        color: $black;
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 120%;
+        text-align: center;
+        margin-bottom: 36px;
+    }
+    &__items {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    &__item {
+        position: relative;
+        &::before {
+            position: absolute;
+            top: 13px;
+            right: 12px;
+            color: $red;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        & .form-error {
+            margin-top: 12px;
+        }
+    }
+    &__input {
+        border: none;
+        border-bottom: 1px solid $gray;
+        padding-right: 40px;
+        border-radius: 0;
+    }
+    &__bottom {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    &__button {
+        margin-top: 40px;
+    }
+    &__link {
+        align-self: center;
+        color: $black;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 120%;
+        transition: color 0.3s ease 0s;
+        @media (any-hover: hover) {
+            &:hover {
+                color: $red;
+            }
+        }
+    }
+}
+.form-item {
+}
+.icon-user-t {
+}
+.icon-lock-t {
+}
+.btn {
+}
+.btn-red {
+}

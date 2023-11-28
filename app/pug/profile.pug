@@ -1,0 +1,47 @@
+extends includes/layout.pug
+
+append variables
+	- let pageTitle = "Редактирование профиля";
+	- description += pageTitle;
+block content
+	.profile
+		.container 
+			.profile__body
+				.profile__title.page-title #{pageTitle}
+				form(action="#").profile-form 
+					.profile__top
+						h2.profile__top-title.content-title ФИО:
+						.profile__top-descr Иванов Иван Иванович
+					.profile__groups 
+						.profile__group.group-profile
+							h2.group-profile__title.content-title Изменить пароль
+							.group-profile__fields.profile-fields
+								.form-item
+									.profile-fields__label Текущий пароль
+									input(type="password" name="current_pass" class="profile-fields__input form-input" placeholder="Введите текущий пароль")
+								.form-item
+									.profile-fields__label Новый пароль
+									input(type="password" name="new_pass" class="profile-fields__input form-input")
+								.form-item.error
+									.profile-fields__label Повторите пароль
+									input(type="password" name="new_pass" class="profile-fields__input form-input error")
+									.form-error Пароли не совпадают
+						.profile__group.group-profile
+							h2.group-profile__title.content-title Персональные настройки
+							.group-profile__actions 
+								.group-profile__label Формат даты:
+								.group-profile__radiobuttons 
+									+radio("ДД.ММ.ГГГГ", "date", "date-1", true)
+									+radio("ММ.ДД.ГГГГ", "date", "date-2")
+								+checkbox("Использовать дату заявки для вычисления срока действия, если срок действия пуст или устарел", "personal_settings")
+						.profile__group.group-profile
+							h2.group-profile__title.content-title Отчеты на e-mail
+							.group-profile__info
+								.group-profile__text 
+									p.
+										Отчет на e-mail рассылается по понедельникам в 08:00 и может включать в себя информацию о знаках:
+									p а) срок действия которых заканчивается через полгода
+									p б) срок напоминаний которых наступает на предстоящей неделе
+								+checkbox("Получать отчет по информации по истекающим товарным знакам", "report_trademark", true)
+								+checkbox("Получать отчет с информацией по приближающимся крайним срокам напоминаний", "report_term")
+					input(type="submit", value="Сохранить").profile-form__button.btn.btn-red

@@ -1,6 +1,7 @@
 console.log("main init");
 // Сортировка данных в таблице
 const table = document.getElementById("mainTable");
+let totalRecord = 0;
 if (table) {
     const th = table.querySelectorAll(".th");
     let tbody = table.querySelector(".table__body");
@@ -43,18 +44,18 @@ if (table) {
             }
         });
     });
-    if (table.scrollWidth > table.offsetWidth) {
-        table.classList.add("sticky");
-    } else {
-        table.classList.remove("sticky");
-    }
+    totalRecord = rows.length;
 }
 // Чекбоксы в таблице
 if (table) {
-    const buttonClear = document.querySelector(".main-search__clear");
     const checkboxAll = table.querySelector("input[name=check-all]");
     const tbody = table.querySelector(".table__body");
     const checkboxes = tbody.querySelectorAll("input[type='checkbox']");
+    const buttonClear = document.querySelector(".main-search__clear");
+    const totalRecordBox = document.querySelector(".total-record");
+    if (totalRecordBox) {
+        totalRecordBox.innerHTML = `${totalRecord} шт.`;
+    }
     let checkboxesChecked = [];
     buttonClear.style.display = "none";
     tbody.addEventListener("change", (e) => {
@@ -67,14 +68,13 @@ if (table) {
         }
         checkboxAll.checked = checked ? true : false;
     });
-    checkboxes.forEach((item, index) => {
+    [...checkboxes].forEach((item, index) => {
         item.addEventListener("change", (e) => {
             item.checked
                 ? checkboxesChecked.push(index)
                 : checkboxesChecked.splice(checkboxesChecked.indexOf(index), 1);
-            checkboxesChecked.length > 0
-                ? (buttonClear.style.display = "flex")
-                : (buttonClear.style.display = "none");
+            stateButtonClear(checkboxesChecked, buttonClear);
+            calculateChangedRecords();
         });
     });
     checkboxAll.addEventListener("change", checkAll);
@@ -87,12 +87,37 @@ if (table) {
             event.target.checked
                 ? checkboxesChecked.push(index)
                 : (checkboxesChecked = []);
-            checkboxesChecked.length > 0
-                ? (buttonClear.style.display = "flex")
-                : (buttonClear.style.display = "none");
+            stateButtonClear(checkboxesChecked, buttonClear);
+            calculateChangedRecords();
         });
     }
+    if (buttonClear) {
+        buttonClear.addEventListener("click", () => {
+            [...checkboxes].forEach((item) => {
+                item.checked = false;
+                checkboxAll.checked = false;
+                checkboxesChecked = [];
+            });
+            setTimeout(() => {
+                stateButtonClear(checkboxesChecked, buttonClear);
+                calculateChangedRecords();
+            }, 300);
+        });
+    }
+    function stateButtonClear(arr, btn) {
+        arr.length > 0
+            ? (btn.style.display = "flex")
+            : (btn.style.display = "none");
+    }
+    function calculateChangedRecords() {
+        const changedRecordBox = document.querySelector(".changed-record");
+        if (changedRecordBox) {
+            changedRecordBox.innerHTML = `${checkboxesChecked.length} шт.`;
+        }
+    }
+    calculateChangedRecords();
 }
+
 const detailGroups = document.querySelectorAll(".detail-form__group");
 [...detailGroups].forEach((group) => {
     changeStateCheckbox(group);
@@ -157,12 +182,17 @@ function dateInputMask(parent) {
     const dropMenuBtn = drop.querySelector(".dropdown__button");
     const dropMenuList = drop.querySelector(".dropdown__wrapper");
     const dropdownSearch = drop.querySelector(".dropdown__search");
+    const dropdownInput = drop.querySelector(".dropdown-input");
     // Клик по кнопке. Открыть/Закрыть select
     dropMenuBtn.addEventListener("click", (e) => {
         drop.classList.toggle("active");
     });
     dropMenuList.addEventListener("click", (e) => {
         e.stopPropagation();
+        if (drop.classList.contains("dropdown-report")) {
+            drop.classList.toggle("active");
+            dropdownInput.value = e.target.textContent;
+        }
     });
     // Клик снаружи dropdown либо на другом dropdown Закрыть дропдаун
     document.addEventListener("click", (e) => {
@@ -179,7 +209,6 @@ function dateInputMask(parent) {
 });
 
 // Формирование динамического изображения в таблице при наведении на логотипы банков
-// Collect hover images
 function createImageTooltip() {
     const picwrap = document.createElement("div");
     const bigpic = document.createElement("img");
@@ -201,7 +230,10 @@ function createImageTooltip() {
     }
 }
 createImageTooltip();
+
 // Подключение кастомного скроллбара
+// const tableCloned = document.querySelector(".table-clone");
+// const selTable = tableCloned.querySelector(".table");
 let simplebar;
 Array.prototype.forEach.call(
     document.querySelectorAll(".main__table[data-simplebar]"),
@@ -211,6 +243,7 @@ Array.prototype.forEach.call(
         });
         let scrollElement = simplebar.getScrollElement();
         scrollElement.addEventListener("scroll", function (e) {
+            var targetScrollLeft = e.target.scrollLeft;
             let scrollPos = e.target.scrollLeft + table.clientWidth;
             let scrollStart = e.target.scrollLeft;
             scrollStart > 0
@@ -222,4 +255,117 @@ Array.prototype.forEach.call(
         });
     }
 );
-const dataSimpleBar = document.querySelectorAll("[data-simplebar]");
+Array.prototype.forEach.call(
+    document.querySelectorAll("[data-dropdown-simplebar]"),
+    (el) => {
+        new SimpleBar(el, {
+            autoHide: true,
+        });
+    }
+);
+
+const reportGroupForm = document.querySelector(".report-group--form");
+if (reportGroupForm) {
+    const previewImages = document.querySelectorAll(".report-preview__image");
+    let inputs = reportGroupForm.querySelectorAll("input");
+    [...inputs].forEach((input) => {
+        input.addEventListener("change", (e) => {
+            let value = e.target.value;
+            let currentPreview = document.querySelector(
+                `[data-preview="${value}"]`
+            );
+            if (previewImages.length) {
+                [...previewImages].forEach((preview) =>
+                    preview.classList.remove("is-show")
+                );
+            }
+            currentPreview.classList.add("is-show");
+        });
+    });
+    let event = new Event("change");
+    inputs[0].dispatchEvent(event);
+}
+
+const reportFields = document.querySelectorAll(".report__field");
+if (reportFields.length) {
+    [...reportFields].forEach((field) => {
+        const buttonDelete = field.querySelector(".report__field-delete");
+        if (buttonDelete) {
+            buttonDelete.addEventListener("click", (e) => {
+                let parent = e.target.parentNode;
+                parent.remove();
+            });
+        }
+    });
+}
+
+const btnBack = document.querySelector(".btn-back");
+if (btnBack) {
+    btnBack.addEventListener("click", () => {
+        window.history.back();
+    });
+}
+
+// const targetElement = document.querySelector(".table-visible");
+// const options = {
+//     rootMargin: "0px",
+//     threshold: [0, 0.5, 1],
+// };
+// const callback = ([entry]) => {
+//     const targetInfo = entry.boundingClientRect;
+//     const rootBoundsInfo = entry.rootBounds;
+//     if (targetInfo.top < rootBoundsInfo.top || targetInfo.isIntersecting) {
+//         tableCloned.classList.add("sticky");
+//     } else {
+//         tableCloned.classList.remove("sticky");
+//     }
+// };
+
+// const observer = new IntersectionObserver(callback, options);
+// observer.observe(targetElement);
+
+// let tableHeader = table.querySelector(".table__header");
+// let createTable = document.createElement("table");
+// createTable.className = "table table-clone";
+// let clone = tableHeader.cloneNode(true);
+// clone.classList.add("clone-header");
+// createTable.appendChild(clone);
+// const mainTable = document.querySelector(".main__table");
+// mainTable.appendChild(createTable);
+// console.log(mainTable);
+
+// let setThWidthCalledOnce;
+// if ($(".table#mainTable")) {
+//     setThWidthCalledOnce = false;
+//     $("body").append('<table class="in-table br-all pd5 headscroll"></table>');
+//     $("#mainTable .table__header").clone().appendTo(".table.headscroll");
+
+//     // показываем и убираем
+//     $(window).scroll(function (e) {
+//         let tablepos = $("#mainTable").offset();
+//         if (window.pageYOffset > tablepos.top) {
+//             if (!setThWidthCalledOnce)
+//                 // вызываем установку ширины столбцов только один раз
+//                 setThWidth();
+//             $(".headscroll").css("width", $("#mainTable").width() + "px");
+//             $(".headscroll").css("left", tablepos.left + "px");
+//             $(".headscroll .th").css(
+//                 "line-height",
+//                 $("#mainTable .th").css("line-height")
+//             );
+//         } else {
+//             // скрываем прокручиваемую шапку
+//             $(".headscroll").css("display", "none");
+//         }
+
+//         // устанавливаем одинаковую ширину столбцов
+//         function setThWidth() {
+//             $("#mainTable .th").each(function (i, el) {
+//                 $(".headscroll .th")
+//                     .eq(i)
+//                     .css("width", $(el).width() + "px");
+//             });
+//             setThWidthCalledOnce = true;
+//         }
+//     });
+// }

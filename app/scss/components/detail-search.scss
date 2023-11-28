@@ -274,7 +274,23 @@
         flex-direction: column;
         gap: 4px;
         overflow-y: auto;
-        height: 152px;
+        overflow-x: hidden;
+        height: fit-content;
+        max-height: 140px;
+        & .simplebar-scrollbar {
+            &::before {
+                border-radius: 11px;
+                background: #868a95;
+                opacity: 1;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+            }
+        }
+        & .simplebar-track.simplebar-vertical {
+            width: 3px;
+        }
     }
     &__list-item {
         padding: 6px 12px;
@@ -282,6 +298,12 @@
         cursor: pointer;
         border-radius: 2px;
         color: #4a4d56;
+        font-size: 15px;
+        line-height: 120%;
+        min-height: 32px;
+        &:not(:last-child) {
+            margin-bottom: 4px;
+        }
         & .checkbox-item label {
             color: inherit;
         }

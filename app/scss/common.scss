@@ -22,7 +22,7 @@
     font-family: "Noto Sans", sans-serif;
     font-size: 14px;
     font-weight: 500;
-    line-height: 110%;
+    line-height: 120%;
     transition: background-color 0.3s ease 0s;
     cursor: pointer;
 }
@@ -157,6 +157,53 @@
         }
     }
 }
+.radiobutton-item {
+    & input {
+        @extend .visuallyHidden;
+        &:checked ~ label {
+            & span {
+                border-color: $red;
+                &::before {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+        }
+    }
+    & label {
+        color: $black;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        cursor: pointer;
+        text-align: left;
+        & span {
+            margin-top: 2px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid $gray_light;
+            transition: border-color 0.3s ease 0s;
+            &::before {
+                content: "";
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: $red;
+                opacity: 0;
+                transform: scale(0);
+                transition: opacity 0.3s ease 0s, transform 0.3s ease 0.15s;
+            }
+        }
+    }
+}
 
 .form-input {
     min-height: 46px;
@@ -211,6 +258,12 @@
     font-weight: 600;
     line-height: 120%;
 }
+.content-title {
+    color: $black;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 120%;
+}
 .btn-back {
     display: flex;
     align-items: center;
@@ -226,5 +279,23 @@
         justify-content: center;
         align-items: center;
         font-size: 12px;
+    }
+}
+
+.form-item {
+    &.error {
+        & input {
+            border-color: $red_error;
+        }
+        & .form-error {
+            display: block;
+        }
+    }
+    & .form-error {
+        color: $red_error;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 120%;
+        display: none;
     }
 }

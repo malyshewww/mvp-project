@@ -1,0 +1,46 @@
+extends includes/layout.pug
+
+append variables
+	- let pageTitle = "Настройка отчёта";
+	- description += pageTitle;
+block content
+	.report 
+		.container
+			.report__title.page-title #{pageTitle}
+			.report__body 
+				.report__content
+					.report__groups 
+						.report-group.report-group--form
+							.report-group__label.content-title Форма отчета
+							.report-group__radiobuttons
+								+radio("Excel", "form-report", "form-report-1", true)
+								+radio("Word", "form-report", "form-report-2")
+						.report-group
+							.report-group__label.content-title Размещение товарного знака
+							.report-group__radiobuttons
+								+radio("В отдельном столбце", "placement-trademark", "placement-trademark-1", true)
+								+radio("В столбце с наименованием", "placement-trademark", "placement-trademark-2")
+								+radio("В столбце с наименованием, вместо наименования товарного знака", "placement-trademark", "placement-trademark-3")
+					.report__fields
+						.report__fields-title.content-title Поля отчета
+						.report__fields-box
+							+reportDropdown("Номер дела", "report-number", ["Номер дела 1", "Номер дела 2", "Номер дела", "Номер дела", "Номер дела"])
+							+reportDropdown("Наименование знака", "report-trademark", ["Наименование знака 1", "Наименование знака 2"])
+							+reportDropdown("Страна", "report-country", ["Страна", "Страна", "Страна", "Страна"])
+							+reportDropdown("Классы", "report-classes", ["Классы", "Классы", "Классы", "Классы"])
+							+reportDropdown("Владелец", "report-owner", ["Владелец", "Владелец", "Владелец", "Владелец"])
+							+reportDropdown("Номер заявки", "report-request-number", ["Номер заявки", "Номер заявки"])
+							+reportDropdown("Дата Заявки", "report-date-request", ["Дата Заявки", "Дата Заявки", "Дата Заявки", "Дата Заявки"])
+							+reportDropdown("Номер регистрации", "report-register-number", ["Номер регистрации", "Номер регистрации"])
+							+reportDropdown("Дата регистрации", "report-register-date", ["Дата регистрации", "Дата регистрации"])
+							+reportDropdown("Статус", "report-status", ["Статус", "Статус", "Статус", "Статус"])
+							+reportDropdown("Срок действия", "report-validity", ["Срок действия", "Срок действия"])
+						button(type="button").report__btn-add Добавить ещё
+					button(type="button").report__download.btn.btn-red Выгрузить отчёт
+				aside.report__aside.report-preview
+					.report-preview__title.content-title Предварительный просмотр
+					.report-preview__images 
+						.report-preview__image(data-preview="excel")
+							img(src="images/report/preview-excel.svg", alt="preview excel")
+						.report-preview__image(data-preview="word")
+							img(src="images/report/preview-word.svg", alt="preview word")

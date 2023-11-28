@@ -1,0 +1,107 @@
+.profile {
+    padding: 60px 0 0;
+    &__body {
+        max-width: 651px;
+    }
+    &__title {
+        margin-bottom: 42px;
+    }
+    &__groups {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    &__group {
+    }
+    &__top {
+        padding-bottom: 24px;
+        border-bottom: 1px solid #f1f2f7;
+        margin-bottom: 24px;
+        &-title {
+            margin-bottom: 9px;
+        }
+        &-descr {
+            color: $text_gray;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 120%;
+        }
+    }
+    & .radiobutton-item {
+        & label {
+            color: $text_gray;
+            font-size: 15px;
+            font-weight: 400;
+        }
+    }
+    & .checkbox-item label {
+        align-items: flex-start;
+        color: $text_gray;
+        font-size: 15px;
+        font-weight: 400;
+        & span {
+            margin-top: 4px;
+        }
+    }
+}
+.profile-form {
+    &__button {
+        margin-top: 40px;
+        padding: 10px 32px;
+    }
+}
+.group-profile {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    &__fields {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+    &__label {
+        color: $black;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 120%;
+        margin-bottom: 16px;
+    }
+    &__actions {
+        display: flex;
+        flex-direction: column;
+    }
+    &__radiobuttons {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+    &__info {
+        color: $text_gray;
+        font-size: 15px;
+        line-height: 120%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    &__text {
+    }
+}
+.profile-fields {
+    & .form-item {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    &__label {
+        color: $black;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 120%;
+    }
+    &__input {
+    }
+}
+.form-error {
+}

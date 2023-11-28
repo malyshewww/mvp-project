@@ -52,10 +52,33 @@ mixin detailFormGroup(label, inputName)
 				.form-item
 					input(type="radio", name=inputName id=`${inputName}-or` value="or")
 					label(for=`${inputName}-or`) Или
-mixin checkbox(inputLabel, inputName)
+mixin checkbox(label, inputName, checked)
 	.checkbox-item
 		.form-item
-			input(type="checkbox", name=inputName id=inputName)
+			if checked
+				input(type="checkbox", name=inputName id=inputName checked)
+			else 
+				input(type="checkbox", name=inputName id=inputName)
 			label(for=inputName)
 				span 
-				| #{inputLabel}
+				| #{label}
+mixin radio(label, inputName, inputId, checked)
+	.radiobutton-item
+		.form-item
+			if checked
+				input(type="radio", name=inputName id=inputId value=label.toLowerCase() checked)
+			else 
+				input(type="radio", name=inputName id=inputId value=label.toLowerCase())
+			label(for=inputId)
+				span 
+				| #{label}
+mixin reportDropdown(inputValue, inputName, [...arr])
+	.report__field 
+		.dropdown.dropdown-report
+			.dropdown__button.icon-arrow-down
+				input(type="text" name=inputName value=inputValue).dropdown-input
+			.dropdown__wrapper 
+				.dropdown__list(data-dropdown-simplebar)
+					each item in arr
+						li.dropdown__list-item= item
+		button(type="button").report__field-delete.icon-close-sm

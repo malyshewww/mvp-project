@@ -17,7 +17,7 @@
                         .dropdown__search 
                             input(type="text" placeholder="Поиск по статусам").dropdown__input
                             button(type="button").dropdown__search-button.icon-search
-                        .dropdown__list 
+                        .dropdown__list(data-dropdown-simplebar)
                             li.dropdown__list-item 
                                 +checkbox("Статус 1", "status-1")
                             li.dropdown__list-item 
@@ -26,6 +26,8 @@
                                 +checkbox("Статус 3", "status-3")
                             li.dropdown__list-item 
                                 +checkbox("Статус 4", "status-4")
+                            li.dropdown__list-item 
+                                +checkbox("Статус 5", "status-5")
                 .detail-form__actions 
                     button(type="button").detail-form__btn-delete.icon-close-sm Удалить условие
                 .detail-form__radiobuttons  
@@ -41,7 +43,7 @@
                 .dropdown
                     button(type="button").dropdown__button.icon-arrow-down Выберите условие
                     .dropdown__wrapper 
-                        .dropdown__list 
+                        .dropdown__list(data-dropdown-simplebar)
                             li.dropdown__list-item Условие 1
                             li.dropdown__list-item Условие 2
                             li.dropdown__list-item Условие 3
