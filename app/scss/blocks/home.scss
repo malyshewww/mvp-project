@@ -1,36 +1,53 @@
 .main {
     &__wrapper {
         position: relative;
+        display: flex;
+        gap: 20px;
     }
     &__content {
         display: grid;
         grid-template-columns: 1fr;
         gap: 40px;
+        padding-bottom: 40px;
     }
     &__body {
         width: 100%;
         // padding-left: $asideWidth + 20px;
-        padding-left: $asideWidth + 350px;
+        // padding-left: $asideWidth;
         padding-top: 30px;
         padding-right: 40px;
     }
     &__aside {
-        width: $asideWidth + 330px;
-        padding: 35px 20px;
+        position: relative;
+        width: $asideWidth;
         border-right: 1px solid $gray;
         background: $white;
-        position: absolute;
+        // position: absolute;
         top: 0;
         left: 0;
         // height: 100%;
-        min-height: 100%;
+        max-height: 1062px;
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 1px;
+            top: 0;
+            right: 0;
+            background-color: $gray;
+            z-index: 10;
+        }
+        transition: width 0.5s ease-in-out 0s;
     }
     &__table {
         position: relative;
         overflow-y: hidden;
         overflow-x: auto;
-        padding-bottom: 20px;
         position: relative;
+        &.simplebar-scrollable-x {
+            padding-bottom: 20px;
+        }
         &.is-scrolled {
             &::after {
                 opacity: 1;
@@ -79,60 +96,32 @@
         padding: 6px;
         background-color: $red;
         border-radius: 6px;
-        display: none;
+        display: block;
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: opacity 0.3s ease 0.5s;
         &::before {
             color: $white;
             font-size: 24px;
         }
     }
 }
-.main-search {
-    &__form {
-    }
-    &__input {
-    }
-    &__btn {
-    }
-    &__result {
-    }
-    &__info {
-    }
-    &__title {
-    }
-    &__count {
-    }
-    &__actions {
-    }
-    &__button {
-    }
-    &__clear {
+
+body.is-open {
+    & .filter__button {
+        opacity: 0;
+        pointer-events: none;
     }
 }
-.form-item {
+
+.table-visible {
+    // max-width: 1783px;
+    // min-width: 1783px;
+    // overflow-x: auto;
+    // overflow-y: hidden;
 }
-.form-input {
-}
-.icon-search {
-}
-.result-search {
-    &__top {
-    }
-    &__bottom {
-    }
-}
-.btn-black {
-}
-.icon-clear {
-}
-.table {
-}
-.checkbox-item {
-    &__input {
-    }
-    &__label {
-    }
-}
-.button-view {
-}
-.icon-eye {
+
+.line {
 }

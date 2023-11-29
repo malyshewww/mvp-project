@@ -82,3 +82,11 @@ mixin reportDropdown(inputValue, inputName, [...arr])
 					each item in arr
 						li.dropdown__list-item= item
 		button(type="button").report__field-delete.icon-close-sm
+mixin modal(id, className)
+	.modal(id=id data-modal class=className)
+		.modal__wrapper
+			.modal__content(data-modal-simplebar)
+				.modal__close.icon-close-sm(data-modal-close)
+				.modal__body
+					if block
+						block

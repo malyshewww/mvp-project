@@ -39,6 +39,11 @@ body {
     // Сайт загружен
     .loaded & {
     }
+    &.home {
+        & .main {
+            padding: 0;
+        }
+    }
 }
 
 .workemail {
@@ -65,6 +70,10 @@ body {
 .footer {
     flex-shrink: 0;
 }
+.main {
+    overflow: clip;
+    padding-bottom: 80px;
+}
 //<ОСНОВНАЯ СЕТКА>===========================================================================================================
 .container {
     max-width: $maxWidthContainer + px;
@@ -83,6 +92,7 @@ body {
 @import "components/main-search";
 @import "components/table";
 @import "components/detail-search";
+@import "components/modals";
 
 // Подключение стилей для отдельных блоков
 @import "blocks/home";

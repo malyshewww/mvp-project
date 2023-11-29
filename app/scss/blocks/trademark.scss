@@ -21,6 +21,7 @@
         border: 1px solid #f1f2f7;
     }
     &__title {
+        line-height: 138%;
     }
     &__wrapper {
     }
@@ -55,7 +56,8 @@
                 }
             }
             & .td {
-                padding: 12px;
+                padding: 10px 11px;
+                justify-content: flex-start;
                 &-caption {
                     font-weight: 500;
                     color: $black;
@@ -74,6 +76,7 @@
         }
         & .td,
         & .th {
+            justify-content: flex-start;
             &:first-child,
             &:last-child {
                 justify-content: center;
@@ -98,7 +101,9 @@
     &__bottom {
         display: flex;
         align-items: center;
-        gap: 30px;
+        flex-wrap: wrap;
+        gap: 10px 30px;
+        margin-top: 20px;
     }
     &__link {
         color: $black;
@@ -113,16 +118,15 @@
         }
     }
     &__button {
-        padding: 10px 31px;
+        padding: 10px 32px;
     }
 }
-.tr {
-}
-.td {
-}
-.td-caption {
-}
-.td-vavlue {
-}
-.th {
+.trademark-info {
+    &__title {
+        color: $black;
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 120%;
+        margin-bottom: 20px;
+    }
 }

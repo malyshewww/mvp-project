@@ -9,15 +9,15 @@
     &__groups {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 34px;
     }
 
     &__group {
     }
     &__top {
-        padding-bottom: 24px;
+        padding-bottom: 26px;
         border-bottom: 1px solid #f1f2f7;
-        margin-bottom: 24px;
+        margin-bottom: 26px;
         &-title {
             margin-bottom: 9px;
         }
@@ -33,6 +33,7 @@
             color: $text_gray;
             font-size: 15px;
             font-weight: 400;
+            gap: 14px;
         }
     }
     & .checkbox-item label {
@@ -40,6 +41,7 @@
         color: $text_gray;
         font-size: 15px;
         font-weight: 400;
+        gap: 14px;
         & span {
             margin-top: 4px;
         }
@@ -54,7 +56,7 @@
 .group-profile {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 22px;
     &__fields {
         display: grid;
         grid-template-columns: 1fr;
@@ -86,6 +88,10 @@
         gap: 20px;
     }
     &__text {
+        color: $text_gray;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 130%;
     }
 }
 .profile-fields {
@@ -98,10 +104,11 @@
         color: $black;
         font-size: 16px;
         font-weight: 600;
-        line-height: 120%;
+        line-height: 130%;
+        &--repeat {
+            font-size: 14px;
+        }
     }
     &__input {
     }
-}
-.form-error {
 }

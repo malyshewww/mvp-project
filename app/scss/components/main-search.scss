@@ -88,14 +88,15 @@
         &__data {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 16px;
+            gap: 20px;
+            padding: 4px 0 0;
         }
         &__top {
         }
         &__bottom {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 17px;
             & .main-search__info {
                 font-size: 18px;
             }

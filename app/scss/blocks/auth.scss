@@ -2,7 +2,7 @@
     display: grid;
     place-items: center;
     height: 100%;
-    min-height: 100%;
+    min-height: 100dvh;
     background-color: #f8f8f8;
 }
 .auth-form {
@@ -69,14 +69,4 @@
             }
         }
     }
-}
-.form-item {
-}
-.icon-user-t {
-}
-.icon-lock-t {
-}
-.btn {
-}
-.btn-red {
 }

@@ -12,15 +12,16 @@ header.header#header
 				.language-header__current.icon-arrow-down Ru
 				.language-header__choice
 					ul.language-header__list 
+						li.language-header__item
+							a(href="#").language-header__link.icon-language English
 						li.language-header__item 
-							a(href="#").language-header__link English
-						li.language-header__item 
-							a(href="#").language-header__link.current Russian
+							a(href="#").language-header__link.current.icon-language Russian
 			a(href="#").header__link Помощь
 			.header__user.user-header
-				.user-header__data managerwebs@yandex.ru
+				.user-header__data 
+					span.user-header__data-label managerweb@yandex.ru
 				.user-header__dropdown 
-					.user-header__top managerwebs@yandex.ru
+					.user-header__top managerweb@yandex.ru
 					ul.user-header__list 
 						li.user-header__item 
 							a(href="profile-settings.html").user-header__link.icon-settings Настройки профиля

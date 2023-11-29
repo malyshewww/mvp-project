@@ -1,7 +1,7 @@
 .main__table {
     & .tr {
         display: grid;
-        grid-template-columns: 46px 89px 144px 201px 168px 109px 138px 146px 120px 157px 140px 144px 107px 87px;
+        grid-template-columns: 46px 88px 143px 200px 167px 108px 137px 145px 119px 156px 139px 143px 105px 84px;
     }
 }
 .table {
@@ -103,11 +103,11 @@
         align-items: center;
         justify-content: space-between;
         gap: 4px;
-        padding: 10px 12px;
+        padding: 14px 11px;
         cursor: pointer;
         &-image {
             hyphens: auto;
-            padding: 10px 5px;
+            padding: 10px 6px;
             word-break: break-all;
         }
         &-view {
@@ -157,6 +157,14 @@
         padding: 7px 12px;
         display: flex;
         align-items: center;
+        justify-content: center;
+        &-country,
+        &-owner {
+            justify-content: flex-start;
+        }
+        &-case {
+            padding: 7px 16px;
+        }
         &-checkbox,
         &-view {
             justify-content: center;

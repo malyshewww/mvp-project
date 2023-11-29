@@ -19,19 +19,21 @@ block content
 								.tr 
 									.td.td-caption= item.caption
 									.td.td-vavlue=item.value
-				.trademark__table-info
-					.table 
-						header.table__header 
-							.tr 
-								each item in trademark.reminderTable.head
-									.th(class=item.class)= item.title
-						.table__body
-							each item in trademark.reminderTable.body
-								.tr
-									.td.td-term= item.term
-									.td.td-text= item.text 
-									.td.td-responsible= item.responsible
-									.td.td-completed= item.completed
+				.trademark-info 
+					h2.trademark-info__title Информация о напоминаниях
+					.trademark__table-info
+						.table 
+							header.table__header 
+								.tr 
+									each item in trademark.reminderTable.head
+										.th(class=item.class)= item.title
+							.table__body
+								each item in trademark.reminderTable.body
+									.tr
+										.td.td-term= item.term
+										.td.td-text= item.text 
+										.td.td-responsible= item.responsible
+										.td.td-completed= item.completed
 				.trademark__bottom
 					button(type="button").trademark__button.btn.btn-red Распечатать
 					a(href="#").trademark__link Вернуться к списку товарных знаков

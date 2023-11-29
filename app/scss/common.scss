@@ -215,7 +215,7 @@
     font-size: 15px;
     font-weight: 400;
     line-height: 120%;
-    color: $black;
+    color: $text_gray;
     &::placeholder {
         font-family: "Noto Sans", sans-serif;
         color: $gray_light;
@@ -256,16 +256,16 @@
     font-size: 38px;
     font-style: normal;
     font-weight: 600;
-    line-height: 120%;
+    line-height: 140%;
 }
 .content-title {
     color: $black;
     font-size: 20px;
     font-weight: 600;
-    line-height: 120%;
+    line-height: 130%;
 }
 .btn-back {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 4px;
     color: $red;

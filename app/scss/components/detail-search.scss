@@ -1,9 +1,41 @@
+body.is-open {
+    & .main__aside {
+        width: 406px;
+    }
+    & .detail-search {
+        transform: translateX(0%);
+    }
+}
 .detail-search {
-    padding: 53px 20px 60px;
+    padding: 88px 40px 60px;
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
+    width: 406px;
+    transform: translateX(-100%);
+    max-height: 100%;
+    background-color: $white;
+    z-index: 10;
+    position: relative;
+    transition: transform 0.5s ease-in-out 0s;
+    & .simplebar-track.simplebar-vertical {
+        width: 6px;
+    }
+    & .simplebar-scrollbar {
+        width: 4px;
+        &::before {
+            width: 4px;
+            top: 0;
+            left: 0;
+            right: 2px;
+            bottom: 0;
+            background: #868a95;
+            opacity: 1;
+        }
+    }
+    &__body {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
     &__btn-close {
         color: $text_gray;
         font-size: 14px;
@@ -13,8 +45,8 @@
         align-items: center;
         gap: 8px;
         position: absolute;
-        top: 8px;
-        right: 0px;
+        top: 40px;
+        right: 16px;
         &::after {
             content: "";
             display: block;
@@ -30,11 +62,13 @@
         color: $black;
         font-size: 26px;
         font-weight: 600;
-        line-height: 120%;
+        line-height: 136%;
         margin-bottom: 20px;
     }
     &__btn-doc {
         display: flex;
+        justify-content: center;
+        align-items: center;
         width: 100%;
         gap: 10px;
         &::before {
@@ -69,11 +103,11 @@
         color: $black;
         font-size: 16px;
         font-weight: 600;
-        line-height: 120%;
+        line-height: 130%;
         margin-bottom: 12px;
     }
     &__input {
-        min-height: 43px;
+        // min-height: 43px;
     }
     &__actions {
         margin: 16px 0 0;

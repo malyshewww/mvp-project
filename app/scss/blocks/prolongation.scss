@@ -18,19 +18,22 @@
         color: $black;
         font-size: 26px;
         font-weight: 600;
-        line-height: 120%;
+        line-height: 132%;
         max-width: 938px;
         & span {
             color: $red;
         }
     }
     &__action {
-        max-width: 420px;
+        max-width: 455px;
+        padding: 8px 0 0;
         & .checkbox-item {
             & label {
                 align-items: flex-start;
                 color: $black_secondary;
                 font-weight: 400;
+                font-size: 15px;
+                gap: 14px;
             }
             & span {
                 margin-top: 4px;
