@@ -205,7 +205,8 @@
     }
 }
 
-.form-input {
+.form-input,
+textarea {
     min-height: 46px;
     width: 100%;
     border-radius: 6px;
@@ -221,6 +222,14 @@
         color: $gray_light;
         font-size: 15px;
         line-height: 120%;
+    }
+}
+.form-textarea {
+    min-height: 92px;
+    resize: none;
+    &::-moz-placeholder,
+    &::-webkit-input-placeholder {
+        color: $gray_light;
     }
 }
 

@@ -3,16 +3,18 @@
         display: grid;
         grid-template-columns: 46px 88px 143px 200px 167px 108px 137px 145px 119px 156px 139px 143px 105px 84px;
     }
+    overflow-y: clip !important;
+    overflow-x: clip !important;
 }
 .table {
     // border: 1px solid $gray;
     border-radius: 6px;
     background-color: $white;
     position: relative;
+    width: 1783px;
     & .th-checkbox,
     & .td-checkbox {
         position: sticky;
-        top: 0;
         left: 0;
         z-index: 5;
     }
@@ -25,12 +27,18 @@
         right: 83px;
         top: 0;
         z-index: 5;
+        @media screen and (max-width: $md) {
+            position: static;
+        }
     }
     & .th-view,
     & .td-view {
         position: sticky;
         top: 0;
         right: 0;
+        @media screen and (max-width: $md) {
+            position: static;
+        }
     }
     &.sticky {
     }
@@ -44,6 +52,8 @@
         }
     }
     &__header {
+        position: sticky;
+        top: 0;
         // &.sticky {
         //     position: fixed;
         //     top: 0;
@@ -51,6 +61,7 @@
         // }
         // border-radius: 6px 6px 0 0;
         // border-bottom: none;
+        table-layout: fixed;
         & .tr {
             min-height: 62px;
         }
@@ -103,8 +114,10 @@
         align-items: center;
         justify-content: space-between;
         gap: 4px;
-        padding: 14px 11px;
+        padding: 12px 11px;
         cursor: pointer;
+        position: sticky;
+        top: 0;
         &-image {
             hyphens: auto;
             padding: 10px 6px;
@@ -159,7 +172,8 @@
         align-items: center;
         justify-content: center;
         &-country,
-        &-owner {
+        &-owner,
+        &-classes {
             justify-content: flex-start;
         }
         &-case {
@@ -248,11 +262,22 @@
 }
 .table-wrapper {
     overflow: clip;
+    position: relative;
+    @media screen and (max-width: $lg) {
+        margin-bottom: 16px;
+    }
+    @media screen and (max-width: $md) {
+        margin-left: -16px;
+        margin-right: -16px;
+    }
 }
 .main__table.table-clone {
-    display: none;
-    opacity: 0;
-    pointer-events: none;
+    // &.simplebar-scrollable-x {
+    //     padding: 0;
+    // }
+    // display: none;
+    // opacity: 0;
+    // pointer-events: none;
     padding: 0;
     position: sticky;
     top: 0;
@@ -268,5 +293,14 @@
         display: block;
         opacity: 1;
         pointer-events: all;
+    }
+}
+
+.main__table {
+    & .simplebar-mask {
+        overflow: clip;
+    }
+    & .simplebar-wrapper {
+        overflow: clip;
     }
 }

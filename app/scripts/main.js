@@ -244,6 +244,7 @@ Array.prototype.forEach.call(
         let scrollElement = simplebar.getScrollElement();
         scrollElement.addEventListener("scroll", function (e) {
             var targetScrollLeft = e.target.scrollLeft;
+            // console.log(targetScrollLeft);
             let scrollPos = e.target.scrollLeft + table.clientWidth;
             let scrollStart = e.target.scrollLeft;
             scrollStart > 0
@@ -388,6 +389,42 @@ function openModal(event) {
         });
     }
 }
+// Маска для телефона
+// Маска телефона
+function maskPhone(elem = document) {
+    let inputs = elem.querySelectorAll('input[type="tel"]');
+    if (inputs.length) {
+        //inputs = once("inputs",inputs);
+        inputs.forEach((phone) => {
+            let code = "+7",
+                find = /\+7/;
+            code = "+7";
+            find = /\+7/;
+            phone.addEventListener("focus", function () {
+                phone.value = code + " " + phone.value.replace(code + " ", "");
+            });
+            phone.addEventListener("input", function () {
+                let val = phone.value.replace(find, ""),
+                    res = code + " ";
+                val = val.replace(/[^0-9]/g, "");
+                for (let i = 0; i < val.length; i++) {
+                    res += i === 0 ? " (" : "";
+                    res += i == 3 ? ") " : "";
+                    res += i == 6 || i == 8 ? "-" : "";
+                    if (i == 10) break;
+                    res += val[i];
+                }
+                phone.value = res;
+            });
+            phone.addEventListener("blur", function () {
+                let val = phone.value.replace(find, "");
+                val = val.trim();
+                if (!val) phone.value = null;
+            });
+        });
+    }
+}
+maskPhone();
 // Кнопки - Открыть Модалку
 // modalButtons.forEach(item => {
 // 	item.addEventListener('click', (e) => {
@@ -426,6 +463,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         item.style.display = "block";
     });
 });
+let delay = 500;
 let unlock = true;
 function body_lock(delay) {
     let body = document.querySelector("body");
@@ -475,6 +513,27 @@ function body_lock_add(delay) {
         unlock = true;
     }, delay);
 }
+
+function formHandler(formId) {
+    const form = document.getElementById(formId);
+    if (form) {
+        form.addEventListener("submit", (e) => {
+            e.preventDefault();
+            console.log(e.target);
+            let modals = document.querySelectorAll("[data-modal]");
+            [...modals].forEach((modal) =>
+                modal.classList.remove("open-modal")
+            );
+            const modalSuccess = document.getElementById("modal-success");
+            modalSuccess.classList.add("open-modal");
+            setTimeout(() => {
+                modalSuccess.classList.remove("open-modal");
+                body_lock_remove();
+            }, 5000);
+        });
+    }
+}
+formHandler("formConsultation");
 
 // const targetElement = document.querySelector(".table-visible");
 // const options = {

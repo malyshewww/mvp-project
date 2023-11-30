@@ -39,11 +39,11 @@ html(lang="ru")
 	body.is-open(class={home: home})
 		if pageTitle != "Страница входа"
 			div.wrapper#wrapper
-				include ../components/header
+				//- include ../components/header
 				//- include ../components/breadcrumbs
 				main.main
 					block content
-				include ../components/footer
+				//- include ../components/footer
 		else 
 			block content
 		include ../components/modals

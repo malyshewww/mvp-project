@@ -30,13 +30,12 @@
         align-items: center;
         justify-content: center;
         padding: 30px 10px;
-
         transition: all 0.5s ease 0s;
     }
     &__content {
         border-radius: 6px;
         background: $white;
-        max-width: 571px;
+        max-width: 675px;
         width: 100%;
         padding: 60px;
         position: relative;
@@ -97,5 +96,65 @@
             padding-left: 20px;
             margin-bottom: 20px;
         }
+    }
+}
+
+.modal-form {
+    &__title {
+        color: $black;
+        text-align: center;
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 120%;
+    }
+    &__header {
+        margin-bottom: 30px;
+    }
+    &__body {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 0 62px;
+    }
+    &__items {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    & .form-item {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+    &__button {
+        min-height: 42px;
+    }
+    &__bottom {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    &__agreement {
+        color: $gray_light;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 120%;
+        & a {
+            text-decoration: underline;
+        }
+    }
+}
+
+.notice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    &__icon {
+    }
+    &__text {
+        @extend .modal-form__title;
+        line-height: 136%;
     }
 }

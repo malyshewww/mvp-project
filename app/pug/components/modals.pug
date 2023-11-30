@@ -11,23 +11,30 @@
         p At orci ut elementum ut proin. Consectetur convallis tempor volutpat id ut at mattis. Aliquam tincidunt mattis blandit odio lacus aliquet lorem nulla arcu. Orci viverra lectus vel consequat mattis suspendisse nulla non. Sagittis quam lorem vulputate pellentesque. Malesuada sagittis eget condimentum viverra volutpat pulvinar phasellus vulputate. Dignissim enim ut fringilla commodo ultricies nulla eu elementum. Malesuada ipsum mollis nibh sed. Interdum tempor vitae aliquam vulputate varius interdum massa. Et dictumst arcu sed nulla elit. Sed sem diam ut dui donec. Tincidunt quis a amet donec enim odio id. Enim vulputate id aliquet in.
         p Elit nunc mollis volutpat lacus diam in risus purus proin. Ac etiam elementum vitae euismod. Pharetra pellentesque volutpat placerat integer. Neque eget sed elementum amet elementum malesuada. Curabitur eros scelerisque suspendisse eu. Proin lacinia nisi pellentesque mattis dignissim nibh ligula felis. Faucibus tortor arcu eget lacus. Platea vitae enim ac quisque vestibulum vulputate. Hendrerit nunc lobortis nisl faucibus. Volutpat penatibus ut purus diam lobortis enim. In lacus tellus tristique blandit sit. Non elit ut auctor semper diam duis interdum vitae. Neque proin elementum in at ut pellentesque nibh felis.
 +modal("modal-consultation", "modal-consultation")
-    form(action="#").modal-form 
-        .modal-form__title Если у вас возникли вопросы, опишите их и мы свяжемся с Вами, чтобы проконсультировать
-        .modal-form__items 
-            .form-item 
-                input(type="text" name="name" placeholder="Имя").form-input
-            .form-item 
-                input(type="tel" name="phone" placeholder="Телефон").form-input
-            .form-item 
-                input(type="email" name="email" placeholder="Электронная почта").form-input
-            .form-item 
-                textarea(placeholder="Вопрос").form-textarea 
-        .modal-form__bottom     
-            input(type="submit", value="Отправить").btn.btn-red
-            .modal-form__agreement 
-                | Отправляя форму, Вы даете #[a(href="#") согласие на обработку персональных данных.]
-+modal("modal-success", "modal-success")
-    .success-block
-        .success-block__icon 
-            img(src="images/icons/succes-check.svg", alt="иконка")
-        .succes-block__text Форма успешно отправлена
+    form(action="#" method="post" id="formConsultation").modal-form 
+        .modal-form__header
+            .modal-form__title Если у вас возникли вопросы, опишите их и мы свяжемся с Вами, чтобы проконсультировать
+        .modal-form__body
+            .modal-form__items 
+                .form-item 
+                    input(type="text" name="name" placeholder="Имя").form-input
+                .form-item 
+                    input(type="tel" name="phone" placeholder="Телефон").form-input
+                .form-item 
+                    input(type="email" name="email" placeholder="Электронная почта").form-input
+                .form-item
+                    textarea(name="question" placeholder="Вопрос").form-textarea
+            .modal-form__bottom     
+                input(type="submit", value="Отправить").modal-form__button.btn.btn-red
+                .modal-form__agreement 
+                    | Отправляя форму, Вы даете #[a(href="#" target="_blank") согласие на обработку персональных данных.]
++modal("modal-notice-success", "modal-success")
+    .notice
+        .notice__icon
+            img(src="images/icons/success-check.svg", alt="иконка")
+        .notice__text Форма успешно отправлена
++modal("modal-notice-error", "modal-error")
+    .notice
+        .notice__icon
+            img(src="images/icons/error.svg", alt="иконка")
+        .notice__text Ошибка! <br> Повторите отправку еще раз

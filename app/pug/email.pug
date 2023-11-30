@@ -1,0 +1,70 @@
+include ./includes/variables
+doctype html
+html(lang="ru")
+    head
+        meta(charset="UTF-8")
+        meta(name='viewport', content='width=1400, initial-scale=1, user-scalable=1')
+        title Письмо на email
+    style. 
+        * {
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+    body
+        table(cellspacing="0" cellpadding="0" width="100%" style="width:100%;border-collapse:collapse;background:#ffffff;border-spacing:0;")
+            tbody 
+                tr 
+                    td(style="vertical-align:top;")
+                        table(style="width: 1400px; margin: 0 auto;" cellspacing="0" cellpadding="0")
+                            tr 
+                                td
+                                    table(style="background: #0E121D; width: 100%; height: 70px; padding: 0px 40px 0px 40px; border-spacing: 0;" width="100%")
+                                        tr 
+                                            td(style="max-width: 147px; padding: 19px 0px 19px 0px; display: block; text-align: center; background: #AE1F2C;")
+                                                img(src="images/logo-email.svg", alt="логотип" style="width: 110px;")
+                                            td(style="width:auto")
+                                    table( style="width:100%;border-collapse:collapse; margin: 60px 20px 80px 20px;" width="100%" cellspacing="0" cellpadding="0")
+                                        tr 
+                                            td
+                                                table(style="width: 100%; max-width: 649px; border-spacing: 0; font-family: Arial;" width="100%")
+                                                    tr
+                                                        td(style="color: #0E121D; font-family: Arial;font-size: 29px;font-style: normal;font-weight: 700;line-height: 120%;")
+                                                            | Отчет об истекающих сроках действия и  напоминаниях от  #[span(style="color: #AE1F2C") 09.11.2023]
+                                                table(style="width: 100%; border-spacing: 0; margin: 30px 0 30px 0; font-family: Arial;")
+                                                    thead(style="border-top: 1px solid #E0E0E0; border-bottom: 1px solid #E0E0E0")
+                                                        tr(style="height: 54px; text-align: left; font-size:10px; line-height: 120%;")
+                                                            each item in email.table.head
+                                                                th(style="padding: 6px; vertical-align: middle; border-bottom: 1px solid #E0E0E0; border-top: 1px solid #E0E0E0;" width=`${item.style};`)= item.title
+                                                    tbody 
+                                                        each item in email.table.body
+                                                            tr(style="height: 54px; text-align: left; font-size: 10px; line-height: 120%;")
+                                                                td(width="177" style="padding: 6px; width: 177px; border-bottom: 1px solid #F3F3F3;")= item.sign
+                                                                td(style="padding: 6px; width: 113px; border-bottom: 1px solid #F3F3F3;")= item.term
+                                                                td(style="padding: 6px; width: 130px; border-bottom: 1px solid #F3F3F3;")= item.comment
+                                                                td(style="padding: 6px; width: 65px; border-bottom: 1px solid #F3F3F3;")= item.days
+                                                                td(style="padding: 6px; width: 92px; border-bottom: 1px solid #F3F3F3;")= item.caseNumber
+                                                                td(style="padding: 6px; width: 96px; border-bottom: 1px solid #F3F3F3;")= item.county
+                                                                td(style="padding: 6px; width: 117px; border-bottom: 1px solid #F3F3F3;")= item.classes
+                                                                td(style="padding: 6px; width: 98px; border-bottom: 1px solid #F3F3F3;")= item.owner
+                                                                td(style="padding: 6px; width: 97px; border-bottom: 1px solid #F3F3F3;")= item.requestNumber
+                                                                td(style="padding: 6px; width: 96px; border-bottom: 1px solid #F3F3F3;")= item.requestDate
+                                                                td(style="padding: 6px; width: 97px; border-bottom: 1px solid #F3F3F3;")= item.registerNumber
+                                                                td(style="padding: 6px; width: 98px; border-bottom: 1px solid #F3F3F3;")= item.registerDate
+                                                                td(style="padding: 6px; width: 96px; border-bottom: 1px solid #F3F3F3;")= item.caseNumber_MB
+                                                table(style="width: 100%; max-width: 640px; border-spacing: 0; font-family: Arial;")
+                                                    tr 
+                                                        td(style="color: #1E1E1E; font-size: 13px; line-height: 20px letter-spacing: -0.13px; font-weight: 400;").
+                                                            Даты истечения срока действия, отмеченные  «*», рассчитаны на основе соответствующих дат подачи заявки или устаревших дат истечения срока действия./ Expiration Dates marked by «*» are calculated from the corresponding Application Dates or outdated Expiration Dates
+                                    table(style="background: #AE1F2C; width: 100%; height: 94px; padding: 0px 50px 0px 50px; border-spacing: 0;")
+                                        tr(style="vertical-align: middle")
+                                            td(style="width: 111px; height: 94px; vertical-align: middle; text-align: center;")
+                                                img(src="images/logo-email.svg", alt="логотип" style="width: 111px;")
+                                            td(style="width:auto")
+                                            td(style="width: 175px; font-size: 12px; font-weight: 400; font-family: Noto Sans; color: #D48990; line-height: 120%;") Меллинг, Войтишкин и Партнеры
+
+
+
+
+
+

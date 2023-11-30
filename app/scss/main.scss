@@ -73,6 +73,9 @@ body {
 .main {
     overflow: clip;
     padding-bottom: 80px;
+    @media screen and (max-width: $lg) {
+        padding-bottom: 60px;
+    }
 }
 //<ОСНОВНАЯ СЕТКА>===========================================================================================================
 .container {

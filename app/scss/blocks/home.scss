@@ -9,6 +9,9 @@
         grid-template-columns: 1fr;
         gap: 40px;
         padding-bottom: 40px;
+        @media screen and (max-width: $lg) {
+            gap: 0;
+        }
     }
     &__body {
         width: 100%;
@@ -51,6 +54,9 @@
         &.is-scrolled {
             &::after {
                 opacity: 1;
+                @media screen and (max-width: $md) {
+                    opacity: 0;
+                }
             }
         }
         &.is-shadow {

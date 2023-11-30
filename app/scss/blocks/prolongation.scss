@@ -1,18 +1,31 @@
 .prolongation {
     padding-top: 30px;
+    & .main__content {
+        padding: 0;
+    }
     & .main__table {
         & .tr {
             grid-template-columns: 46px 91px 148px 206px 174px 111px 141px 150px 123px 161px 143px 148px 109px 89px;
         }
     }
+    & .table {
+        width: 1840px;
+    }
     &__body {
         padding: 0 40px;
+        @media screen and (max-width: $lg) {
+            padding: 0 16px;
+        }
     }
     &__top {
         display: flex;
         align-items: flex-start;
         justify-content: flex-start;
-        gap: 20px 60px;
+        gap: 16px 60px;
+        @media screen and (max-width: $lg) {
+            flex-direction: column;
+            margin-bottom: 24px;
+        }
     }
     &__title {
         color: $black;
@@ -20,6 +33,12 @@
         font-weight: 600;
         line-height: 132%;
         max-width: 938px;
+        @media screen and (max-width: $lg) {
+            max-width: 100%;
+        }
+        @media screen and (max-width: $md) {
+            font-size: 18px;
+        }
         & span {
             color: $red;
         }
@@ -27,6 +46,9 @@
     &__action {
         max-width: 455px;
         padding: 8px 0 0;
+        @media screen and (max-width: $lg) {
+            padding: 0;
+        }
         & .checkbox-item {
             & label {
                 align-items: flex-start;
@@ -34,6 +56,9 @@
                 font-weight: 400;
                 font-size: 15px;
                 gap: 14px;
+                @media screen and (max-width: $md) {
+                    font-size: 14px;
+                }
             }
             & span {
                 margin-top: 4px;

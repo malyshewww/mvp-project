@@ -4,27 +4,30 @@ header.header#header
 			.header__logo 
 				a.logo(href="/")
 					img(src="images/logo.svg", alt="логотип")
-			nav.header__links
-				a(href="#").header__link Список товарных знаков
-				a(href="prolongation.html").header__link Необходимо продление в ближайшее время
+			.header__menu
+				nav.header__links
+					a(href="#").header__link Список товарных знаков
+					a(href="prolongation.html").header__link Необходимо продление в ближайшее время
 		.header__actions 
 			.header__language.language-header
 				.language-header__current.icon-arrow-down Ru
-				.language-header__choice
-					ul.language-header__list 
-						li.language-header__item
-							a(href="#").language-header__link.icon-language English
-						li.language-header__item 
-							a(href="#").language-header__link.current.icon-language Russian
-			a(href="#").header__link Помощь
+				.language-header__dropdown
+					.language-header__choice
+						ul.language-header__list 
+							li.language-header__item
+								a(href="#").language-header__link.icon-language English
+							li.language-header__item 
+								a(href="#").language-header__link.current.icon-language Russian
+			button(type="button" data-modal-button="modal-consultation").header__link Помощь
 			.header__user.user-header
 				.user-header__data 
 					span.user-header__data-label managerweb@yandex.ru
 				.user-header__dropdown 
-					.user-header__top managerweb@yandex.ru
-					ul.user-header__list 
-						li.user-header__item 
-							a(href="profile-settings.html").user-header__link.icon-settings Настройки профиля
-						li.user-header__item 
-							a(href="#").user-header__link.icon-exit Выйти
+					.user-header__body
+						.user-header__top managerweb@yandex.ru
+						ul.user-header__list 
+							li.user-header__item 
+								a(href="profile-settings.html").user-header__link.icon-settings Настройки профиля
+							li.user-header__item 
+								a(href="#").user-header__link.icon-exit Выйти
 
