@@ -3,8 +3,6 @@
         display: grid;
         grid-template-columns: 46px 88px 143px 200px 167px 108px 137px 145px 119px 156px 139px 143px 105px 84px;
     }
-    overflow-y: clip !important;
-    overflow-x: clip !important;
 }
 .table {
     // border: 1px solid $gray;
@@ -69,10 +67,18 @@
             border-top: 1px solid $gray;
             &:first-child {
                 border-left: 1px solid $gray;
+                @media screen and (max-width: $md) {
+                    border-left: 0;
+                    border-radius: 0;
+                }
             }
             &:last-child {
                 border-right: 1px solid $gray;
                 border-radius: 0 6px 0 0;
+                @media screen and (max-width: $md) {
+                    border-right: 0;
+                    border-radius: 0;
+                }
             }
         }
     }
@@ -90,9 +96,15 @@
                 & .td {
                     &:first-child {
                         border-radius: 0 0 0 6px;
+                        @media screen and (max-width: $md) {
+                            border-radius: 0;
+                        }
                     }
                     &:last-child {
                         border-radius: 0 0 6px 0px;
+                        @media screen and (max-width: $md) {
+                            border-radius: 0;
+                        }
                     }
                 }
             }
@@ -100,16 +112,22 @@
         & .td {
             &:first-child {
                 border-left: 1px solid $gray;
+                @media screen and (max-width: $md) {
+                    border-left: 0;
+                }
             }
             &:last-child {
                 border-right: 1px solid $gray;
+                @media screen and (max-width: $md) {
+                    border-right: 0;
+                }
             }
         }
     }
     & .th {
         color: $black;
         font-size: 14px;
-        line-height: 120%;
+        line-height: 100%;
         display: flex;
         align-items: center;
         justify-content: space-between;

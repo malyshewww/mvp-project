@@ -1,5 +1,8 @@
 .profile {
     padding: 60px 0 0;
+    @media screen and (max-width: $md) {
+        padding: 40px 0 0;
+    }
     &__body {
         max-width: 651px;
     }
@@ -10,6 +13,9 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 34px;
+        @media screen and (max-width: $md) {
+            gap: 32px;
+        }
     }
 
     &__group {
@@ -18,8 +24,15 @@
         padding-bottom: 26px;
         border-bottom: 1px solid #f1f2f7;
         margin-bottom: 26px;
+        @media screen and (max-width: $md) {
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+        }
         &-title {
             margin-bottom: 9px;
+            @media screen and (max-width: $md) {
+                margin-bottom: 6px;
+            }
         }
         &-descr {
             color: $text_gray;
@@ -51,12 +64,23 @@
     &__button {
         margin-top: 40px;
         padding: 10px 32px;
+        @media screen and (max-width: $md) {
+            width: 100%;
+        }
     }
 }
 .group-profile {
     display: grid;
     grid-template-columns: 1fr;
     gap: 22px;
+    @media screen and (max-width: $md) {
+        gap: 20px;
+    }
+    &__title {
+        @media screen and (max-width: $md) {
+            margin: 0;
+        }
+    }
     &__fields {
         display: grid;
         grid-template-columns: 1fr;

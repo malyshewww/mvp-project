@@ -8,16 +8,17 @@
             .result-search__data
                 .result-search__top 
                     .main-search__info
-                        h2.main-search__title Результат поиска по записям:
+                        h2.main-search__title Результат поиска#[span  по записям]:
                         span.main-search__count  34 шт.
                 .result-search__bottom
                     .main-search__info
-                        h3.main-search__title Показано записей: 
+                        h3.main-search__title Показано#[span  записей]: 
                         span.main-search__count.total-record 
                     .main-search__info
-                        h3.main-search__title Выбрано записей: 
+                        h3.main-search__title Выбрано#[span  записей]: 
                         span.main-search__count.changed-record 
                     button(type="button").main-search__clear.icon-clear Очистить выбор
             .main-search__actions 
                 button(type="button").main-search__button.btn.btn-black Распечатать выбранное
                 button(type="button").main-search__button.btn.btn-black Распечатать все
+                button(type="button").main-search__button-mobile.btn.btn-black(data-modal-button="modal-result") Распечатать

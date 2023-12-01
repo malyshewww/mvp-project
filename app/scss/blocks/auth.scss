@@ -4,12 +4,19 @@
     height: 100%;
     min-height: 100dvh;
     background-color: #f8f8f8;
+    padding: 40px 16px 40px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 .auth-form {
     border-radius: 10px;
     background: $white;
     padding: 60px;
     width: 551px;
+    @media screen and (max-width: $md) {
+        width: 100%;
+        padding: 20px;
+    }
     &__title {
         color: $black;
         font-size: 26px;
@@ -17,6 +24,10 @@
         line-height: 120%;
         text-align: center;
         margin-bottom: 36px;
+        @media screen and (max-width: $md) {
+            font-size: 20px;
+            margin-bottom: 32px;
+        }
     }
     &__items {
         display: grid;

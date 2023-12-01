@@ -18,14 +18,13 @@
         border-radius: 6px;
         border: 1px solid $gray;
         background: $white;
-        padding: 11px;
+        padding: 12px 50px 11px 11px;
         min-height: 46px;
         color: $black;
         font-family: "Noto Sans", sans-serif;
         font-size: 16px;
         line-height: 120%;
         width: 100%;
-        padding-right: 50px;
         &::placeholder {
             color: $gray_light;
             font-family: "Noto Sans", sans-serif;
@@ -69,6 +68,11 @@
     &__title {
         line-height: 120%;
         font-size: inherit;
+        @media screen and (max-width: $md) {
+            & span {
+                display: none;
+            }
+        }
     }
     &__count {
         line-height: 120%;
@@ -79,8 +83,29 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 10px;
+        @media screen and (max-width: $md) {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+        }
     }
     &__button {
+        &-mobile {
+            display: none;
+            @media screen and (max-width: $md) {
+                display: block;
+                width: 100%;
+                padding: 20px;
+                border-radius: 0;
+                background-color: #282831;
+                min-height: 59pxs;
+            }
+        }
+        @media screen and (max-width: $md) {
+            display: none;
+        }
     }
     &__clear {
         color: $text_gray;

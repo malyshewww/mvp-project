@@ -48,10 +48,8 @@
         overflow-y: hidden;
         overflow-x: auto;
         position: relative;
-        &.simplebar-scrollable-x {
-            padding-bottom: 20px;
-        }
-        &.is-scrolled {
+        transition: width 0.5s ease 0s;
+        &.is-scrolled.simplebar-scrollable-x {
             &::after {
                 opacity: 1;
                 @media screen and (max-width: $md) {
@@ -59,7 +57,7 @@
                 }
             }
         }
-        &.is-shadow {
+        &.is-shadow.simplebar-scrollable-x {
             &::before {
                 opacity: 1;
             }

@@ -11,17 +11,17 @@ block content
 				.trademark__header 
 					.trademark__logo 
 						img(src="images/trademark/logo.png", alt="логотип товарного знака")
-					h1.trademark__title.page-title Название товарного знакаНазвание товарного знака
-				.trademark__table
+					h1.trademark__title.page-title Название товарного знака Название товарного знака
+				.trademark__table(data-simplebar)
 					.table
 						.table__body
 							each item in trademark.mainTable
 								.tr 
 									.td.td-caption= item.caption
-									.td.td-vavlue=item.value
+									.td.td-value=item.value
 				.trademark-info 
 					h2.trademark-info__title Информация о напоминаниях
-					.trademark__table-info
+					.trademark__table-info(data-simplebar)
 						.table 
 							header.table__header 
 								.tr 

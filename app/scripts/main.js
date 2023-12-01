@@ -260,6 +260,15 @@ Array.prototype.forEach.call(
     }
 );
 Array.prototype.forEach.call(
+    document.querySelectorAll(".trademark [data-simplebar]"),
+    (el) => {
+        new SimpleBar(el, {
+            autoHide: false,
+            clickOnTrack: true,
+        });
+    }
+);
+Array.prototype.forEach.call(
     document.querySelectorAll("[data-dropdown-simplebar]"),
     (el) => {
         new SimpleBar(el, {
@@ -325,72 +334,36 @@ const filterButtonClose = document.querySelector("[data-filter-close]");
 if (filterButtonOpen) {
     filterButtonOpen.addEventListener("click", openFilter);
 }
-
 if (filterButtonClose) {
     filterButtonClose.addEventListener("click", closeFilter);
 }
 
+let filterActive = true;
+let asideWidth = 76;
+function calcTableWidth() {
+    let mainTable = document.querySelector(".main__table.table-visible");
+    if (mainTable) {
+        let mainTableWidth = window.innerWidth - asideWidth - 40;
+        setTimeout(() => {
+            mainTable.style.width = `${mainTableWidth}px`;
+        }, 400);
+    }
+}
+
 function openFilter() {
     document.body.classList.add("is-open");
-    // const content = document.querySelector(".main__content");
-    // let currentTable = simplebar.getContentElement().querySelector(".table");
-    // currentTable.remove();
-    // simplebar
-    //     .getContentElement()
-    //     .insertAdjacentElement("beforeend", currentTable);
-    // let mainTableScrollable = simplebar.getContentElement();
-    // console.log(table.scrollWidth);
-    // mainTableScrollable.style.maxWidth = table.scrollWidth + "px";
-    // simplebar.recalculate();
-    // console.log(simplebar.getContentElement());
-    // simplebar?.recalculate();
-    // if (table) {
-    //     let tbody = table.querySelector(".table__body");
-    //     let thead = table.querySelector(".table__header");
-    //     let rows = [...tbody.querySelectorAll(".tr")];
-    //     tbody.remove();
-    //     tbody = document.createElement("div");
-    //     tbody.className = "table__body";
-    //     table.appendChild(thead);
-    //     rows.forEach((row) => tbody.appendChild(row));
-    //     table.appendChild(tbody);
-    //     simplebar.getContentElement().insertAdjacentElement("beforeend", table);
-    // }
-    // initScrollBar();
-    // console.log(simplebar.getScrollElement());
+    asideWidth = 406;
+    calcTableWidth();
 }
 function closeFilter() {
     document.body.classList.remove("is-open");
+    asideWidth = 76;
+    calcTableWidth();
 }
 
-let wrapper = document.querySelector(".wrapper");
-const modalButtons = wrapper.querySelectorAll("[data-modal-button]");
-const modalClosebuttons = document.querySelectorAll("[data-modal-close]");
-const allModals = document.querySelectorAll("[data-modal]");
+calcTableWidth();
 
-function closeModal(currentModal) {
-    currentModal.classList.remove("open-modal");
-    body_lock_remove();
-}
-
-document.addEventListener("click", openModal);
-function openModal(event) {
-    const target = event.target;
-    const modals = document.querySelectorAll("[data-modal]");
-    if (target.closest("[data-modal-button]")) {
-        event.preventDefault();
-        const modalId = target.dataset.modalButton;
-        modals.forEach((item) => {
-            const modal = item.getAttribute("id");
-            if (modalId == modal) {
-                item.classList.add("open-modal");
-                body_lock();
-            }
-        });
-    }
-}
 // Маска для телефона
-// Маска телефона
 function maskPhone(elem = document) {
     let inputs = elem.querySelectorAll('input[type="tel"]');
     if (inputs.length) {
@@ -425,6 +398,33 @@ function maskPhone(elem = document) {
     }
 }
 maskPhone();
+
+let wrapper = document.querySelector(".wrapper");
+const modalButtons = wrapper?.querySelectorAll("[data-modal-button]");
+const modalClosebuttons = document.querySelectorAll("[data-modal-close]");
+const allModals = document.querySelectorAll("[data-modal]");
+
+function closeModal(currentModal) {
+    currentModal.classList.remove("open-modal");
+    body_lock_remove();
+}
+
+document.addEventListener("click", openModal);
+function openModal(event) {
+    const target = event.target;
+    const modals = document.querySelectorAll("[data-modal]");
+    if (target.closest("[data-modal-button]")) {
+        event.preventDefault();
+        const modalId = target.dataset.modalButton;
+        modals.forEach((item) => {
+            const modal = item.getAttribute("id");
+            if (modalId == modal) {
+                item.classList.add("open-modal");
+                body_lock();
+            }
+        });
+    }
+}
 // Кнопки - Открыть Модалку
 // modalButtons.forEach(item => {
 // 	item.addEventListener('click', (e) => {
@@ -463,6 +463,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         item.style.display = "block";
     });
 });
+
 let delay = 500;
 let unlock = true;
 function body_lock(delay) {

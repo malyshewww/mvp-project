@@ -1,5 +1,8 @@
 .report {
     padding-top: 60px;
+    @media screen and (max-width: $md) {
+        padding-top: 40px;
+    }
     &__title {
         margin-bottom: 40px;
         line-height: 140%;
@@ -8,17 +11,29 @@
         display: flex;
         justify-content: space-between;
         gap: 40px;
+        @media screen and (max-width: $lg) {
+            flex-direction: column;
+            gap: 32px;
+        }
     }
     &__content {
         flex: 0 1 491px;
         display: grid;
         grid-template-columns: 1fr;
         gap: 40px;
+        @media screen and (max-width: $lg) {
+            flex: 1 1 auto;
+            gap: 32px;
+        }
     }
     &__groups {
         display: grid;
         grid-template-columns: 144px 1fr;
         gap: 40px;
+        @media screen and (max-width: $lg) {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
     }
     &__fields {
         &-box {
@@ -42,7 +57,6 @@
     }
     &__dropdown-input {
     }
-
     &__field-delete {
         width: 24px;
         height: 24px;
@@ -80,6 +94,9 @@
             left: 0;
             border-bottom: 1px solid currentColor;
         }
+        @media screen and (max-width: $md) {
+            margin-top: 20px;
+        }
         @media (any-hover: hover) {
             &:hover {
                 color: $red;
@@ -91,14 +108,24 @@
     }
     &__download {
         max-width: 182px;
+        @media screen and (max-width: $md) {
+            max-width: 100%;
+            margin-top: 8px;
+        }
     }
     &__aside {
+        @media screen and (max-width: $lg) {
+            display: none;
+        }
     }
 }
 .report-group {
     width: 100%;
     &__label {
         margin-bottom: 20px;
+        @media screen and (max-width: $md) {
+            margin-bottom: 12px;
+        }
     }
     &__radiobuttons {
         display: flex;
@@ -118,6 +145,7 @@
         padding: 0;
         border: none;
         position: relative;
+        color: $text_gray;
         &__button {
             border-radius: 6px;
             border: $gray;
@@ -130,6 +158,15 @@
             border: 1px solid $gray;
             &::before {
                 font-size: 8px;
+            }
+            @media screen and (max-width: $md) {
+                padding: 9px 12px;
+                min-height: 40px;
+                color: $text_gray;
+                &::before {
+                    color: $black;
+                    font-size: 7px;
+                }
             }
         }
         &__wrapper {
@@ -171,6 +208,10 @@
         position: relative;
         width: 360px;
         height: 278px;
+        @media screen and (max-width: $md) {
+            width: 225px;
+            height: 173px;
+        }
     }
     &__image {
         position: absolute;
