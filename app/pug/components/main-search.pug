@@ -21,4 +21,7 @@
             .main-search__actions 
                 button(type="button").main-search__button.btn.btn-black Распечатать выбранное
                 button(type="button").main-search__button.btn.btn-black Распечатать все
-                button(type="button").main-search__button-mobile.btn.btn-black(data-modal-button="modal-result") Распечатать
+                if pageTitle == "Главная"
+                    button(type="button" data-filter-open).main-search__button-detail Открыть детальный поиск 
+                button(type="button").main-search__button-mobile.btn.btn-black(data-modal-button="modal-result")
+                    | Распечатать

@@ -329,10 +329,12 @@ if (btnBack) {
     });
 }
 
-const filterButtonOpen = document.querySelector("[data-filter-open]");
+const filterButtonOpen = document.querySelectorAll("[data-filter-open]");
 const filterButtonClose = document.querySelector("[data-filter-close]");
 if (filterButtonOpen) {
-    filterButtonOpen.addEventListener("click", openFilter);
+    [...filterButtonOpen].forEach((btn) => {
+        btn.addEventListener("click", openFilter);
+    });
 }
 if (filterButtonClose) {
     filterButtonClose.addEventListener("click", closeFilter);
@@ -341,14 +343,20 @@ if (filterButtonClose) {
 let filterActive = true;
 let asideWidth = 76;
 function calcTableWidth() {
-    let mainTable = document.querySelector(".main__table.table-visible");
-    if (mainTable) {
-        let mainTableWidth = window.innerWidth - asideWidth - 40;
-        setTimeout(() => {
-            mainTable.style.width = `${mainTableWidth}px`;
-        }, 400);
+    if (window.innerWidth > 991.98) {
+        let mainTable = document.querySelector(".main__table.table-visible");
+        if (mainTable) {
+            let mainTableWidth = window.innerWidth - asideWidth - 40;
+            setTimeout(() => {
+                mainTable.style.width = `${mainTableWidth}px`;
+            }, 400);
+        }
     }
 }
+// window.addEventListener("resize", () => {
+//     openFilter();
+//     closeFilter();
+// });
 
 function openFilter() {
     document.body.classList.add("is-open");
@@ -536,20 +544,48 @@ function formHandler(formId) {
 }
 formHandler("formConsultation");
 
-// const targetElement = document.querySelector(".table-visible");
+window.addEventListener("scroll", () => {
+    getScrollPosition();
+});
+window.addEventListener("resize", () => {
+    if (window.innerWidth < 991.98) {
+        getScrollPosition();
+    }
+});
+function getScrollPosition() {
+    const table = document.querySelector(".table-wrapper");
+    // const resultSearch = document.querySelector(".result-search");
+    // const resultSearchHeight = resultSearch.getBoundingClientRect().height;
+    const tableTop = table.getBoundingClientRect().top + window.scrollY;
+    const tableHeight = table.getBoundingClientRect().height;
+    if (window.scrollY > tableTop) {
+        document.body.classList.add("is-sticky");
+        simplebar.recalculate();
+    } else {
+        document.body.classList.remove("is-sticky");
+        simplebar.recalculate();
+    }
+    // console.log(resultSearchHeight);
+}
+
+// const wrapperBlock = document.querySelector(".wrapper");
+// const targetElement = document.querySelector(".table-wrapper");
 // const options = {
+//     // root: wrapperBlock,
 //     rootMargin: "0px",
-//     threshold: [0, 0.5, 1],
+//     // threshold: [0, 0.5, 1],
 // };
 // const callback = ([entry]) => {
 //     const targetInfo = entry.boundingClientRect;
 //     const rootBoundsInfo = entry.rootBounds;
-//     if (targetInfo.top < rootBoundsInfo.top || targetInfo.isIntersecting) {
-//         tableCloned.classList.add("sticky");
-//     } else {
-//         tableCloned.classList.remove("sticky");
+//     console.log(targetInfo);
+//     console.log(rootBoundsInfo);
+//     if (targetInfo.top > rootBoundsInfo.top || entry.isIntersecting) {
+//         // console.log(rootBoundsInfo.top);s
+//         document.body.classList.add("is-sticky");
+//     } else if (targetInfo.bottom < rootBoundsInfo.top) {
+//         document.body.classList.remove("is-sticky");
 //     }
 // };
-
-// const observer = new IntersectionObserver(callback, options);
-// observer.observe(targetElement);
+// const observerTable = new IntersectionObserver(callback, options);
+// observerTable.observe(targetElement);

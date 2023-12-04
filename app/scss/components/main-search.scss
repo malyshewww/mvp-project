@@ -49,6 +49,9 @@
         &::before {
             color: $red;
             font-size: 22px;
+            @media screen and (max-width: $md) {
+                font-size: 20px;
+            }
         }
     }
     &__result {
@@ -83,27 +86,42 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 10px;
-        @media screen and (max-width: $md) {
+        @media screen and (max-width: $lg) {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             z-index: 10;
+            gap: 0;
         }
     }
     &__button {
         &-mobile {
             display: none;
-            @media screen and (max-width: $md) {
+            @media screen and (max-width: $lg) {
                 display: block;
-                width: 100%;
+                flex-grow: 1;
                 padding: 20px;
                 border-radius: 0;
                 background-color: #282831;
-                min-height: 59pxs;
+                min-height: 59px;
             }
         }
-        @media screen and (max-width: $md) {
+        &-detail {
+            background-color: $red;
+            color: $white;
+            padding: 10px 15px;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 120%;
+            min-height: 59px;
+            flex-grow: 1;
+            display: none;
+            @media screen and (max-width: $lg) {
+                display: block;
+            }
+        }
+        @media screen and (max-width: $lg) {
             display: none;
         }
     }
@@ -127,9 +145,19 @@
         align-items: flex-start;
         flex-wrap: wrap;
         gap: 20px;
+        background-color: $white;
+        &-sticky {
+            position: fixed;
+            top: 16px;
+            width: 100%;
+            z-index: 20;
+            display: none;
+        }
         @media screen and (max-width: $lg) {
             flex-direction: column;
             gap: 8px;
+            margin: -16px;
+            padding: 16px;
         }
         &__data {
             display: grid;
@@ -157,6 +185,17 @@
         }
     }
 }
+body.home {
+    & .main-search {
+        &__actions {
+            @media screen and (max-width: $lg) {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                align-items: stretch;
+            }
+        }
+    }
+}
 .icon-clear {
     &::before {
         transition: transform 0.3s ease 0s;
@@ -166,6 +205,18 @@
             &::before {
                 transform: rotate(180deg);
             }
+        }
+    }
+}
+
+body.is-sticky {
+    @media screen and (max-width: $lg) {
+        & .result-search {
+            position: fixed;
+            z-index: 20;
+            top: 16px;
+            left: 16px;
+            width: 100%;
         }
     }
 }
