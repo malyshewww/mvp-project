@@ -108,6 +108,15 @@
 .checkbox-item {
     & input {
         @extend .visuallyHidden;
+        &:disabled,
+        &.disabled {
+            & ~ label {
+                pointer-events: none;
+                & span {
+                    border-color: $gray;
+                }
+            }
+        }
     }
     & input:disabled ~ label {
         pointer-events: none;
@@ -122,6 +131,7 @@
             opacity: 1;
         }
     }
+
     & label {
         display: flex;
         align-items: center;
@@ -169,6 +179,23 @@
                 }
             }
         }
+        // &:focus,
+        // &:focus-visible {
+        //     & ~ label {
+        //         & span {
+        //             border-color: $black;
+        //         }
+        //     }
+        // }
+        &:disabled,
+        &.disabled {
+            & ~ label {
+                pointer-events: none;
+                & span {
+                    border-color: $gray;
+                }
+            }
+        }
     }
     & label {
         color: $black;
@@ -202,6 +229,13 @@
                 transition: opacity 0.3s ease 0s, transform 0.3s ease 0.15s;
             }
         }
+        @media (any-hover: hover) {
+            &:hover {
+                & span {
+                    border-color: $black;
+                }
+            }
+        }
     }
 }
 
@@ -217,11 +251,17 @@ textarea {
     font-weight: 400;
     line-height: 120%;
     color: $text_gray;
+    transition: box-shadow 0.3s ease 0s;
     &::placeholder {
         font-family: "Noto Sans", sans-serif;
         color: $gray_light;
         font-size: 15px;
         line-height: 120%;
+    }
+    &:focus,
+    &:focus-visible {
+        // background-color: $white;
+        box-shadow: 0px 4px 14px 9px rgba(0, 0, 0, 0.05);
     }
 }
 .form-textarea {
@@ -318,6 +358,16 @@ textarea {
     &.error {
         & input {
             border-color: $red_error;
+            &:focus,
+            &:focus-visible {
+                box-shadow: 0px 4px 14px 9px rgba($red_error, 0.05);
+            }
+        }
+        & input.auth-form__input {
+            &:focus,
+            &:focus-visible {
+                box-shadow: none;
+            }
         }
         & .form-error {
             display: block;

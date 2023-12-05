@@ -29,7 +29,7 @@ html(lang="ru")
 				link(href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css"  rel="stylesheet")
 				link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.5/simplebar.min.css")
 				link(href="styles/main.min.css" rel="stylesheet")
-			//- include ../components/favicons
+			include ../components/favicons
 			meta(name="apple-mobile-web-app-title" content="Название")
 			meta(name="apple-mobile-web-app-capable" content="yes")
 			meta(name="format-detection" content="telephone=no")
@@ -39,11 +39,12 @@ html(lang="ru")
 	body(class={home: home})
 		if pageTitle != "Страница входа"
 			div.wrapper#wrapper
-				//- include ../components/header
+				include ../components/header
 				//- include ../components/breadcrumbs
 				main.main
 					block content
 				include ../components/footer
+				div.overlay
 		else 
 			block content
 		include ../components/modals

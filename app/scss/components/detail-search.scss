@@ -110,6 +110,9 @@ body.is-open {
         align-items: center;
         width: 100%;
         gap: 10px;
+        border: 1px solid transparent;
+        transition: background-color 0.3s ease 0s, border-color 0.3s ease 0s,
+            color 0.3s ease 0s;
         &::before {
             content: "";
             display: block;
@@ -119,9 +122,29 @@ body.is-open {
             mask-image: url("../images/icons/doc.svg");
             mask-repeat: no-repeat;
             mask-position: center;
+            transition: background-color 0.3s ease 0s;
         }
         @media screen and (max-width: $md) {
             padding: 10px 8px;
+        }
+        @media (any-hover: hover) {
+            &:hover {
+                background-color: $white;
+                border-color: $black;
+                color: $black;
+                &::before {
+                    background-color: $black;
+                }
+            }
+        }
+        &:focus-visible,
+        &:focus {
+            color: $black;
+            background-color: $white;
+            border-color: $black;
+            &::before {
+                background-color: $black;
+            }
         }
     }
 

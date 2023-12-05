@@ -25,6 +25,7 @@
         font-size: 16px;
         line-height: 120%;
         width: 100%;
+        transition: border-color 0.3s ease 0s;
         &::placeholder {
             color: $gray_light;
             font-family: "Noto Sans", sans-serif;
@@ -35,6 +36,11 @@
             &::placeholder {
                 font-size: 14px;
             }
+        }
+        &:focus,
+        &:focus-visible {
+            border-color: $black;
+            box-shadow: none;
         }
     }
     &__btn {
@@ -213,7 +219,7 @@ body.is-sticky {
     @media screen and (max-width: $lg) {
         & .result-search {
             position: fixed;
-            z-index: 20;
+            z-index: 15;
             top: 16px;
             left: 16px;
             width: 100%;

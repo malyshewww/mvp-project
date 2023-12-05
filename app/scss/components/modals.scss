@@ -41,7 +41,7 @@
         position: relative;
         max-height: 820px;
         @media screen and (max-width: $md) {
-            padding: 40px 15px 40px 15px;
+            padding: 40px 16px 40px 16px;
         }
         & .simplebar-track.simplebar-vertical {
             width: 4px;
@@ -82,14 +82,24 @@
     }
     &__title {
         margin-bottom: 40px;
+        @media screen and (max-width: $md) {
+            margin-bottom: 30px;
+            line-height: 120%;
+        }
     }
     &__description {
         color: #676767;
         font-size: 16px;
         line-height: 120%;
+        @media screen and (max-width: $md) {
+            font-size: 14px;
+        }
         & p {
             &:not(:last-child) {
                 margin-bottom: 20px;
+                @media screen and (max-width: $md) {
+                    margin-bottom: 15px;
+                }
             }
         }
         & ol {
@@ -106,15 +116,25 @@
         font-size: 26px;
         font-weight: 600;
         line-height: 120%;
+        @media screen and (max-width: $md) {
+            font-size: 22px;
+        }
     }
     &__header {
         margin-bottom: 30px;
+        @media screen and (max-width: $md) {
+            margin-bottom: 20px;
+        }
     }
     &__body {
         display: grid;
         grid-template-columns: 1fr;
         gap: 40px;
         padding: 0 62px;
+        @media screen and (max-width: $md) {
+            padding: 0;
+            gap: 24px;
+        }
     }
     &__items {
         display: grid;
@@ -151,10 +171,23 @@
     flex-direction: column;
     align-items: center;
     gap: 30px;
+    @media screen and (max-width: $md) {
+        gap: 16px;
+    }
     &__icon {
+        width: 108px;
+        height: 108px;
+        flex-shrink: 0;
+        @media screen and (max-width: $md) {
+            width: 70px;
+            height: 70px;
+        }
     }
     &__text {
         @extend .modal-form__title;
         line-height: 136%;
+        @media screen and (max-width: $md) {
+            font-size: 20px;
+        }
     }
 }

@@ -6,7 +6,26 @@
     color: $white;
     padding: 0 40px;
     position: relative;
-    z-index: 10;
+    // position: sticky;
+    // top: 0;
+    z-index: 20;
+    transition: background-color 0.3s ease 0s;
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background-color: $gray;
+        z-index: 20;
+        opacity: 0;
+        transition: opacity 0.3s ease 0s;
+    }
+    @media screen and (max-width: $xxxl) {
+        padding: 0 0px 0 0;
+        min-height: 61px;
+    }
     &__body {
         display: flex;
         justify-content: space-between;
@@ -15,12 +34,25 @@
     &__left {
         display: flex;
         gap: 0 60px;
+        @media screen and (max-width: $xxxl) {
+            gap: 0 20px;
+            flex: 1 1 auto;
+        }
     }
     &__logo {
         flex: 0 0 223px;
+        position: relative;
+        z-index: 20;
+        @media screen and (max-width: $xxl) {
+            flex: 0 0 127px;
+        }
     }
     &__links {
         display: flex;
+        @media screen and (max-width: $lg) {
+            flex-direction: column;
+            gap: 10px;
+        }
     }
     &__link {
         display: grid;
@@ -31,23 +63,64 @@
         font-weight: 400;
         line-height: 120%;
         transition: background-color 0.3s ease-in-out 0s;
+        &::before {
+            display: none;
+        }
         @media (any-hover: hover) {
             &:hover {
                 background-color: $red;
+            }
+        }
+        @media screen and (max-width: $xxxl) {
+            font-size: 16px;
+            padding: 20px 16px;
+        }
+        @media screen and (max-width: $lg) {
+            color: $text_gray;
+            padding: 16px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row-reverse;
+            gap: 20px;
+            border-bottom: 1px solid #dddee3;
+            min-height: 54px;
+            line-height: 132%;
+            &::before {
+                display: block;
+                color: currentColor;
+                width: 18px;
+                height: 18px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 10px;
+                transform: rotate(-90deg);
             }
         }
     }
     &__actions {
         display: flex;
     }
-
     &__language {
     }
-
     &__user {
     }
     &__menu {
         display: grid;
+        @media screen and (max-width: $lg) {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: $white;
+            padding: 36px 16px 50px;
+            color: $text_gray;
+            transform: translateY(-100%);
+            top: 0;
+            transition: transform 0.4s ease 0s, top 0.4s ease 0s;
+            z-index: 19;
+        }
     }
 }
 .logo {
@@ -57,11 +130,15 @@
     justify-content: center;
     padding: 28px 29px;
     background-color: $red;
+    @media screen and (max-width: $xxxl) {
+        padding: 15px 16px;
+    }
 }
 .language-header {
     position: relative;
     display: grid;
     transition: background-color 0.3s ease-in-out 0s;
+    z-index: 21;
     @media (any-hover: hover) {
         &:hover {
             background-color: $red;
@@ -93,6 +170,17 @@
             align-items: center;
             font-size: 8px;
             transition: transform 0.3s ease 0s;
+        }
+        @media screen and (max-width: $xxxl) {
+            font-size: 16px;
+            padding: 20px 10px;
+        }
+        @media screen and (max-width: $md) {
+            font-size: 14px;
+            line-height: 19px;
+            &::before {
+                font-size: 7px;
+            }
         }
     }
     &__dropdown {
@@ -153,8 +241,11 @@
 .user-header {
     position: relative;
     display: grid;
+    transition: background-color 0.3s ease-in-out 0s;
+    z-index: 21;
     @media (any-hover: hover) {
         &:hover {
+            background-color: $red;
             & .user-header__dropdown {
                 opacity: 1;
                 transform: translateY(0);
@@ -181,6 +272,27 @@
             width: 180px;
             text-overflow: ellipsis;
             white-space: nowrap;
+            @media screen and (max-width: 1600px) {
+                display: none;
+            }
+        }
+        @media screen and (max-width: $xxxl) {
+            padding: 20px 18px;
+        }
+    }
+    &__icon {
+        display: none;
+        width: 21px;
+        height: 21px;
+        flex-shrink: 0;
+        &::before {
+            font-size: 20px;
+            color: $white;
+        }
+        @media screen and (max-width: 1600px) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
     &__dropdown {
@@ -208,12 +320,18 @@
         text-align: center;
         line-height: 120%;
         margin-bottom: 16px;
+        @media screen and (max-width: $lg) {
+            padding: 8px 0 14px;
+        }
     }
     &__list {
         @include reset-list;
         display: flex;
         flex-direction: column;
         gap: 16px;
+        @media screen and (max-width: $lg) {
+            gap: 10px;
+        }
     }
     &__item {
     }
@@ -256,4 +374,135 @@
     &::before {
         mask-image: url("../images/icons/exit.svg");
     }
+}
+
+.header-burger {
+    display: none;
+    @media screen and (max-width: $lg) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 64px;
+        flex-shrink: 0;
+        height: 100%;
+        border-left: 1px solid #363a45;
+        padding: 19px 20px;
+        cursor: pointer;
+        position: relative;
+        z-index: 20;
+        background-color: $black;
+        transition: border-color 0.15s ease 0s;
+    }
+    &__lines {
+        position: relative;
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        z-index: 20;
+        & span {
+            position: absolute;
+            left: 0;
+            width: 24px;
+            height: 1px;
+            background-color: $white;
+            border-radius: 9px;
+            flex-shrink: 0;
+            transition: background-color 0.3s ease 0s, transform 0.3s ease 0s;
+            &:nth-child(1) {
+                top: 4px;
+            }
+            &:nth-child(2) {
+                top: calc(50% - 1px);
+            }
+            &:nth-child(3) {
+                bottom: 4px;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $lg) {
+    .menu-open {
+        & .overlay {
+            opacity: 1;
+            z-index: 1;
+        }
+        & .header {
+            background-color: $white;
+            &::after {
+                opacity: 1;
+            }
+            &-burger {
+                border-color: $gray;
+                background-color: $white;
+                &__lines {
+                    & span {
+                        background-color: $text_gray;
+                        &:nth-child(1) {
+                            top: 50%;
+                            transform: translateY(-50%) rotate(135deg);
+                        }
+
+                        &:nth-child(2) {
+                            opacity: 0;
+                            left: -60px;
+                        }
+
+                        &:nth-child(3) {
+                            top: 50%;
+                            transform: translateY(-50%) rotate(-135deg);
+                        }
+                    }
+                }
+            }
+            &__actions {
+                pointer-events: none;
+                visibility: hidden;
+            }
+            &__menu {
+                transform: translateY(0);
+                top: 100%;
+            }
+        }
+    }
+    .user-header {
+        &__dropdown {
+            right: -50px;
+            z-index: 20;
+        }
+    }
+}
+._touch {
+    & .user-header {
+        &.is-active .user-header__dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+    }
+    & .language-header {
+        &.is-active .language-header__dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+        &.is-active .language-header__current {
+            &::before {
+                transform: rotate(180deg);
+            }
+        }
+    }
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 18, 29, 0.6);
+    opacity: 0;
+    transition: opacity 0.5s ease 0s;
+    z-index: -1;
 }

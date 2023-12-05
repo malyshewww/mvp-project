@@ -1,7 +1,7 @@
 .main__table {
     & .tr {
         display: grid;
-        grid-template-columns: 46px 88px 143px 200px 167px 108px 137px 145px 119px 156px 139px 143px 105px 84px;
+        grid-template-columns: 46px 88px 143px minmax(200px, 1fr) 167px 108px 137px 145px 119px 156px 139px 143px 105px 84px;
     }
 }
 .table {
@@ -9,7 +9,10 @@
     border-radius: 6px;
     background-color: $white;
     position: relative;
-    width: 1783px;
+    width: 100%;
+    @media screen and (max-width: $lg) {
+        width: 1783px;
+    }
     & .th-checkbox,
     & .td-checkbox {
         position: sticky;
