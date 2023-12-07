@@ -80,6 +80,11 @@
     }
 }
 .detail-form__radiobutton {
+    &.radiobutton-item {
+        & label {
+            width: 100%;
+        }
+    }
     & input:checked ~ label {
         color: $red;
         &::before {
@@ -133,7 +138,7 @@
     }
 
     & label {
-        display: flex;
+        display: inline-flex;
         align-items: center;
         gap: 8px;
         cursor: pointer;
@@ -163,6 +168,13 @@
                 background-color: $white;
                 opacity: 0;
                 transition: opacity 0.3s ease 0s;
+            }
+        }
+        @media (any-hover: hover) {
+            &:hover {
+                & span {
+                    border-color: $black;
+                }
             }
         }
     }
@@ -202,7 +214,7 @@
         font-size: 14px;
         font-weight: 500;
         line-height: 20px;
-        display: flex;
+        display: inline-flex;
         align-items: flex-start;
         gap: 8px;
         cursor: pointer;

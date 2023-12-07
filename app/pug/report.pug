@@ -21,13 +21,6 @@ block content
 								+radio("В отдельном столбце", "placement-trademark", "placement-trademark-1", true)
 								+radio("В столбце с наименованием", "placement-trademark", "placement-trademark-2")
 								+radio("В столбце с наименованием, вместо наименования товарного знака", "placement-trademark", "placement-trademark-3")
-					.report-preview.report-preview-mobile
-						.report-preview__title.content-title Предварительный просмотр
-						.report-preview__images 
-							.report-preview__image(data-preview="excel")
-								img(src="images/report/preview-excel.svg", alt="preview excel")
-							.report-preview__image(data-preview="word")
-								img(src="images/report/preview-word.svg", alt="preview word")
 					.report__fields
 						.report__fields-title.content-title Поля отчета
 						.report__fields-box
@@ -44,7 +37,7 @@ block content
 							+reportDropdown("Срок действия", "report-validity", ["Срок действия", "Срок действия"])
 						button(type="button").report__btn-add Добавить ещё
 					button(type="button").report__download.btn.btn-red Выгрузить отчёт
-				aside.report__aside.report-preview
+				.report-preview(data-da=".report__content, 991.98, 1")
 					.report-preview__title.content-title Предварительный просмотр
 					.report-preview__images 
 						.report-preview__image(data-preview="excel")

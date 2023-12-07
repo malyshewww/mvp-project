@@ -19,7 +19,7 @@
     //-                 .th.th-view
     //-                     .th-title Просмотр
     //- include ./main-search
-    .main__table.table-visible(data-simplebar)
+    .main__table(class=`${tableVisible ? 'table-visible': ''}`)(data-simplebar)
         .table#mainTable
             header.table__header
                 .tr 
@@ -59,7 +59,7 @@
                         .td.td-register-number= item.registerNumber
                         .td.td-register-date= item.registerDate
                         .td.td-status= item.status
-                        .td.td-validity= item.validity
+                        .td.td-validity(class=`${index === 2 ? 'in-active' : ''}`)= item.validity
                         .td.td-view 
-                            button(type="button").button-view.icon-eye
+                            a(href="trademark.html").button-view.icon-eye
 button(type="button").main__button.btn-more Показать ещё

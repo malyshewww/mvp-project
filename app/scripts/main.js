@@ -1,4 +1,3 @@
-console.log("main init");
 import "./modules/dynamic_adapt.js";
 // Сортировка данных в таблице
 const table = document.getElementById("mainTable");
@@ -25,12 +24,10 @@ if (table) {
                 header.classList.remove("no-active");
                 header.setAttribute("data-sort-direction", sortDirection);
                 rows.sort((a, b) => {
-                    let aValue = a.querySelector(
-                        `.td:nth-child(${columnIndex})`
-                    ).textContent;
-                    let bValue = b.querySelector(
-                        `.td:nth-child(${columnIndex})`
-                    ).textContent;
+                    let aValue =
+                        a.querySelectorAll(`.td`)[columnIndex].textContent;
+                    let bValue =
+                        b.querySelectorAll(`.td`)[columnIndex].textContent;
                     if (sortDirection === "asc") {
                         return aValue > bValue ? 1 : -1;
                     } else {
@@ -52,13 +49,22 @@ if (table) {
     const checkboxAll = table.querySelector("input[name=check-all]");
     const tbody = table.querySelector(".table__body");
     const checkboxes = tbody.querySelectorAll("input[type='checkbox']");
-    const buttonClear = document.querySelector(".main-search__clear");
+    const buttonClear = document.querySelectorAll(".main-search__clear");
     const totalRecordBox = document.querySelector(".total-record");
+    const modalResult = document.querySelector(".modal-result");
+    const modalResultTotalRecord = modalResult?.querySelector(
+        ".main-search__info--show .main-search__count"
+    );
     if (totalRecordBox) {
         totalRecordBox.innerHTML = `${totalRecord} шт.`;
     }
+    if (modalResultTotalRecord) {
+        modalResultTotalRecord.innerHTML = `${totalRecord} шт.`;
+    }
     let checkboxesChecked = [];
-    buttonClear.style.display = "none";
+    [...buttonClear].forEach((btn) => {
+        btn.style.display = "none";
+    });
     tbody.addEventListener("change", (e) => {
         let checked = true;
         for (let i = checkboxes.length; i--; ) {
@@ -93,27 +99,36 @@ if (table) {
         });
     }
     if (buttonClear) {
-        buttonClear.addEventListener("click", () => {
-            [...checkboxes].forEach((item) => {
-                item.checked = false;
-                checkboxAll.checked = false;
-                checkboxesChecked = [];
+        [...buttonClear].forEach((btn) => {
+            btn.addEventListener("click", () => {
+                [...checkboxes].forEach((item) => {
+                    item.checked = false;
+                    checkboxAll.checked = false;
+                    checkboxesChecked = [];
+                });
+                setTimeout(() => {
+                    stateButtonClear(checkboxesChecked, buttonClear);
+                    calculateChangedRecords();
+                }, 300);
             });
-            setTimeout(() => {
-                stateButtonClear(checkboxesChecked, buttonClear);
-                calculateChangedRecords();
-            }, 300);
         });
     }
-    function stateButtonClear(arr, btn) {
+    function stateButtonClear(arr, btns) {
         arr.length > 0
-            ? (btn.style.display = "flex")
-            : (btn.style.display = "none");
+            ? btns.forEach((btn) => (btn.style.display = "flex"))
+            : btns.forEach((btn) => (btn.style.display = "none"));
     }
     function calculateChangedRecords() {
         const changedRecordBox = document.querySelector(".changed-record");
+        const modalResult = document.querySelector(".modal-result");
+        const modalResultTotalRecord = modalResult?.querySelector(
+            ".main-search__info--changed .main-search__count"
+        );
         if (changedRecordBox) {
             changedRecordBox.innerHTML = `${checkboxesChecked.length} шт.`;
+        }
+        if (modalResultTotalRecord) {
+            modalResultTotalRecord.innerHTML = `${checkboxesChecked.length} шт.`;
         }
     }
     calculateChangedRecords();
@@ -233,8 +248,6 @@ function createImageTooltip() {
 createImageTooltip();
 
 // Подключение кастомного скроллбара
-// const tableCloned = document.querySelector(".table-clone");
-// const selTable = tableCloned.querySelector(".table");
 let simplebar;
 Array.prototype.forEach.call(
     document.querySelectorAll(".main__table[data-simplebar]"),
@@ -260,33 +273,17 @@ Array.prototype.forEach.call(
         });
     }
 );
-Array.prototype.forEach.call(
-    document.querySelectorAll(".trademark [data-simplebar]"),
-    (el) => {
+const initSimpleBar = (selector) => {
+    Array.prototype.forEach.call(document.querySelectorAll(selector), (el) => {
         new SimpleBar(el, {
             autoHide: false,
             clickOnTrack: true,
         });
-    }
-);
-Array.prototype.forEach.call(
-    document.querySelectorAll("[data-dropdown-simplebar]"),
-    (el) => {
-        new SimpleBar(el, {
-            autoHide: false,
-            clickOnTrack: true,
-        });
-    }
-);
-Array.prototype.forEach.call(
-    document.querySelectorAll("[data-modal-simplebar]"),
-    (el) => {
-        new SimpleBar(el, {
-            autoHide: false,
-            clickOnTrack: true,
-        });
-    }
-);
+    });
+};
+initSimpleBar(".trademark [data-simplebar]");
+initSimpleBar("[data-dropdown-simplebar]");
+initSimpleBar("[data-modal-simplebar]");
 
 const reportGroupForm = document.querySelector(".report-group--form");
 const reportGroupPlacing = document.querySelector(".report-group--placing");
@@ -326,13 +323,16 @@ if (reportFields.length) {
     });
 }
 
+// Кнопка назад
 const btnBack = document.querySelector(".btn-back");
 if (btnBack) {
-    btnBack.addEventListener("click", () => {
+    btnBack.addEventListener("click", (e) => {
+        e.preventDefault();
         window.history.back();
     });
 }
 
+// Открытие / закрытие фильтров
 const filterButtonOpen = document.querySelectorAll("[data-filter-open]");
 const filterButtonClose = document.querySelector("[data-filter-close]");
 if (filterButtonOpen) {
@@ -344,11 +344,10 @@ if (filterButtonClose) {
     filterButtonClose.addEventListener("click", closeFilter);
 }
 
-let filterActive = true;
 let asideWidth = 76;
 function calcTableWidth() {
     if (window.innerWidth > 991.98) {
-        let mainTable = document.querySelector(".main__table.table-visible");
+        let mainTable = document.querySelector(".table-visible");
         if (mainTable) {
             let mainTableWidth = window.innerWidth - asideWidth - 40;
             setTimeout(() => {
@@ -418,32 +417,15 @@ function closeModal(currentModal) {
 document.addEventListener("click", openModal);
 function openModal(event) {
     const target = event.target;
-    const modals = document.querySelectorAll("[data-modal]");
     if (target.closest("[data-modal-button]")) {
         event.preventDefault();
         const modalId = target.dataset.modalButton;
-        modals.forEach((item) => {
-            const modal = item.getAttribute("id");
-            if (modalId == modal) {
-                item.classList.add("open-modal");
-                body_lock();
-            }
-        });
+        const modal = document.getElementById(modalId);
+        modal.classList.add("open-modal");
+        body_lock();
     }
 }
-// Кнопки - Открыть Модалку
-// modalButtons.forEach(item => {
-// 	item.addEventListener('click', (e) => {
-// 		e.preventDefault();
-// 		const modalId = item.dataset.modalButton;
-// 		const modal = document.getElementById(modalId);
-// 		modal.classList.add('open-modal');
-// 		modal.querySelector('.modal__content').addEventListener('click', (event) => {
-// 			event.stopPropagation();
-// 		})
-// 		bodyLock();
-// 	})
-// })
+
 // Кнопки - Закрыть Модалку
 modalClosebuttons.forEach((item) => {
     item.addEventListener("click", () => {
@@ -579,28 +561,6 @@ function setFooterPadding() {
 setFooterPadding();
 window.addEventListener("resize", setFooterPadding);
 
-// const wrapperBlock = document.querySelector(".wrapper");
-// const targetElement = document.querySelector(".table-wrapper");
-// const options = {
-//     // root: wrapperBlock,
-//     rootMargin: "0px",
-//     // threshold: [0, 0.5, 1],
-// };
-// const callback = ([entry]) => {
-//     const targetInfo = entry.boundingClientRect;
-//     const rootBoundsInfo = entry.rootBounds;
-//     console.log(targetInfo);
-//     console.log(rootBoundsInfo);
-//     if (targetInfo.top > rootBoundsInfo.top || entry.isIntersecting) {
-//         // console.log(rootBoundsInfo.top);s
-//         document.body.classList.add("is-sticky");
-//     } else if (targetInfo.bottom < rootBoundsInfo.top) {
-//         document.body.classList.remove("is-sticky");
-//     }
-// };
-// const observerTable = new IntersectionObserver(callback, options);
-// observerTable.observe(targetElement);
-
 /* Проверка мобильного браузера */
 let isMobile = {
     Android: function () {
@@ -638,7 +598,7 @@ function addTouchClass() {
 }
 addTouchClass();
 
-function openDropdownMenu() {
+function openHeaderMenu() {
     const burger = document.querySelector(".header-burger");
     const overlay = document.querySelector(".overlay");
     const headerMenu = document.querySelector(".header-menu");
@@ -657,57 +617,24 @@ function openDropdownMenu() {
         });
     }
 }
-openDropdownMenu();
+openHeaderMenu();
 
-function openHeaderActions() {
-    const userHeader = document.querySelector(".user-header");
-    const languageHeader = document.querySelector(".language-header");
-    if (userHeader) {
-        const dropdown = userHeader.querySelector(".user-header__dropdown");
-        dropdown.addEventListener("click", (event) => event.stopPropagation());
-        userHeader.addEventListener("click", (event) => {
+function headerActions() {
+    let overlay = document.querySelector(".overlay");
+    const actions = document.querySelectorAll("[data-action]");
+    [...actions].forEach((action) => {
+        action.addEventListener("click", (event) => {
             event.stopPropagation();
-            userHeader.classList.toggle("is-active");
-            languageHeader.classList.remove("is-active");
-            // showOverlay();
+            [...actions].forEach((item) => item.classList.remove("is-active"));
+            action.classList.toggle("is-active");
+            overlay.classList.add("is-show");
         });
-    }
-    if (languageHeader) {
-        let dropdownLanguage = languageHeader.querySelector(
-            ".language-header__dropdown"
-        );
-        dropdownLanguage.addEventListener("click", (event) => {
-            event.stopPropagation();
+        document.addEventListener("click", (event) => {
+            if (event.target !== action) {
+                action.classList.remove("is-active");
+                overlay.classList.remove("is-show");
+            }
         });
-        languageHeader.addEventListener("click", (event) => {
-            event.stopPropagation();
-            userHeader.classList.remove("is-active");
-            languageHeader.classList.toggle("is-active");
-        });
-    }
-    document.addEventListener("click", (e) => {
-        if (e.target !== userHeader) {
-            userHeader.classList.remove("is-active");
-        }
-        if (e.target !== languageHeader) {
-            languageHeader.classList.remove("is-active");
-        }
-        if (!e.target.closest(".user-header")) {
-            // hideOverlay();
-        }
-        if (!e.target.closest(".language-header")) {
-            // languageHeader.classList.remove("is-active");
-        }
     });
 }
-function showOverlay() {
-    let overlay = document.querySelector(".overlay");
-    overlay.style.opacity = "1";
-    overlay.style.zIndex = "2";
-}
-function hideOverlay() {
-    let overlay = document.querySelector(".overlay");
-    overlay.style.opacity = "0";
-    overlay.style.zIndex = "-1";
-}
-openHeaderActions();
+headerActions();

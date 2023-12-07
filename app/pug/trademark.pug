@@ -1,12 +1,12 @@
 extends includes/layout.pug
 
 append variables
-	- let pageTitle = "Информаиця о товарном знаке";
+	- let pageTitle = "Информация о товарном знаке";
 	- description += pageTitle;
 block content
 	.trademark 
 		.container 
-			a(href="#").btn-back.icon-arrow-back Назад
+			button(type="button").btn-back.icon-arrow-back Назад
 			.trademark__body
 				.trademark__header 
 					.trademark__logo 

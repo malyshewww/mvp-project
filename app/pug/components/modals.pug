@@ -38,3 +38,19 @@
         .notice__icon
             img(src="images/icons/error.svg", alt="иконка")
         .notice__text Ошибка! <br> Повторите отправку еще раз
++modal("modal-result", "modal-result")
+    .main-search
+        .main-search__result.result-search
+            .result-search__data
+                .result-search__top
+                    .main-search__info
+                        h2.main-search__title Результат поиска по записям: #[span.main-search__count 34 шт.] 
+                .result-search__bottom
+                    .main-search__info.main-search__info--show
+                        h3.main-search__title Показано записей: #[span.main-search__count]
+                    .main-search__info.main-search__info--changed
+                        h3.main-search__title Выбрано записей: #[span.main-search__count]
+                    button(type="button").main-search__clear.icon-clear Очистить
+            .main-search__actions 
+                button(type="button").main-search__button.btn.btn-black Распечатать выбранное
+                button(type="button").main-search__button.btn.btn-black Распечатать все

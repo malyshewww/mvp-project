@@ -19,14 +19,14 @@ html(lang="ru")
 			meta(property="og:url" content="https://example.com")
 			meta(property="og:title" content=pageTitle)
 			meta(property="og:description" content=description)
-			//- meta(property="og:image" content="./images/favicons/favicon-16x16.png")
+			meta(property="og:image" content="./images/favicons/favicon-16x16.png")
 			meta(property="twitter:title" content=pageTitle)
 			meta(property="twitter:description" content="description")
 			link(rel="canonical" href="https://example.com")
 			if googleFonts
 				link(href=`https://fonts.googleapis.com/css2?family=${googleFonts}&display=swap` rel="stylesheet")
+				link(rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400&display=swap" as="font" type="font/woff2" crossorigin="anonymous")
 			block styles
-				link(href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css"  rel="stylesheet")
 				link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/simplebar/6.2.5/simplebar.min.css")
 				link(href="styles/main.min.css" rel="stylesheet")
 			include ../components/favicons

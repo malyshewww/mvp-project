@@ -195,7 +195,8 @@
         min-height: 54px;
         &-country,
         &-owner,
-        &-classes {
+        &-classes,
+        &-status {
             justify-content: flex-start;
         }
         &-case {
@@ -240,6 +241,10 @@
                 visibility: visible;
                 transition: all 0.3s ease 0s;
             }
+        }
+        &.in-active {
+            background-color: #f4e9e8;
+            color: $red;
         }
     }
 }

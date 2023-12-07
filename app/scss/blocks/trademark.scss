@@ -72,6 +72,9 @@
             & .th {
                 cursor: default;
             }
+            & .td {
+                min-height: 38px;
+            }
             &__body {
                 & .tr {
                     min-height: 38px;

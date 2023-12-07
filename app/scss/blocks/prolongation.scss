@@ -5,11 +5,14 @@
     }
     & .main__table {
         & .tr {
-            grid-template-columns: 46px 91px 148px 206px 174px 111px 141px 150px 123px 161px 143px 148px 109px 89px;
+            grid-template-columns: 46px 91px 148px minmax(206px, 1fr) 174px 111px 141px 150px 123px 161px 143px 148px 109px 89px;
         }
     }
     & .table {
-        width: 1840px;
+        width: 100%;
+        @media screen and (max-width: $xxl) {
+            width: 1804px;
+        }
     }
     &__body {
         padding: 0 40px;
