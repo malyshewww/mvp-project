@@ -240,6 +240,9 @@
         }
         & .main-search__info {
             display: block;
+            &--show {
+                display: none;
+            }
         }
         & .main-search__title span {
             display: inline-block;

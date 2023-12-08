@@ -23,12 +23,27 @@
     font-size: 14px;
     font-weight: 500;
     line-height: 120%;
-    transition: background-color 0.3s ease 0s;
+    transition: background-color 0.3s ease 0s, color 0.3s ease 0s,
+        border-color 0.3s ease 0s;
     cursor: pointer;
+    @media screen and (max-width: $md) {
+        height: 39px;
+    }
 }
 .btn-black {
     color: $white;
     background-color: $black;
+    border: 1px solid $black;
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: transparent;
+            color: $black;
+        }
+    }
+    &:focus-visible {
+        background-color: transparent;
+        color: $black;
+    }
 }
 
 .btn-red {

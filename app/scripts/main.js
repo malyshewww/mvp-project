@@ -344,12 +344,25 @@ if (filterButtonClose) {
     filterButtonClose.addEventListener("click", closeFilter);
 }
 
+function getScrollbarWidth() {
+    return window.innerWidth;
+}
+
 let asideWidth = 76;
 function calcTableWidth() {
+    let someWidth = 0;
+    if (window.innerWidth > 1199.98) {
+        someWidth = 60;
+    } else if (window.innerWidth > 991.98) {
+        someWidth = 30;
+    }
     if (window.innerWidth > 991.98) {
         let mainTable = document.querySelector(".table-visible");
         if (mainTable) {
-            let mainTableWidth = window.innerWidth - asideWidth - 40;
+            let scrollbarWidth = getScrollbarWidth();
+            let mainTableWidth = parseInt(
+                scrollbarWidth - asideWidth - someWidth
+            );
             setTimeout(() => {
                 mainTable.style.width = `${mainTableWidth}px`;
             }, 400);
@@ -554,12 +567,11 @@ function setFooterPadding() {
     if (searchActions && footer) {
         const searchActionsHeight =
             searchActions.getBoundingClientRect().height;
-        if (window.innerWidth > 991.98) return;
+        if (window.innerWidth > 991.98) return false;
         footer.style.paddingBottom = `${searchActionsHeight + 30}px`;
     }
 }
 setFooterPadding();
-window.addEventListener("resize", setFooterPadding);
 
 /* Проверка мобильного браузера */
 let isMobile = {

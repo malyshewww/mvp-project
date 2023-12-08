@@ -73,6 +73,11 @@
             font-size: 16px;
             gap: 6px;
         }
+        &--show {
+            @media screen and (max-width: $md) {
+                display: none;
+            }
+        }
     }
     &__title {
         line-height: 120%;
