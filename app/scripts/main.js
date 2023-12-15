@@ -44,6 +44,11 @@ if (table) {
     });
     totalRecord = rows.length;
 }
+
+// const tableCloneTh = document.querySelector(".table-clone .th");
+// [...tableCloneTh].forEach((header, index) => {
+
+// });
 // Чекбоксы в таблице
 if (table) {
     const checkboxAll = table.querySelector("input[name=check-all]");
@@ -165,6 +170,25 @@ function deleteCondition(parent) {
         });
     }
 }
+
+function addCondition() {
+    const groupCondition = document.querySelector(
+        ".detail-form__group--condition"
+    );
+    if (groupCondition) {
+        groupCondition.style.display = "none";
+    }
+    const addButton = document.querySelector(
+        ".detail-form__bottom .detail-form__btn-add"
+    );
+    if (addButton && groupCondition) {
+        addButton.addEventListener("click", (event) => {
+            event.target.remove();
+            groupCondition.style.display = "block";
+        });
+    }
+}
+addCondition();
 
 // Маска для даты
 function dateInputMask(parent) {
@@ -348,18 +372,18 @@ function getScrollbarWidth() {
     return window.innerWidth;
 }
 
+let scrollbarWidth = getScrollbarWidth();
 let asideWidth = 76;
-function calcTableWidth() {
+function calcTableWidth(asideWidth) {
     let someWidth = 0;
     if (window.innerWidth > 1199.98) {
-        someWidth = 60;
+        someWidth = 80;
     } else if (window.innerWidth > 991.98) {
         someWidth = 30;
     }
     if (window.innerWidth > 991.98) {
         let mainTable = document.querySelector(".table-visible");
         if (mainTable) {
-            let scrollbarWidth = getScrollbarWidth();
             let mainTableWidth = parseInt(
                 scrollbarWidth - asideWidth - someWidth
             );
@@ -369,15 +393,27 @@ function calcTableWidth() {
         }
     }
 }
+
+let prolongationTable = document.querySelector(".prolongation .main__table");
+if (prolongationTable) {
+    if (window.innerWidth >= 1920) {
+        let scrollWidth =
+            window.innerWidth -
+            document.querySelector(".wrapper").offsetWidth +
+            document.querySelector(".table-wrapper").offsetWidth;
+        prolongationTable.style.width = `${scrollWidth}px`;
+    }
+}
+
 function openFilter() {
     document.body.classList.add("is-open");
     asideWidth = 406;
-    calcTableWidth();
+    calcTableWidth(asideWidth);
 }
 function closeFilter() {
     document.body.classList.remove("is-open");
     asideWidth = 76;
-    calcTableWidth();
+    calcTableWidth(asideWidth);
 }
 calcTableWidth();
 
@@ -569,6 +605,9 @@ function setFooterPadding() {
             searchActions.getBoundingClientRect().height;
         if (window.innerWidth > 991.98) return false;
         footer.style.paddingBottom = `${searchActionsHeight + 30}px`;
+        if (document.body.classList.contains("_touch")) {
+            footer.style.paddingBottom = `${searchActionsHeight + 30}px`;
+        }
     }
 }
 setFooterPadding();

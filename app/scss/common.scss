@@ -30,6 +30,20 @@
         height: 39px;
     }
 }
+._touch {
+    & .btn {
+        border-radius: 6px;
+        @media screen and (max-width: $md) {
+            height: 39px;
+        }
+    }
+    & .profile-form__button {
+        border-radius: 6px;
+        @media screen and (max-width: $md) {
+            height: 39px;
+        }
+    }
+}
 .btn-black {
     color: $white;
     background-color: $black;

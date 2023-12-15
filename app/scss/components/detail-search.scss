@@ -215,6 +215,15 @@ body.is-open {
         font-size: 14px;
         font-weight: 500;
         line-height: 120%;
+        transition: color 0.3s ease 0s;
+        @media (any-hover: hover) {
+            &:hover {
+                color: $red;
+            }
+        }
+        &:focus-visible {
+            color: $red;
+        }
     }
     &__btn-search {
         width: 150px;
@@ -413,6 +422,22 @@ body.is-open {
         @media (any-hover: hover) {
             &:hover {
                 background-color: #f1f2f7;
+            }
+        }
+    }
+}
+.dropdown-condition {
+    & .dropdown__list-item {
+        padding: 0;
+        & .form-item {
+            & input:checked {
+                & ~ label {
+                    background-color: #f1f2f7;
+                }
+            }
+            & label {
+                padding: 6px 12px;
+                width: 100%;
             }
         }
     }

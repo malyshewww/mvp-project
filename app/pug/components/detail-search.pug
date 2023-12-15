@@ -40,17 +40,28 @@
                             .form-item
                                 input(type="radio", name="search-status" id=`search-status-or` value="or")
                                 label(for=`search-status-or`) Или
-                .detail-form__group
-                    .dropdown
+                .detail-form__group.detail-form__group--condition
+                    .dropdown.dropdown-condition
                         button(type="button").dropdown__button.icon-arrow-down Выберите условие
                         .dropdown__wrapper 
                             .dropdown__list(data-dropdown-simplebar)
-                                li.dropdown__list-item Условие 1
-                                li.dropdown__list-item Условие 2
-                                li.dropdown__list-item Условие 3
-                                li.dropdown__list-item Условие 4
+                                li.dropdown__list-item
+                                    .checkbox-item.form-item
+                                        input(type="checkbox" name="condition" id="condition-1")
+                                        label(for="condition-1") Условие 
+                                li.dropdown__list-item
+                                    .checkbox-item.form-item
+                                        input(type="checkbox" name="condition" id="condition-2")
+                                        label(for="condition-2") Условие 2
+                                li.dropdown__list-item
+                                    .checkbox-item.form-item
+                                        input(type="checkbox" name="condition" id="condition-3")
+                                        label(for="condition-3") Условие 3
+                                li.dropdown__list-item
+                                    .checkbox-item.form-item
+                                        input(type="checkbox" name="condition" id="condition-4")
+                                        label(for="condition-4") Условие 4
                     .detail-form__actions
-                        button(type="button").detail-form__btn-add Добавить
                         button(type="button").detail-form__btn-delete.icon-close-sm Удалить условие
             .detail-form__bottom 
                 .detail-form__bottom-top 

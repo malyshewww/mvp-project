@@ -1,5 +1,5 @@
 .table-wrapper
-    //- .main__table.table-clone(data-simplebar)
+    //- .main__table.table-clone
     //-     .table
     //-         header.table__header
     //-             .tr 
@@ -18,7 +18,6 @@
     //-                                 button(type="button").sorting-button.sorting-button-down.icon-sort-down
     //-                 .th.th-view
     //-                     .th-title Просмотр
-    //- include ./main-search
     .main__table(class=`${tableVisible ? 'table-visible': ''}`)(data-simplebar)
         .table#mainTable
             header.table__header
@@ -44,7 +43,8 @@
                             label(for=index+1)
                                 span
                         .td.td-image
-                            img(src=`images/banks/${item.logo}.png`, alt="логотип банка")
+                            a(href="trademark.html")
+                                img(src=`images/banks/${item.logo}.png`, alt="логотип банка")
                         .td.td-case= item.caseNumber
                         .td.td-name-sign= item.nameSign
                         .td.td-country= item.country

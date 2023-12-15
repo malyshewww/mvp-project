@@ -1,8 +1,9 @@
 .main__table {
     & .tr {
         display: grid;
-        grid-template-columns: 46px 88px 143px minmax(200px, 1fr) 167px 108px 137px 145px 119px 156px 139px 143px 105px 84px;
+        grid-template-columns: 46px 89px 144px minmax(200px, 1fr) 168px 109px 138px 146px 120px 157px 140px 144px 105px 84px;
     }
+    transition: width 0.3s ease 0s;
 }
 .table {
     // border: 1px solid $gray;
@@ -49,7 +50,6 @@
     }
     & .tr {
         & > * {
-            border-bottom: 1px solid $gray;
         }
     }
     &__header {
@@ -63,11 +63,13 @@
         // border-radius: 6px 6px 0 0;
         // border-bottom: none;
         table-layout: fixed;
+        border-radius: 6px 6px 0 0;
         & .tr {
             min-height: 62px;
         }
         & .th {
             border-top: 1px solid $gray;
+            border-bottom: 1px solid $gray;
             &:first-child {
                 border-left: 1px solid $gray;
                 @media screen and (max-width: $md) {
@@ -88,6 +90,14 @@
     &__body {
         & .tr {
             min-height: 54px;
+            &:not(:last-child) {
+                border-bottom: 1px solid #f1f2f7;
+            }
+            &:last-child {
+                & .td {
+                    border-bottom: 1px solid $gray;
+                }
+            }
             &:last-child {
                 & .td-image {
                     &-tooltip {
