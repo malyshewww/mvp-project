@@ -1,4 +1,9 @@
 import "./modules/dynamic_adapt.js";
+// import "./modules/jquery_floatingscroll.min.js";
+
+// $(document).ready(function () {
+//     $(".table-wrapper").floatingScroll();
+// });
 // Сортировка данных в таблице
 const table = document.getElementById("mainTable");
 let totalRecord = 0;
@@ -166,7 +171,15 @@ function deleteCondition(parent) {
     const deleteButton = parent.querySelector(".detail-form__btn-delete");
     if (deleteButton) {
         deleteButton.addEventListener("click", () => {
-            parent.remove();
+            if (parent.classList.contains("detail-form__group--condition")) {
+                const addButton = document.querySelector(
+                    ".detail-form__bottom .detail-form__btn-add"
+                );
+                addButton.style.display = "block";
+                parent.style.display = "none";
+            } else {
+                parent.remove();
+            }
         });
     }
 }
@@ -183,7 +196,7 @@ function addCondition() {
     );
     if (addButton && groupCondition) {
         addButton.addEventListener("click", (event) => {
-            event.target.remove();
+            event.target.style.display = "none";
             groupCondition.style.display = "block";
         });
     }
@@ -375,14 +388,14 @@ function getScrollbarWidth() {
 let scrollbarWidth = getScrollbarWidth();
 let asideWidth = 76;
 function calcTableWidth(asideWidth) {
+    let mainTable = document.querySelector(".table-visible");
     let someWidth = 0;
     if (window.innerWidth > 1199.98) {
-        someWidth = 80;
+        someWidth = 60;
     } else if (window.innerWidth > 991.98) {
         someWidth = 30;
     }
     if (window.innerWidth > 991.98) {
-        let mainTable = document.querySelector(".table-visible");
         if (mainTable) {
             let mainTableWidth = parseInt(
                 scrollbarWidth - asideWidth - someWidth
@@ -397,16 +410,23 @@ function calcTableWidth(asideWidth) {
 let prolongationTable = document.querySelector(".prolongation .main__table");
 if (prolongationTable) {
     if (window.innerWidth >= 1920) {
-        let scrollWidth =
+        let scrollWidth = parseInt(
             window.innerWidth -
-            document.querySelector(".wrapper").offsetWidth +
-            document.querySelector(".table-wrapper").offsetWidth;
+                document.querySelector(".wrapper").offsetWidth +
+                document.querySelector(".table-wrapper").offsetWidth -
+                30
+        );
         prolongationTable.style.width = `${scrollWidth}px`;
     }
 }
 
 function openFilter() {
     document.body.classList.add("is-open");
+    const aside = document.querySelector(".main__aside");
+    window.scrollTo({
+        top: aside.getBoundingClientRect().top + window.scrollY,
+        behavior: "smooth",
+    });
     asideWidth = 406;
     calcTableWidth(asideWidth);
 }

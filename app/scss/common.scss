@@ -36,6 +36,9 @@
         @media screen and (max-width: $md) {
             height: 39px;
         }
+        &.main-search__button-mobile {
+            border-radius: 0;
+        }
     }
     & .profile-form__button {
         border-radius: 6px;

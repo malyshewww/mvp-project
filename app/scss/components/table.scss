@@ -90,9 +90,6 @@
     &__body {
         & .tr {
             min-height: 54px;
-            &:not(:last-child) {
-                border-bottom: 1px solid #f1f2f7;
-            }
             &:last-child {
                 & .td {
                     border-bottom: 1px solid $gray;
@@ -123,6 +120,7 @@
             }
         }
         & .td {
+            border-bottom: 1px solid #f1f2f7;
             &:first-child {
                 border-left: 1px solid $gray;
                 @media screen and (max-width: $md) {
