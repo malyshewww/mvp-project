@@ -709,3 +709,35 @@ function headerActions() {
     });
 }
 headerActions();
+
+// Кнопка наверх
+function scrollTop() {
+    const buttonUp = document.querySelector(".button-up");
+    if (buttonUp) {
+        buttonUp.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.scrollTo(0, 0);
+            setTimeout(() => {
+                buttonUp.classList.add("hidden");
+            }, 500);
+        });
+        const options = {
+            rootMargin: "50px 0px 0px 0px",
+            threshold: 0,
+        };
+        const observer = new IntersectionObserver(([entry]) => {
+            const targetInfo = entry.boundingClientRect;
+            const rootBoundsInfo = entry.rootBounds;
+            if (
+                targetInfo.bottom > rootBoundsInfo.top ||
+                targetInfo.isIntersecting
+            ) {
+                buttonUp.classList.add("hidden");
+            } else {
+                buttonUp.classList.remove("hidden");
+            }
+        }, options);
+        observer.observe(header);
+    }
+}
+scrollTop();

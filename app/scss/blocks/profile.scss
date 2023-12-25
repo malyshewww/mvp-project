@@ -5,6 +5,9 @@
     }
     &__body {
         max-width: 651px;
+        @media screen and (max-width: $md) {
+            max-width: 100%;
+        }
     }
     &__title {
         margin-bottom: 42px;

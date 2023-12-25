@@ -425,3 +425,50 @@ textarea {
         display: none;
     }
 }
+
+.button-up {
+    position: fixed;
+    right: 43px;
+    bottom: 60px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: $red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
+    &::before {
+        content: "";
+        display: block;
+        background-color: $white;
+        mask-image: url("../images/icons/arrow-up.svg");
+        mask-repeat: no-repeat;
+        mask-position: center;
+        width: 20px;
+        height: 20px;
+    }
+    &.hidden {
+        transform: translateY(150%);
+        opacity: 0;
+        pointer-events: none;
+    }
+    @media (any-hover: hover) {
+        &:hover {
+            background-color: $red_hover;
+        }
+    }
+    &:focus-visible {
+        background-color: $red_hover;
+    }
+    @media screen and (max-width: $lg) {
+        width: 40px;
+        height: 40px;
+        bottom: 30px;
+        right: 16px;
+        &::before {
+            mask-size: 15px 15px;
+        }
+    }
+}
