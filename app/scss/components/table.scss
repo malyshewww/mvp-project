@@ -358,3 +358,13 @@
         overflow: clip;
     }
 }
+
+.main__table.simplebar-scrollable-x {
+    &::after {
+        opacity: 1;
+        @media screen and (max-width: $md) {
+            opacity: 0;
+        }
+    }
+}
+.simplebar-placeholder { width: auto!important;}

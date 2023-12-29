@@ -78,7 +78,7 @@ mixin reportDropdown(inputValue, inputName, [...arr])
 			.dropdown__button.icon-arrow-down
 				input(type="text" name=inputName value=inputValue).dropdown-input
 			.dropdown__wrapper 
-				.dropdown__list(data-dropdown-simplebar)
+				.dropdown__list
 					each item in arr
 						li.dropdown__list-item= item
 		button(type="button").report__field-delete.icon-close-sm

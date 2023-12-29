@@ -35,7 +35,8 @@ block content
 							+reportDropdown("Дата регистрации", "report-register-date", ["Дата регистрации", "Дата регистрации"])
 							+reportDropdown("Статус", "report-status", ["Статус", "Статус", "Статус", "Статус"])
 							+reportDropdown("Срок действия", "report-validity", ["Срок действия", "Срок действия"])
-						button(type="button").report__btn-add Добавить ещё
+							.report(data-name="report-validitty")
+						button(type="button").report__btn-add(data-button-report) Добавить ещё
 					button(type="button").report__download.btn.btn-red Выгрузить отчёт
 				.report-preview(data-da=".report__content, 991.98, 1")
 					.report-preview__title.content-title Предварительный просмотр

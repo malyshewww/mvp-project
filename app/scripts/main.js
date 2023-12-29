@@ -175,8 +175,10 @@ function deleteCondition(parent) {
                 const addButton = document.querySelector(
                     ".detail-form__bottom .detail-form__btn-add"
                 );
+                const statusButtons = document.querySelector('.detail-form__status-buttons');
                 addButton.style.display = "block";
                 parent.style.display = "none";
+                statusButtons.setAttribute('hidden', true);
             } else {
                 parent.remove();
             }
@@ -194,10 +196,16 @@ function addCondition() {
     const addButton = document.querySelector(
         ".detail-form__bottom .detail-form__btn-add"
     );
-    if (addButton && groupCondition) {
+    const statusButtons = document.querySelector('.detail-form__status-buttons');
+    if (addButton && groupCondition && statusButtons) {
         addButton.addEventListener("click", (event) => {
             event.target.style.display = "none";
             groupCondition.style.display = "block";
+            let dropdown = groupCondition.querySelector('.dropdown');
+            statusButtons.removeAttribute('hidden');
+            setTimeout(() => {
+                dropdown.classList.add('active');
+            }, 300);
         });
     }
 }
@@ -231,36 +239,95 @@ function dateInputMask(parent) {
 }
 
 // Dropdown menu
-[...document.querySelectorAll(".dropdown")].forEach((drop) => {
-    const dropMenuBtn = drop.querySelector(".dropdown__button");
-    const dropMenuList = drop.querySelector(".dropdown__wrapper");
-    const dropdownSearch = drop.querySelector(".dropdown__search");
-    const dropdownInput = drop.querySelector(".dropdown-input");
-    // Клик по кнопке. Открыть/Закрыть select
-    dropMenuBtn.addEventListener("click", (e) => {
-        drop.classList.toggle("active");
-    });
-    dropMenuList.addEventListener("click", (e) => {
-        e.stopPropagation();
-        if (drop.classList.contains("dropdown-report")) {
+function initDropdown() {
+    [...document.querySelectorAll(".dropdown")].forEach((drop) => {
+        const dropMenuBtn = drop.querySelector(".dropdown__button");
+        const dropMenuList = drop.querySelector(".dropdown__wrapper");
+        const dropdownSearch = drop.querySelector(".dropdown__search");
+        const dropdownInput = drop.querySelector(".dropdown-input");
+        const inputCondition = drop.querySelectorAll('.radiobutton-item input')
+        // Клик по кнопке. Открыть/Закрыть select
+        dropMenuBtn.addEventListener("click", (e) => {
             drop.classList.toggle("active");
-            dropdownInput.value = e.target.textContent;
+        });
+        dropMenuList.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (drop.classList.contains("dropdown-report")) {
+                drop.classList.toggle("active");
+                dropdownInput.value = e.target.textContent;
+            }
+        });
+        if (inputCondition) {
+            [...inputCondition].forEach(input => {
+                input.addEventListener('change', (e) => {
+                    drop.classList.remove("active");
+                })
+            })
         }
+        // Клик снаружи dropdown либо на другом dropdown Закрыть дропдаун
+        document.addEventListener("click", (e) => {
+            if (e.target !== dropMenuBtn) {
+                drop.classList.remove("active");
+            }
+        });
+        // Нажатие на Tab или Escape. Закрыть дропдаун
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Tab" || e.key === "Escape") {
+                drop.classList.remove("active");
+            }
+        });
     });
-    // Клик снаружи dropdown либо на другом dropdown Закрыть дропдаун
-    document.addEventListener("click", (e) => {
-        if (e.target !== dropMenuBtn) {
-            drop.classList.remove("active");
-        }
-    });
-    // Нажатие на Tab или Escape. Закрыть дропдаун
-    document.addEventListener("keydown", (e) => {
-        if (e.key === "Tab" || e.key === "Escape") {
-            drop.classList.remove("active");
-        }
-    });
-});
+}
+initDropdown();
+// document.addEventListener('click', dropdownFunc)
+// const dropDown = [...document.querySelectorAll(".dropdown")];
+// function dropdownFunc(event) {
+//     let target = event.target;
+//     if (target.closest('.dropdown__button')) {
+//         dropDown.forEach(drop => drop.classList.remove('active'));
+//         let parent = target.parentNode;
+//         parent.classList.toggle('active');
+        
+//     }
+//     if (target.classList.contains('.dropdown.active') && !target.closest('.dropdown.active')) {
+//         target.classList.remove('active');
+//     }
+// }
 
+class ModalManager {
+    constructor() {
+        this.actions = {
+            'open-modal': 'open',
+            'close-modal': 'close'
+        };
+        this.onClick = this.onClick.bind(this);
+        document.addEventListener('click', this.onClick, false);
+    }
+    onClick(e) {
+        const target = e.target.closest('[data-action]');
+        if (e.target.closest('.dropdown__wrapper') && !target) return;
+        if (!!this.current && !target) this.close();
+        if (!target) return;
+        const name = target.getAttribute('data-name');
+        if (!name) console.error('Missing required parameter "data-name"');
+        const action = target.getAttribute('data-action');
+        if (!this.actions[action]) return;
+        this[this.actions[action]](name);
+    }
+    open(name) {
+        const modal = document.querySelector(`.dropdown[data-name="${name}"]`);
+        if (!modal) console.error(`Modal with name ${name} does not exist on the current page`);
+        modal.classList.add('active');
+        this.current = name;
+    }
+    close() {
+        if (!this.current) return;
+        const modal = document.querySelector(`.dropdown[data-name="${this.current}"]`);
+        modal.classList.remove('active');
+        this.current = null;
+    }
+}
+new ModalManager();
 // Формирование динамического изображения в таблице при наведении на логотипы банков
 function createImageTooltip() {
     const picwrap = document.createElement("div");
@@ -398,7 +465,7 @@ function calcTableWidth(asideWidth) {
     if (window.innerWidth > 991.98) {
         if (mainTable) {
             let mainTableWidth = parseInt(
-                scrollbarWidth - asideWidth - someWidth
+                window.innerWidth - asideWidth - someWidth
             );
             setTimeout(() => {
                 mainTable.style.width = `${mainTableWidth}px`;
@@ -428,12 +495,12 @@ function openFilter() {
         behavior: "smooth",
     });
     asideWidth = 406;
-    calcTableWidth(asideWidth);
+    // calcTableWidth(asideWidth);
 }
 function closeFilter() {
     document.body.classList.remove("is-open");
     asideWidth = 76;
-    calcTableWidth(asideWidth);
+    // calcTableWidth(asideWidth);
 }
 calcTableWidth();
 
@@ -695,18 +762,22 @@ function headerActions() {
     const actions = document.querySelectorAll("[data-action]");
     [...actions].forEach((action) => {
         action.addEventListener("click", (event) => {
-            event.stopPropagation();
-            [...actions].forEach((item) => item.classList.remove("is-active"));
+            // event.stopPropagation();
+            // [...actions].forEach((item) => item.classList.remove("is-active"));
             action.classList.toggle("is-active");
             overlay.classList.add("is-show");
         });
-        document.addEventListener("click", (event) => {
-            if (event.target !== action) {
-                action.classList.remove("is-active");
-                overlay.classList.remove("is-show");
-            }
-        });
+        // document.addEventListener("click", (event) => {
+        //     if (event.target == action || action.classList.contains('is-active')) {
+        //         action.classList.remove("is-active");
+        //         overlay.classList.remove("is-show");
+        //     }
+        // });
     });
+    overlay.addEventListener('click', () => {
+        [...actions].forEach((item) => item.classList.remove("is-active"));
+        overlay.classList.remove('is-show');
+    })
 }
 headerActions();
 
@@ -741,3 +812,16 @@ function scrollTop() {
     }
 }
 scrollTop();
+
+const reportPage = document.querySelector('.report');
+if (reportPage) {
+    const buttonReportAdd = reportPage.querySelector('[data-button-report]');
+    const reportList = reportPage.querySelector('.report__fields-box');
+    reportPage.addEventListener('click', (event) => {
+        if (event.target.closest('[data-button-report]')) {
+            const reportFileds = reportPage.querySelectorAll('.report__field');
+            const clone = reportFileds[0].cloneNode(true);
+            reportList.insertBefore(clone, reportFileds[reportFileds.length]);
+        }
+    })
+}
