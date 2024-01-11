@@ -30,6 +30,20 @@ body.is-open {
     z-index: 10;
     position: relative;
     transition: transform 0.5s ease-in-out 0s;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+        background-color: transparent;
+        width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 11px;
+        width: 4px;
+        background-color: #868a95;
+    }
+    scrollbar-color: #868a95 #868a95;
+    scrollbar-width: 4px;
     @media screen and (max-width: $lg) {
         width: 100%;
         transform: none;
@@ -242,6 +256,9 @@ body.is-open {
             place-items: center;
             font-size: 14px;
         }
+        @media screen and (max-width: $md) {
+            font-size: 14px;
+        }
     }
     &__radiobuttons {
         max-width: 260px;
@@ -270,7 +287,7 @@ body.is-open {
             width: 100%;
             align-items: center;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         & .detail-form__btn-add {
             color: $black;
@@ -313,16 +330,6 @@ body.is-open {
 .dropdown {
     padding-bottom: 12px;
     border-bottom: 1px solid $gray_light;
-    &.active {
-        & .dropdown__wrapper {
-            display: block;
-        }
-        & .dropdown__button {
-            &::before {
-                transform: rotate(-180deg);
-            }
-        }
-    }
     &__button {
         display: flex;
         flex-direction: row-reverse;
@@ -342,6 +349,14 @@ body.is-open {
             place-items: center;
             font-size: 10px;
             transition: transform 0.3s ease 0s;
+        }
+        &.active {
+            &::before {
+                transform: rotate(-180deg);
+            }
+            & + .dropdown__wrapper {
+                display: block;
+            }
         }
     }
     &__wrapper {
@@ -380,6 +395,8 @@ body.is-open {
             color: $gray_light;
         }
     }
+    &__content {
+    }
     &__list {
         @include reset-list;
         display: flex;
@@ -403,6 +420,17 @@ body.is-open {
         & .simplebar-track.simplebar-vertical {
             width: 3px;
         }
+        &::-webkit-scrollbar {
+            background-color: transparent;
+            width: 3px;
+        }
+        &::-webkit-scrollbar-thumb {
+            border-radius: 11px;
+            width: 3px;
+            background-color: #868a95;
+        }
+        scrollbar-color: #868a95 #868a95;
+        scrollbar-width: 3px;
     }
     &__list-item {
         padding: 6px 12px;
@@ -413,9 +441,6 @@ body.is-open {
         font-size: 15px;
         line-height: 120%;
         min-height: 32px;
-        &:not(:last-child) {
-            margin-bottom: 4px;
-        }
         & .checkbox-item label {
             color: inherit;
         }
@@ -428,6 +453,9 @@ body.is-open {
 }
 .dropdown-condition {
     & .dropdown__list-item {
+        &:not(:last-child) {
+            margin: 0;
+        }
         padding: 0;
         & .form-item {
             & input:checked {
@@ -438,6 +466,8 @@ body.is-open {
             & label {
                 padding: 6px 12px;
                 width: 100%;
+                font-weight: 400;
+                color: $text_gray;
             }
         }
     }

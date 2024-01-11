@@ -288,6 +288,7 @@
         width: 21px;
         height: 21px;
         flex-shrink: 0;
+        pointer-events: none;
         &::before {
             font-size: 20px;
             color: $white;
@@ -497,6 +498,8 @@
                     transform: rotate(180deg);
                 }
             }
+        }
+        &.action-active {
         }
     }
 }

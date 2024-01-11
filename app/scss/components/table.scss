@@ -326,12 +326,6 @@
     }
 }
 .main__table.table-clone {
-    // &.simplebar-scrollable-x {
-    //     padding: 0;
-    // }
-    // display: none;
-    // opacity: 0;
-    // pointer-events: none;
     padding: 0;
     position: sticky;
     top: 0;
@@ -367,4 +361,6 @@
         }
     }
 }
-.simplebar-placeholder { width: auto!important;}
+.simplebar-placeholder {
+    width: auto !important;
+}

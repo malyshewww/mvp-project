@@ -1,4 +1,4 @@
-.detail-search(data-dropdown-simplebar)
+.detail-search
     .detail-search__body
         button(type="button" data-filter-close).detail-search__btn-close Cкрыть фильтр
         .detail-search__top
@@ -11,14 +11,14 @@
                 +detailFormGroup("Номер регистрации", "register")
                 +detailFormGroup("Товарный знак", "trademark")
                 +detailFormGroup("Срок действия", "validity")
-                .detail-form__group
+                .detail-form__group.detail-form__group--status
                     .dropdown
                         button(type="button").dropdown__button.icon-arrow-down Поиск по статусу
                         .dropdown__wrapper 
                             .dropdown__search 
                                 input(type="text" placeholder="Поиск по статусам").dropdown__input
                                 button(type="button").dropdown__search-button.icon-search
-                            .dropdown__list(data-dropdown-simplebar)
+                            .dropdown__list
                                 li.dropdown__list-item 
                                     +checkbox("Статус 1", "status-1")
                                 li.dropdown__list-item 
@@ -45,7 +45,7 @@
                     .dropdown.dropdown-condition
                         button(type="button").dropdown__button.icon-arrow-down Выберите условие
                         .dropdown__wrapper 
-                            .dropdown__list(data-dropdown-simplebar)
+                            .dropdown__list
                                 li.dropdown__list-item
                                     .radiobutton-item.form-item
                                         input(type="radio" name="condition" id="condition-1")

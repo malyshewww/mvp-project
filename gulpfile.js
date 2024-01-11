@@ -50,6 +50,8 @@ import vinylFTP from "vinyl-ftp"; // Подключение по ftp
 import util from "gulp-util";
 import formatHTML from "gulp-format-html"; // Форматирование резалютирующего html кода
 import { deleteAsync } from "del";
+import concat from "gulp-concat";
+import cleanJs from "gulp-minify";
 
 import webp from "gulp-webp";
 import webpHtmlNoSvg from "gulp-webp-html-nosvg";
@@ -93,6 +95,8 @@ const path = {
         fonts: `${srcFolder}/fonts/*.*`,
         files: `${srcFolder}/files/**/*.*`,
         svgicons: `${srcFolder}/svgicons/*.svg`,
+        jsLibs: `${srcFolder}/scripts/libs/**/*.js`,
+        styleLibs: `${srcFolder}/style/libs/**/*.css`,
     },
     watch: {
         pug: `${srcFolder}/pug/**/*.pug`,
@@ -102,6 +106,8 @@ const path = {
         fonts: `${srcFolder}/fonts/**/*`,
         svgicons: `${srcFolder}/svgicons/*.svg`,
         files: `${srcFolder}/files/**/*.*`,
+        styleLibs: `${srcFolder}/style/libs/**/*.css`,
+        jsLibs: `${srcFolder}/scripts/libs/**/*.js`,
     },
     clean: `${buildFolder}/`,
     buildFolder: buildFolder,
@@ -117,11 +123,6 @@ const configFTP = {
     password: "L540YD9y", // Пароль
     parallel: 5, // Количество одновременных потоков
 };
-
-// Раскомментировать, если нужна верстка под MODX
-const pathCurrent = process.cwd();
-const pathModx = `${pathCurrent}.local/`;
-const pathModxTemplate = `${pathModx}assets/template/`;
 
 function browsersync() {
     browserSync.init({
@@ -237,64 +238,106 @@ function styles() {
             .pipe(browserSync.stream())
     );
 }
-function scripts() {
-    return (
-        src(path.src.js)
-            .pipe(plumber(plumberNotify("JS")))
-            .pipe(named())
-            .pipe(
-                webpackStream(
-                    {
-                        mode: app.isBuild ? "production" : "development",
-                        performance: { hints: false },
-                        // plugins: [
-                        //   new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery' }), // jQuery (npm i jquery)
-                        // ],
-                        module: {
-                            rules: [
-                                {
-                                    test: /\.m?js$/,
-                                    exclude: /(node_modules)/,
-                                    use: {
-                                        loader: "babel-loader",
-                                        options: {
-                                            presets: ["@babel/preset-env"],
-                                            plugins: [
-                                                "babel-plugin-root-import",
-                                            ],
-                                        },
-                                    },
-                                },
-                            ],
-                        },
-                        optimization: {
-                            minimize: true,
-                            minimizer: [
-                                new TerserPlugin({
-                                    terserOptions: {
-                                        format: { comments: false },
-                                    },
-                                    extractComments: false,
-                                    // include: /\.min\.js$/,
-                                }),
-                            ],
-                        },
-                        output: {
-                            filename: "[name].min.js",
-                        },
-                    },
-                    webpack
-                )
-            )
-            .on("error", (err) => {
-                this.emit("end");
-            })
-            .pipe(dest(path.build.js))
-            // Раскомментировать, если нужно добавлять в папку assets/template
-            // .pipe(dest(`${pathModxTemplate}scripts/`))
-            .pipe(browserSync.stream())
-    );
+
+function stylesLibs() {
+    return src(path.src.styleLibs)
+        .pipe(plumber(plumberNotify("STYLE LIBS")))
+        .pipe(concat("libs.css"))
+        .pipe(dest(path.build.css))
+        .pipe(
+            postCss([
+                cssnano({
+                    preset: [
+                        "default",
+                        { discardComments: { removeAll: true } },
+                    ],
+                }),
+            ])
+        )
+        .pipe(rename({ suffix: ".min" }))
+        .pipe(dest(path.build.css));
 }
+function jsDist() {
+    return src(path.src.js)
+        .pipe(plumber(plumberNotify("JS")))
+        .pipe(dest(path.build.js));
+}
+function jsLibs() {
+    return src(path.src.jsLibs)
+        .pipe(plumber(plumberNotify("JS")))
+        .pipe(concat("libs.js"))
+        .pipe(dest(path.build.js));
+}
+function jsMin() {
+    return src(path.build.js + "/*.js")
+        .pipe(
+            cleanJs({
+                noSource: true,
+                ext: {
+                    min: ".js",
+                },
+            })
+        )
+        .pipe(dest(path.build.js));
+}
+// function scripts() {
+//     return (
+//         src(path.src.js)
+//             .pipe(plumber(plumberNotify("JS")))
+//             .pipe(named())
+//             .pipe(
+//                 webpackStream(
+//                     {
+//                         mode: app.isBuild ? "production" : "development",
+//                         performance: { hints: false },
+//                         // plugins: [
+//                         //   new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', 'window.jQuery': 'jquery' }), // jQuery (npm i jquery)
+//                         // ],
+//                         module: {
+//                             rules: [
+//                                 {
+//                                     test: /\.m?js$/,
+//                                     exclude: /(node_modules)/,
+//                                     use: {
+//                                         loader: "babel-loader",
+//                                         options: {
+//                                             presets: ["@babel/preset-env"],
+//                                             plugins: [
+//                                                 "babel-plugin-root-import",
+//                                             ],
+//                                         },
+//                                     },
+//                                 },
+//                             ],
+//                         },
+//                         optimization: {
+//                             minimize: true,
+//                             minimizer: [
+//                                 new TerserPlugin({
+//                                     terserOptions: {
+//                                         format: { comments: false },
+//                                     },
+//                                     extractComments: false,
+//                                     // include: /\.min\.js$/,
+//                                 }),
+//                             ],
+//                         },
+//                         output: {
+//                             filename: "[name].min.js",
+//                         },
+//                     },
+//                     webpack
+//                 )
+//             )
+//             .on("error", (err) => {
+//                 this.emit("end");
+//             })
+//             .pipe(dest(path.build.js))
+//             // Раскомментировать, если нужно добавлять в папку assets/template
+//             // .pipe(dest(`${pathModxTemplate}scripts/`))
+//             .pipe(browserSync.stream())
+//     );
+// }
 function images() {
     return (
         src([path.src.images, `!${path.srcFolder}/images/favicons/**/*.*`])
@@ -425,7 +468,10 @@ const cleandist = () => {
 function startwatch() {
     gulpWatch([path.watch.pug], { usePolling: true }, buildPug);
     gulpWatch([path.watch.scss], { usePolling: true }, styles);
-    gulpWatch([path.watch.js], { usePolling: true }, scripts);
+    gulpWatch([path.watch.styleLibs], { usePolling: true }, stylesLibs);
+    // gulpWatch([path.watch.js], { usePolling: true }, scripts)
+    gulpWatch([path.watch.js], { usePolling: true }, jsDist);
+    gulpWatch([path.watch.jsLibs], { usePolling: true }, jsLibs);
     gulpWatch([path.watch.images], { usePolling: true }, images);
     gulpWatch([path.watch.fonts], { usePolling: true }, fonts);
     gulpWatch([path.watch.svgicons], { usePolling: true }, sprite);
@@ -449,12 +495,14 @@ function ftp() {
         .pipe(plumber(plumberNotify("FTP")))
         .pipe(ftpConnect.dest(`/${path.ftp}/${path.rootFolder}`));
 }
-
 const mainTasks = parallel(
     images,
-    scripts,
+    jsDist,
+    jsLibs,
+    jsMin,
     buildPug,
     styles,
+    stylesLibs,
     sprite,
     fonts,
     files

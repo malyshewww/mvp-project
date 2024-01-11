@@ -12,9 +12,9 @@ header.header#header
 					a(href="#").header__link.icon-arrow-down Список товарных знаков
 					a(href="prolongation.html").header__link.icon-arrow-down Необходимо продление в ближайшее время
 		.header__actions 
-			.header__language.language-header(data-action)
-				.language-header__current.icon-arrow-down Ru
-				.language-header__dropdown
+			.header__language.language-header(data-action="language")
+				.language-header__current.icon-arrow-down(data-trigger) Ru
+				.language-header__dropdown(data-dropdown)
 					.language-header__choice
 						ul.language-header__list 
 							li.language-header__item
@@ -22,11 +22,11 @@ header.header#header
 							li.language-header__item 
 								a(href="#").language-header__link.current.icon-language Russian
 			button(type="button" data-modal-button="modal-consultation").header__link(data-da=".header__links, 991.98, 2").icon-arrow-down Помощь
-			.header__user.user-header(data-action)
-				.user-header__data 
+			.header__user.user-header(data-action="user")
+				.user-header__data(data-trigger)
 					span.user-header__data-label managerweb@yandex.ru
 					span.user-header__icon.icon-user-t
-				.user-header__dropdown 
+				.user-header__dropdown(data-dropdown)
 					.user-header__body
 						.user-header__top 
 							a(href="mailto:managerweb@yandex.ru") managerweb@yandex.ru

@@ -1,9 +1,3 @@
-import "./modules/dynamic_adapt.js";
-// import "./modules/jquery_floatingscroll.min.js";
-
-// $(document).ready(function () {
-//     $(".table-wrapper").floatingScroll();
-// });
 // Сортировка данных в таблице
 const table = document.getElementById("mainTable");
 let totalRecord = 0;
@@ -175,10 +169,12 @@ function deleteCondition(parent) {
                 const addButton = document.querySelector(
                     ".detail-form__bottom .detail-form__btn-add"
                 );
-                const statusButtons = document.querySelector('.detail-form__status-buttons');
+                const statusButtons = document.querySelector(
+                    ".detail-form__status-buttons"
+                );
                 addButton.style.display = "block";
                 parent.style.display = "none";
-                statusButtons.setAttribute('hidden', true);
+                statusButtons.setAttribute("hidden", true);
             } else {
                 parent.remove();
             }
@@ -186,6 +182,7 @@ function deleteCondition(parent) {
     }
 }
 
+// Dropdown "Выберите условие"
 function addCondition() {
     const groupCondition = document.querySelector(
         ".detail-form__group--condition"
@@ -196,15 +193,18 @@ function addCondition() {
     const addButton = document.querySelector(
         ".detail-form__bottom .detail-form__btn-add"
     );
-    const statusButtons = document.querySelector('.detail-form__status-buttons');
+    const statusButtons = document.querySelector(
+        ".detail-form__status-buttons"
+    );
     if (addButton && groupCondition && statusButtons) {
         addButton.addEventListener("click", (event) => {
             event.target.style.display = "none";
             groupCondition.style.display = "block";
-            let dropdown = groupCondition.querySelector('.dropdown');
-            statusButtons.removeAttribute('hidden');
+            let dropdownButton =
+                groupCondition.querySelector(".dropdown__button");
+            statusButtons.removeAttribute("hidden");
             setTimeout(() => {
-                dropdown.classList.add('active');
+                dropdownButton.classList.add("active");
             }, 300);
         });
     }
@@ -237,97 +237,6 @@ function dateInputMask(parent) {
         });
     }
 }
-
-// Dropdown menu
-function initDropdown() {
-    [...document.querySelectorAll(".dropdown")].forEach((drop) => {
-        const dropMenuBtn = drop.querySelector(".dropdown__button");
-        const dropMenuList = drop.querySelector(".dropdown__wrapper");
-        const dropdownSearch = drop.querySelector(".dropdown__search");
-        const dropdownInput = drop.querySelector(".dropdown-input");
-        const inputCondition = drop.querySelectorAll('.radiobutton-item input')
-        // Клик по кнопке. Открыть/Закрыть select
-        dropMenuBtn.addEventListener("click", (e) => {
-            drop.classList.toggle("active");
-        });
-        dropMenuList.addEventListener("click", (e) => {
-            e.stopPropagation();
-            if (drop.classList.contains("dropdown-report")) {
-                drop.classList.toggle("active");
-                dropdownInput.value = e.target.textContent;
-            }
-        });
-        if (inputCondition) {
-            [...inputCondition].forEach(input => {
-                input.addEventListener('change', (e) => {
-                    drop.classList.remove("active");
-                })
-            })
-        }
-        // Клик снаружи dropdown либо на другом dropdown Закрыть дропдаун
-        document.addEventListener("click", (e) => {
-            if (e.target !== dropMenuBtn) {
-                drop.classList.remove("active");
-            }
-        });
-        // Нажатие на Tab или Escape. Закрыть дропдаун
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Tab" || e.key === "Escape") {
-                drop.classList.remove("active");
-            }
-        });
-    });
-}
-initDropdown();
-// document.addEventListener('click', dropdownFunc)
-// const dropDown = [...document.querySelectorAll(".dropdown")];
-// function dropdownFunc(event) {
-//     let target = event.target;
-//     if (target.closest('.dropdown__button')) {
-//         dropDown.forEach(drop => drop.classList.remove('active'));
-//         let parent = target.parentNode;
-//         parent.classList.toggle('active');
-        
-//     }
-//     if (target.classList.contains('.dropdown.active') && !target.closest('.dropdown.active')) {
-//         target.classList.remove('active');
-//     }
-// }
-
-class ModalManager {
-    constructor() {
-        this.actions = {
-            'open-modal': 'open',
-            'close-modal': 'close'
-        };
-        this.onClick = this.onClick.bind(this);
-        document.addEventListener('click', this.onClick, false);
-    }
-    onClick(e) {
-        const target = e.target.closest('[data-action]');
-        if (e.target.closest('.dropdown__wrapper') && !target) return;
-        if (!!this.current && !target) this.close();
-        if (!target) return;
-        const name = target.getAttribute('data-name');
-        if (!name) console.error('Missing required parameter "data-name"');
-        const action = target.getAttribute('data-action');
-        if (!this.actions[action]) return;
-        this[this.actions[action]](name);
-    }
-    open(name) {
-        const modal = document.querySelector(`.dropdown[data-name="${name}"]`);
-        if (!modal) console.error(`Modal with name ${name} does not exist on the current page`);
-        modal.classList.add('active');
-        this.current = name;
-    }
-    close() {
-        if (!this.current) return;
-        const modal = document.querySelector(`.dropdown[data-name="${this.current}"]`);
-        modal.classList.remove('active');
-        this.current = null;
-    }
-}
-new ModalManager();
 // Формирование динамического изображения в таблице при наведении на логотипы банков
 function createImageTooltip() {
     const picwrap = document.createElement("div");
@@ -351,7 +260,7 @@ function createImageTooltip() {
 }
 createImageTooltip();
 
-// Подключение кастомного скроллбара
+// Подключение кастомного скроллбара, инициализация
 let simplebar;
 Array.prototype.forEach.call(
     document.querySelectorAll(".main__table[data-simplebar]"),
@@ -379,7 +288,7 @@ Array.prototype.forEach.call(
 );
 const initSimpleBar = (selector) => {
     Array.prototype.forEach.call(document.querySelectorAll(selector), (el) => {
-        new SimpleBar(el, {
+        let simpleBar = new SimpleBar(el, {
             autoHide: false,
             clickOnTrack: true,
         });
@@ -389,6 +298,7 @@ initSimpleBar(".trademark [data-simplebar]");
 initSimpleBar("[data-dropdown-simplebar]");
 initSimpleBar("[data-modal-simplebar]");
 
+// Переключение между формами отчета
 const reportGroupForm = document.querySelector(".report-group--form");
 const reportGroupPlacing = document.querySelector(".report-group--placing");
 if (reportGroupForm || reportGroupPlacing) {
@@ -414,18 +324,6 @@ if (reportGroupForm || reportGroupPlacing) {
     let event = new Event("change");
     inputs[0].dispatchEvent(event);
 }
-const reportFields = document.querySelectorAll(".report__field");
-if (reportFields.length) {
-    [...reportFields].forEach((field) => {
-        const buttonDelete = field.querySelector(".report__field-delete");
-        if (buttonDelete) {
-            buttonDelete.addEventListener("click", (e) => {
-                let parent = e.target.parentNode;
-                parent.remove();
-            });
-        }
-    });
-}
 
 // Кнопка назад
 const btnBack = document.querySelector(".btn-back");
@@ -448,61 +346,21 @@ if (filterButtonClose) {
     filterButtonClose.addEventListener("click", closeFilter);
 }
 
-function getScrollbarWidth() {
-    return window.innerWidth;
-}
-
-let scrollbarWidth = getScrollbarWidth();
-let asideWidth = 76;
-function calcTableWidth(asideWidth) {
-    let mainTable = document.querySelector(".table-visible");
-    let someWidth = 0;
-    if (window.innerWidth > 1199.98) {
-        someWidth = 60;
-    } else if (window.innerWidth > 991.98) {
-        someWidth = 30;
-    }
-    if (window.innerWidth > 991.98) {
-        if (mainTable) {
-            let mainTableWidth = parseInt(
-                window.innerWidth - asideWidth - someWidth
-            );
-            setTimeout(() => {
-                mainTable.style.width = `${mainTableWidth}px`;
-            }, 400);
-        }
-    }
-}
-
-let prolongationTable = document.querySelector(".prolongation .main__table");
-if (prolongationTable) {
-    if (window.innerWidth >= 1920) {
-        let scrollWidth = parseInt(
-            window.innerWidth -
-                document.querySelector(".wrapper").offsetWidth +
-                document.querySelector(".table-wrapper").offsetWidth -
-                30
-        );
-        prolongationTable.style.width = `${scrollWidth}px`;
-    }
-}
-
 function openFilter() {
     document.body.classList.add("is-open");
     const aside = document.querySelector(".main__aside");
-    window.scrollTo({
-        top: aside.getBoundingClientRect().top + window.scrollY,
-        behavior: "smooth",
-    });
-    asideWidth = 406;
-    // calcTableWidth(asideWidth);
+    const header = document.querySelector(".header");
+    const headerHeight = header.getBoundingClientRect().height;
+    if (window.scrollY > headerHeight) {
+        window.scrollTo({
+            top: aside.getBoundingClientRect().top + window.scrollY,
+            behavior: "smooth",
+        });
+    }
 }
 function closeFilter() {
     document.body.classList.remove("is-open");
-    asideWidth = 76;
-    // calcTableWidth(asideWidth);
 }
-calcTableWidth();
 
 // Маска для телефона
 function maskPhone(elem = document) {
@@ -540,16 +398,15 @@ function maskPhone(elem = document) {
 }
 maskPhone();
 
+// Модальные окна
 let wrapper = document.querySelector(".wrapper");
 const modalButtons = wrapper?.querySelectorAll("[data-modal-button]");
 const modalClosebuttons = document.querySelectorAll("[data-modal-close]");
 const allModals = document.querySelectorAll("[data-modal]");
-
 function closeModal(currentModal) {
     currentModal.classList.remove("open-modal");
     body_lock_remove();
 }
-
 document.addEventListener("click", openModal);
 function openModal(event) {
     const target = event.target;
@@ -561,7 +418,6 @@ function openModal(event) {
         body_lock();
     }
 }
-
 // Кнопки - Закрыть Модалку
 modalClosebuttons.forEach((item) => {
     item.addEventListener("click", () => {
@@ -587,7 +443,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         item.style.display = "block";
     });
 });
-
 let delay = 500;
 let unlock = true;
 function body_lock(delay) {
@@ -639,6 +494,7 @@ function body_lock_add(delay) {
     }, delay);
 }
 
+// Тестовая обработка формы и показ модального окна об успехе
 function formHandler(formId) {
     const form = document.getElementById(formId);
     if (form) {
@@ -672,7 +528,6 @@ function getScrollPosition() {
     const table = document.querySelector(".table-wrapper");
     if (table) {
         const tableTop = table.getBoundingClientRect().top + window.scrollY;
-        const tableHeight = table.getBoundingClientRect().height;
         if (!document.body.classList.contains("menu-open")) {
             if (window.scrollY > tableTop) {
                 document.body.classList.add("is-sticky");
@@ -736,6 +591,7 @@ function addTouchClass() {
 }
 addTouchClass();
 
+// Открытие, закрытие меню
 function openHeaderMenu() {
     const burger = document.querySelector(".header-burger");
     const overlay = document.querySelector(".overlay");
@@ -744,6 +600,9 @@ function openHeaderMenu() {
         burger.addEventListener("click", () => {
             document.body.classList.toggle("menu-open");
             // body_lock_add();
+            if (overlay.classList.contains("is-show")) {
+                overlay.classList.remove("is-show");
+            }
         });
     }
     if (overlay) {
@@ -757,27 +616,35 @@ function openHeaderMenu() {
 }
 openHeaderMenu();
 
+// Показ, скрытие выпадающего меню при клике на пользователя и язык в header
 function headerActions() {
     let overlay = document.querySelector(".overlay");
     const actions = document.querySelectorAll("[data-action]");
     [...actions].forEach((action) => {
-        action.addEventListener("click", (event) => {
-            // event.stopPropagation();
-            // [...actions].forEach((item) => item.classList.remove("is-active"));
-            action.classList.toggle("is-active");
-            overlay.classList.add("is-show");
+        const actionTrigger = action.querySelector("[data-trigger]");
+        const actionDropdown = action.querySelector("[data-dropdown]");
+        actionDropdown.addEventListener("click", (e) => {
+            e.stopPropagation();
         });
-        // document.addEventListener("click", (event) => {
-        //     if (event.target == action || action.classList.contains('is-active')) {
-        //         action.classList.remove("is-active");
-        //         overlay.classList.remove("is-show");
-        //     }
-        // });
+        action.addEventListener("click", (e) => {
+            action.classList.toggle("is-active");
+            let activeActions = document.querySelectorAll(
+                "[data-action].is-active"
+            );
+            [...activeActions].length > 0
+                ? overlay.classList.add("is-show")
+                : overlay.classList.remove("is-show");
+        });
+        document.addEventListener("click", (event) => {
+            if (event.target !== actionTrigger) {
+                action.classList.remove("is-active");
+            }
+        });
+        overlay.addEventListener("click", () => {
+            action.classList.remove("is-active");
+            overlay.classList.remove("is-show");
+        });
     });
-    overlay.addEventListener('click', () => {
-        [...actions].forEach((item) => item.classList.remove("is-active"));
-        overlay.classList.remove('is-show');
-    })
 }
 headerActions();
 
@@ -813,15 +680,114 @@ function scrollTop() {
 }
 scrollTop();
 
-const reportPage = document.querySelector('.report');
+// Расчет ширины маски в таблице слева и справа
+function setMaskWidth() {
+    const mainTable = document.querySelector(".main__table");
+    if (mainTable) {
+        const tableHeader = mainTable.querySelector(".table__header");
+        const th = tableHeader.querySelectorAll(".th");
+        const lastColumn = [...th].at(-1);
+        const prevLastColumn = [...th].at(-2);
+        const firstColumn = th[0];
+        let leftMaskWidth = firstColumn.getBoundingClientRect().width;
+        let prevLastColumnWidth = prevLastColumn.getBoundingClientRect().width;
+        let lastColumnWidth = lastColumn.getBoundingClientRect().width;
+        let rightMaskWidth = (prevLastColumnWidth + lastColumnWidth).toFixed(0);
+        mainTable.style.setProperty("--mask-left-width", `${leftMaskWidth}px`);
+        mainTable.style.setProperty(
+            "--mask-right-width",
+            `${rightMaskWidth}px`
+        );
+    }
+}
+setMaskWidth();
+
+// Dropdown menu (OLD)
+function initDropdown() {
+    [...document.querySelectorAll(".dropdown")].forEach((drop) => {
+        if (drop.classList.contains("dropdown-condition")) {
+            const dropMenuBtn = drop.querySelector(".dropdown__button");
+            const inputCondition = drop.querySelectorAll(
+                ".radiobutton-item input"
+            );
+            // Клик по кнопке. Открыть/Закрыть select
+            dropMenuBtn.addEventListener("click", (e) => {
+                dropMenuBtn.classList.toggle("active");
+            });
+            if (inputCondition) {
+                [...inputCondition].forEach((input) => {
+                    input.addEventListener("change", (e) => {
+                        dropMenuBtn.classList.remove("active");
+                    });
+                });
+            }
+            // Клик снаружи dropdown либо на другом dropdown Закрыть дропдаун
+            document.addEventListener("click", (e) => {
+                if (e.target !== dropMenuBtn) {
+                    dropMenuBtn.classList.remove("active");
+                }
+            });
+            // Нажатие на Tab или Escape. Закрыть дропдаун
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Tab" || e.key === "Escape") {
+                    dropMenuBtn.classList.remove("active");
+                }
+            });
+        }
+    });
+}
+// initDropdown();
+
+// Dropdown menu (NEW)
+function deactivateAllDropdownTriggers() {
+    const activeDropdownButtons = document.querySelectorAll(
+        ".dropdown__button.active"
+    );
+    [...activeDropdownButtons].forEach((elem) => {
+        elem.classList.remove("active");
+    });
+}
+function handleDropdownClicks(event) {
+    let target = event.target;
+    if (target.matches(".dropdown__button")) {
+        if (target.classList.contains("active")) {
+            target.classList.remove("active");
+        } else {
+            deactivateAllDropdownTriggers();
+            target.classList.add("active");
+        }
+    } else {
+        if (target.matches(".dropdown__wrapper *")) {
+            deactivateAllDropdownTriggers();
+        }
+        if (!target.matches(".dropdown__wrapper *")) {
+            deactivateAllDropdownTriggers();
+        }
+    }
+    if (target.closest(".dropdown__list-item")) {
+        let parent = target.closest(".dropdown");
+        let dropdownInput = parent.querySelector(".dropdown-input");
+        if (dropdownInput) {
+            dropdownInput.value = target.textContent;
+        }
+    }
+    if (target.closest(".report__field-delete")) {
+        let parent = target.closest(".report__field");
+        parent.remove();
+    }
+}
+document.addEventListener("click", handleDropdownClicks, false);
+// document.addEventListener("change", handleDropdownChange);
+
+// Клонирование первого списка на странице с отчетами
+const reportPage = document.querySelector(".report");
 if (reportPage) {
-    const buttonReportAdd = reportPage.querySelector('[data-button-report]');
-    const reportList = reportPage.querySelector('.report__fields-box');
-    reportPage.addEventListener('click', (event) => {
-        if (event.target.closest('[data-button-report]')) {
-            const reportFileds = reportPage.querySelectorAll('.report__field');
+    const reportList = reportPage.querySelector(".report__fields-box");
+    reportPage.addEventListener("click", (event) => {
+        if (event.target.closest("[data-button-report]")) {
+            const reportFileds = reportPage.querySelectorAll(".report__field");
             const clone = reportFileds[0].cloneNode(true);
             reportList.insertBefore(clone, reportFileds[reportFileds.length]);
         }
-    })
+    });
 }

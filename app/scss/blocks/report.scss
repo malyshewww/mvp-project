@@ -50,10 +50,16 @@
         }
     }
     &__field {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 24px;
         align-items: center;
         gap: 15px;
         width: 100%;
+        &:nth-child(1) {
+            & .report__field-delete {
+                display: none;
+            }
+        }
     }
     &__dropdown-input {
     }
@@ -190,6 +196,8 @@
         &__list {
             height: fit-content;
             max-height: 128px;
+            & .simplebar-placeholder {
+            }
         }
         &__list-item {
             color: $black;
