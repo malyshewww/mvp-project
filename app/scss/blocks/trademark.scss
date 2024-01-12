@@ -59,7 +59,7 @@
                 grid-template-columns: 166px 1fr;
             }
             @media screen and (max-width: $xs) {
-                grid-template-columns: 166px 318px;
+                grid-template-columns: 166px 1fr;
             }
         }
         & .td {
@@ -92,6 +92,7 @@
                                 border-right: 1px solid $gray;
                                 @media screen and (max-width: $md) {
                                     border-radius: 0;
+                                    border-right: none;
                                 }
                             }
                         }

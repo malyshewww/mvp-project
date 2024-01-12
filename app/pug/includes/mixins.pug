@@ -21,8 +21,8 @@ mixin menu([...items])
 mixin svgsprite(name)
 	svg(class=`svg-svg-${name}-dims`)&attributes(attributes)
 		use(xlink:href=`./images/icons/icons.svg#svg-${name}`)
-mixin detailFormGroup(label, inputName)
-	.detail-form__group
+mixin detailFormGroup(label, inputName, dataId)
+	.detail-form__group(data-group=dataId)
 		.detail-form__label= label
 		if inputName === "validity"
 			.detail-form__dates.detail-date
@@ -43,15 +43,16 @@ mixin detailFormGroup(label, inputName)
 						span 
 						| Исключить
 			button(type="button").detail-form__btn-delete.icon-close-sm Удалить условие
-		.detail-form__radiobuttons  
-			.detail-form__radiobutton.radiobutton-item
-				.form-item
-					input(type="radio", name=inputName id=`${inputName}-and` value="and" checked)
-					label(for=`${inputName}-and`) И
-			.detail-form__radiobutton.radiobutton-item
-				.form-item
-					input(type="radio", name=inputName id=`${inputName}-or` value="or")
-					label(for=`${inputName}-or`) Или
+		.detail-form__status-buttons
+			.detail-form__radiobuttons
+				.detail-form__radiobutton.radiobutton-item
+					.form-item
+						input(type="radio", name=inputName id=`${inputName}-and` value="and" checked)
+						label(for=`${inputName}-and`) И
+				.detail-form__radiobutton.radiobutton-item
+					.form-item
+						input(type="radio", name=inputName id=`${inputName}-or` value="or")
+						label(for=`${inputName}-or`) Или
 mixin checkbox(label, inputName, checked)
 	.checkbox-item
 		.form-item

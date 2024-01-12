@@ -69,7 +69,7 @@
         &::before {
             display: none;
         }
-        @media (any-hover: hover) {
+        @media screen and (min-width: $lg) and (any-hover: hover) {
             &:hover {
                 background-color: $red;
             }
@@ -104,6 +104,8 @@
     }
     &__actions {
         display: flex;
+        position: relative;
+        z-index: 20;
     }
     &__language {
     }
@@ -141,7 +143,7 @@
     position: relative;
     display: grid;
     transition: background-color 0.3s ease-in-out 0s;
-    z-index: 21;
+    z-index: 10;
     @media (any-hover: hover) {
         &:hover {
             background-color: $red;
@@ -476,53 +478,43 @@
         }
     }
 }
-@media screen and (max-width: $xl) {
-    ._touch {
-        & .user-header {
-            &.is-active .user-header__dropdown {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-                pointer-events: all;
-            }
-        }
-        & .language-header {
-            &.is-active .language-header__dropdown {
-                opacity: 1;
-                visibility: visible;
-                transform: translateY(0);
-                pointer-events: all;
-            }
-            &.is-active .language-header__current {
-                &::before {
-                    transform: rotate(180deg);
-                }
-            }
-        }
-        &.action-active {
-        }
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 100dvh;
+    background: rgba(14, 18, 29, 0.6);
+    opacity: 0;
+    transition: opacity 0.5s ease 0s;
+    transform-origin: top right;
+    z-index: 15;
+    pointer-events: none;
+    &.is-show {
+        pointer-events: all;
+        opacity: 1;
     }
 }
-
-@media screen and (max-width: $xl) {
-    ._touch {
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            min-height: 100dvh;
-            background: rgba(14, 18, 29, 0.6);
-            opacity: 0;
-            transition: opacity 0.5s ease 0s;
-            transform-origin: top right;
-            z-index: 15;
-            pointer-events: none;
-            &.is-show {
-                // z-index: 15;
-                pointer-events: all;
-                opacity: 1;
+@media screen and (max-width: $lg) {
+    .user-header {
+        &.is-active .user-header__dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+    }
+    .language-header {
+        &.is-active .language-header__dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+        &.is-active .language-header__current {
+            &::before {
+                transform: rotate(180deg);
             }
         }
     }

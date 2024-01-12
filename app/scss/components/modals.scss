@@ -11,9 +11,11 @@
     overflow-x: hidden;
     transition: all 0.3s ease 0s;
     z-index: 30;
+    pointer-events: none;
     &.open-modal {
         opacity: 1;
         visibility: visible;
+        pointer-events: all;
         & .modal__content {
             opacity: 1;
             transform: perspective(600px) translate(0px, 0%) rotateX(0deg);

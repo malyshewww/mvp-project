@@ -6,14 +6,9 @@
     transition: width 0.3s ease 0s;
 }
 .table {
-    // border: 1px solid $gray;
     border-radius: 6px;
     background-color: $white;
     position: relative;
-    width: 1800px;
-    @media screen and (max-width: $lg) {
-        width: 1783px;
-    }
     & .th-checkbox,
     & .td-checkbox {
         position: sticky;
@@ -214,7 +209,8 @@
         &-country,
         &-owner,
         &-classes,
-        &-status {
+        &-status,
+        &-name-sign {
             justify-content: flex-start;
         }
         &-case {

@@ -116,6 +116,12 @@
                 border-radius: 0;
                 background-color: #282831;
                 min-height: 59px;
+                &.btn-black {
+                    &:hover {
+                        background-color: #282831;
+                        color: $white;
+                    }
+                }
             }
         }
         &-detail {

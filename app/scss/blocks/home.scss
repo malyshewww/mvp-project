@@ -51,6 +51,9 @@
             min-height: 100dvh;
             z-index: 20;
             transition: left 0.3s ease 0s;
+            &::after {
+                content: none;
+            }
         }
     }
 }

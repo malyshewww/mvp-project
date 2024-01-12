@@ -478,10 +478,19 @@ textarea {
         --mask-left-width: 0;
         --mask-right-width: 0;
         position: relative;
-        // overflow-y: hidden;
-        // overflow-x: auto;
-        position: relative;
+        overflow-y: hidden;
+        overflow-x: auto;
         transition: width 0.5s ease 0s;
+        &::-webkit-scrollbar {
+            width: 0;
+            height: 0;
+        }
+        &::-webkit-scrollbar-thumb {
+            width: 0;
+            height: 0;
+        }
+        scrollbar-color: transparent;
+        scrollbar-width: 0px;
         &.is-scrolled.simplebar-scrollable-x {
             &::after {
                 opacity: 1;
