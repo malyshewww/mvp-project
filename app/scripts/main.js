@@ -143,33 +143,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const detailGroups = document.querySelectorAll(".detail-form__group");
     [...detailGroups].forEach((group) => {
-        changeStateCheckbox(group);
         dateInputMask(group);
     });
-    // Переключение между И или ИЛИ в детальном поиске и блокирование чекбокса "Исключить"
-    function changeStateCheckbox(parent) {
-        const radioButtons = parent.querySelectorAll('input[type="radio"]');
-        const groupActions = parent.querySelector(".detail-form__actions");
-        const checkboxReset = groupActions?.querySelector(
-            'input[type="checkbox"]'
-        );
-        [...radioButtons].forEach((radioBtn) => {
-            radioBtn.addEventListener("change", (event) => {
-                let target = event.target;
-                if (checkboxReset) {
-                    target.value === "or"
-                        ? checkboxReset.setAttribute("disabled", true)
-                        : checkboxReset.removeAttribute("disabled");
-                }
-            });
-        });
-    }
+
     // Группа фильтров и условия
-    let groupArr = [];
-    const currentDetailGroups = document.querySelectorAll("[data-group]");
-    [...currentDetailGroups].forEach((group, index) => {
-        groupArr.push(index);
-    });
+
+    // Удаление группы
+    document.addEventListener("click", deleteCondition);
+
+    // Добавление группы
+    document.addEventListener("click", addCondition);
+
+    // Переключение между И или ИЛИ в детальном поиске и блокирование чекбокса "Исключить"
+    document.addEventListener("change", changeStateCheckbox);
+
+    function changeStateCheckbox(event) {
+        let target = event.target;
+        if (
+            target.closest('.detail-form__status-buttons input[type="radio"]')
+        ) {
+            let parent = target.closest(".detail-form__group");
+            let checkboxReset = parent.querySelector('input[type="checkbox"]');
+            if (checkboxReset) {
+                target.value === "or"
+                    ? checkboxReset.setAttribute("disabled", true)
+                    : checkboxReset.removeAttribute("disabled");
+            }
+        }
+    }
+
     const groupNewCondition = document.querySelector(
         ".detail-form__group--condition"
     );
@@ -177,17 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
         groupNewCondition.classList.add("hidden");
         groupNewCondition.style.display = "none";
     }
-    let lastIndexGroup = [...groupArr].length - 1;
-    let radiobuttons = currentDetailGroups[lastIndexGroup].querySelector(
-        ".detail-form__status-buttons"
-    );
-    if (radiobuttons) {
-        radiobuttons.setAttribute("hidden", true);
-        radiobuttons.style.display = "none";
-    }
-
-    document.addEventListener("click", deleteCondition);
-    document.addEventListener("click", addCondition);
 
     function addCondition(event) {
         let target = event.target;
@@ -201,12 +192,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     dropdownButton.classList.add("active");
                 }, 300);
             }
-            let last = [...groupArr].length - 1;
-            let radiobuttons = currentDetailGroups[last].querySelector(
+            let last = document.querySelector("[data-group]:last-child");
+            let radiobuttons = last.querySelector(
                 ".detail-form__status-buttons"
             );
             if (radiobuttons) {
-                radiobuttons.removeAttribute("hidden");
                 radiobuttons.style.display = "block";
             }
         }
@@ -216,49 +206,30 @@ document.addEventListener("DOMContentLoaded", () => {
         if (target.closest(".detail-form__btn-delete")) {
             let parent = target.closest(".detail-form__group");
             if (parent.classList.contains("detail-form__group--condition")) {
+                hidden = true;
                 parent.style.display = "none";
-                if (groupArr.length > 0) {
-                    let last = [...groupArr].length - 1;
-                    let radiobuttons = currentDetailGroups[last].querySelector(
-                        ".detail-form__status-buttons"
-                    );
-                    if (radiobuttons) {
-                        radiobuttons.setAttribute("hidden", true);
-                        radiobuttons.style.display = "none";
-                    }
-                    console.log(groupArr);
-                }
+                parent.classList.add("hidden");
             } else {
-                let dataGroupId = parent.dataset.group;
-                if (groupArr.includes(dataGroupId)) {
-                    groupArr.filter((item) => item != dataGroupId);
-                    // groupArr.splice(groupArr.indexOf(dataGroupId), 1);
-                }
-                if (groupArr.length > 0) {
-                    let last = [...groupArr].length - 1;
-                    let radiobuttons = currentDetailGroups[last].querySelector(
-                        ".detail-form__status-buttons"
-                    );
-                    if (radiobuttons) {
-                        radiobuttons.setAttribute("hidden", true);
-                        radiobuttons.style.display = "none";
-                    }
-                }
                 parent.remove();
             }
-        }
-    }
-
-    function array_splice(array, key) {
-        resoltArray = new Array();
-        // перебираем массив
-        for (let i = 0; i < array.length; i++) {
-            if (i != key) {
-                // добавляем значение в массив
-                resoltArray.push(array[i]);
+            if (!groupNewCondition.classList.contains("hidden")) {
+                let last = document.querySelector("[data-group]:last-child");
+                let radiobuttons = last.querySelector(
+                    ".detail-form__status-buttons"
+                );
+                if (radiobuttons) {
+                    radiobuttons.style.display = "block";
+                }
+            } else {
+                let last = document.querySelector("[data-group]:last-child");
+                let radiobuttons = last.querySelector(
+                    ".detail-form__status-buttons"
+                );
+                if (radiobuttons) {
+                    radiobuttons.style.display = "none";
+                }
             }
         }
-        return resoltArray;
     }
     // Маска для даты
     function dateInputMask(parent) {
@@ -289,7 +260,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Формирование динамического изображения в таблице при наведении на логотипы банков
     function createImageTooltip() {
         if (!mobile.matches) {
-            console.log("desktop");
             const picwrap = document.createElement("div");
             const bigpic = document.createElement("img");
             picwrap.appendChild(bigpic);
@@ -309,7 +279,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
         } else {
-            console.log("mobile");
             return false;
         }
     }
@@ -821,6 +790,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     function handleDropdownClicks(event) {
         let target = event.target;
+        let group;
         if (target.matches(".dropdown__button")) {
             if (target.classList.contains("active")) {
                 target.classList.remove("active");
@@ -829,11 +799,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 target.classList.add("active");
             }
         } else {
-            if (target.matches(".dropdown__wrapper *")) {
-                deactivateAllDropdownTriggers();
-            }
-            if (!target.matches(".dropdown__wrapper *")) {
-                deactivateAllDropdownTriggers();
+            group = target.closest(".detail-form__group");
+            if (group?.classList.contains("detail-form__group--status")) {
+                if (target.matches(".dropdown__wrapper *")) {
+                    event.stopPropagation();
+                }
+                if (!target.matches(".dropdown__wrapper *")) {
+                    deactivateAllDropdownTriggers();
+                }
+            } else {
+                if (target.matches(".dropdown__wrapper *")) {
+                    deactivateAllDropdownTriggers();
+                }
+                if (!target.matches(".dropdown__wrapper *")) {
+                    deactivateAllDropdownTriggers();
+                }
             }
         }
         if (target.closest(".dropdown__list-item")) {

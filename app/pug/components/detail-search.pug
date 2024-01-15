@@ -5,42 +5,49 @@
             .detail-search__title Детальный поиск по товарным знакам
             button(type="button").detail-search__btn-doc.btn.btn-black(data-modal-button="modal-instructions") Инструкция по работе с фильтром
         form(action="#").detail-search__form.detail-form
-            .detail-form__groups
-                +detailFormGroup("Номер дела", "case", "0")
-                +detailFormGroup("Номер заявки", "request", "1")
-                +detailFormGroup("Номер регистрации", "register", "2")
-                +detailFormGroup("Товарный знак", "trademark", "3")
-                +detailFormGroup("Срок действия", "validity", "4")
-                .detail-form__group.detail-form__group--status(data-group="5")
-                    .dropdown
-                        button(type="button").dropdown__button.icon-arrow-down Поиск по статусу
-                        .dropdown__wrapper 
-                            .dropdown__search 
-                                input(type="text" placeholder="Поиск по статусам").dropdown__input
-                                button(type="button").dropdown__search-button.icon-search
-                            .dropdown__list
-                                li.dropdown__list-item 
-                                    +checkbox("Статус 1", "status-1")
-                                li.dropdown__list-item 
-                                    +checkbox("Статус 2", "status-2")
-                                li.dropdown__list-item 
-                                    +checkbox("Статус 3", "status-3")
-                                li.dropdown__list-item 
-                                    +checkbox("Статус 4", "status-4")
-                                li.dropdown__list-item 
-                                    +checkbox("Статус 5", "status-5")
-                    .detail-form__actions 
-                        button(type="button").detail-form__btn-delete.icon-close-sm Удалить условие
-                    .detail-form__status-buttons(hidden)
-                        .detail-form__radiobuttons
-                            .detail-form__radiobutton.radiobutton-item
+            .detail-form__wrapper
+                .detail-form__groups
+                    +detailFormGroup("Номер дела", "case", "0")
+                    +detailFormGroup("Номер заявки", "request", "1")
+                    +detailFormGroup("Номер регистрации", "register", "2")
+                    +detailFormGroup("Товарный знак", "trademark", "3")
+                    +detailFormGroup("Срок действия", "validity", "4")
+                    .detail-form__group.detail-form__group--status(data-group="5")
+                        .dropdown
+                            button(type="button").dropdown__button.icon-arrow-down Поиск по статусу
+                            .dropdown__wrapper 
+                                .dropdown__search 
+                                    input(type="text" placeholder="Поиск по статусам").dropdown__input
+                                    button(type="button").dropdown__search-button.icon-search
+                                .dropdown__list
+                                    li.dropdown__list-item 
+                                        +checkbox("Статус 1", "status-1")
+                                    li.dropdown__list-item 
+                                        +checkbox("Статус 2", "status-2")
+                                    li.dropdown__list-item 
+                                        +checkbox("Статус 3", "status-3")
+                                    li.dropdown__list-item 
+                                        +checkbox("Статус 4", "status-4")
+                                    li.dropdown__list-item 
+                                        +checkbox("Статус 5", "status-5")
+                        .detail-form__actions 
+                            .checkbox-item
                                 .form-item
-                                    input(type="radio", name="search-status" id=`search-status-and` value="and" checked)
-                                    label(for=`search-status-and`) И
-                            .detail-form__radiobutton.radiobutton-item
-                                .form-item
-                                    input(type="radio", name="search-status" id=`search-status-or` value="or")
-                                    label(for=`search-status-or`) Или
+                                    input(type="checkbox", name="status" id="status")
+                                    label(for="status")
+                                        span 
+                                        | Исключить
+                            button(type="button").detail-form__btn-delete.icon-close-sm Удалить условие
+                        .detail-form__status-buttons
+                            .detail-form__radiobuttons
+                                .detail-form__radiobutton.radiobutton-item
+                                    .form-item
+                                        input(type="radio", name="search-status" id=`search-status-and` value="and" checked)
+                                        label(for=`search-status-and`) И
+                                .detail-form__radiobutton.radiobutton-item
+                                    .form-item
+                                        input(type="radio", name="search-status" id=`search-status-or` value="or")
+                                        label(for=`search-status-or`) Или
                 .detail-form__group.detail-form__group--condition
                     .dropdown.dropdown-condition
                         button(type="button").dropdown__button.icon-arrow-down Выберите условие

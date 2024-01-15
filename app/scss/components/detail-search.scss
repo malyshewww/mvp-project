@@ -167,10 +167,20 @@ body.is-open {
 }
 .btn-black {
 }
+[data-group]:last-child {
+    & .detail-form__status-buttons {
+        display: none;
+    }
+}
 .detail-form {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
+    &__wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
     &__groups {
         display: grid;
         grid-template-columns: 1fr;
