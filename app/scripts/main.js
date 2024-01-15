@@ -716,6 +716,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     scrollTop();
 
+    function headerObserver() {
+        const header = document.querySelector(".header");
+        const mainAside = document.querySelector(".main__aside");
+        const options = {
+            rootMargin: "0px 0px 0px 0px",
+            threshold: 0,
+        };
+        const observer = new IntersectionObserver(([entry]) => {
+            const targetInfo = entry.boundingClientRect;
+            const rootBoundsInfo = entry.rootBounds;
+            if (
+                targetInfo.bottom > rootBoundsInfo.top ||
+                targetInfo.isIntersecting
+            ) {
+                mainAside.classList.remove("fixed");
+            } else {
+                mainAside.classList.add("fixed");
+            }
+        }, options);
+        observer.observe(header);
+    }
+    headerObserver();
+
     // Расчет ширины маски в таблице слева и справа
     function setMaskWidth() {
         const mainTable = document.querySelector(".main__table");

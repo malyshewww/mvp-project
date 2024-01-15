@@ -55,6 +55,12 @@
                 content: none;
             }
         }
+        &.fixed {
+            .filter__button {
+                position: fixed;
+                left: 38px;
+            }
+        }
     }
 }
 .filter {
@@ -73,9 +79,9 @@
         top: 35px;
         left: 50%;
         transform: translateX(-50%);
-        position: sticky;
+        position: absolute;
         top: 35px;
-        margin-top: 35px;
+        // margin-top: 35px;
         transition: opacity 0.5s ease 0s;
         &::before {
             color: $white;
@@ -90,8 +96,8 @@
 body.is-open {
     & .filter__button {
         opacity: 0;
-        transform: translate(-50%, -100%);
-        position: absolute;
+        // transform: translate(-50%, -100%);
+        // position: absolute;
         pointer-events: none;
         transition: opacity 0.5s ease 0s;
     }
