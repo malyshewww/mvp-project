@@ -163,7 +163,9 @@ document.addEventListener("DOMContentLoaded", () => {
             target.closest('.detail-form__status-buttons input[type="radio"]')
         ) {
             let parent = target.closest(".detail-form__group");
-            let checkboxReset = parent.querySelector('input[type="checkbox"]');
+            let checkboxReset = parent.querySelector(
+                '.detail-form__actions input[type="checkbox"]'
+            );
             if (checkboxReset) {
                 target.value === "or"
                     ? checkboxReset.setAttribute("disabled", true)
@@ -283,7 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     createImageTooltip();
-    window.addEventListener("resize", createImageTooltip);
     // Подключение кастомного скроллбара, инициализация
     let simplebar;
     Array.prototype.forEach.call(
