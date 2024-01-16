@@ -35,6 +35,8 @@ block content
 							+reportDropdown("Дата регистрации", "report-register-date", ["Дата регистрации", "Дата регистрации"])
 							+reportDropdown("Статус", "report-status", ["Статус", "Статус", "Статус", "Статус"])
 							+reportDropdown("Срок действия", "report-validity", ["Срок действия", "Срок действия"])
+						.report-error.form-item
+							.form-error В отчете должно присутсовать минимум одно поле
 						button(type="button").report__btn-add(data-button-report) Добавить ещё
 					button(type="button").report__download.btn.btn-red Выгрузить отчёт
 				.report-preview(data-da=".report__content, 991.98, 1")

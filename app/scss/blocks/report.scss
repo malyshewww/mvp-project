@@ -40,6 +40,15 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
+            &.active {
+                & .report__field {
+                    &:nth-child(1) {
+                        & .report__field-delete {
+                            display: none;
+                        }
+                    }
+                }
+            }
         }
         &-title {
             color: $black;
@@ -55,11 +64,6 @@
         align-items: center;
         gap: 15px;
         width: 100%;
-        &:nth-child(1) {
-            & .report__field-delete {
-                display: none;
-            }
-        }
     }
     &__dropdown-input {
     }
@@ -139,10 +143,12 @@
         gap: 12px;
     }
 }
-
 .form-item {
 }
 .report {
+    &-error {
+        margin-top: 12px;
+    }
     .dropdown {
         &-input {
             pointer-events: none;

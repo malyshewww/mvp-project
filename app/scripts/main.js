@@ -730,9 +730,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 targetInfo.bottom > rootBoundsInfo.top ||
                 targetInfo.isIntersecting
             ) {
-                mainAside.classList.remove("fixed");
+                mainAside?.classList.remove("fixed");
             } else {
-                mainAside.classList.add("fixed");
+                mainAside?.classList.add("fixed");
             }
         }, options);
         observer.observe(header);
@@ -804,6 +804,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // initDropdown();
 
     // Dropdown menu (NEW)
+    let reportFields = [...document.querySelectorAll('.report__field')];
+    let countFields = [...reportFields].length;
+    let reportError = document.querySelector('.report-error .form-error');
+    let reportBox = document.querySelector('.report__fields-box')
+    reportError.style.display = countFields === 1 ? "block" : "none";
+    let firstChild = document.querySelector('.report__field:first-child');
     function deactivateAllDropdownTriggers() {
         const activeDropdownButtons = document.querySelectorAll(
             ".dropdown__button.active"
@@ -849,55 +855,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (target.closest(".report__field-delete")) {
             let parent = target.closest(".report__field");
+            countFields--;
+            if (countFields === 1) {
+                reportError.style.display = "block"
+                reportBox.classList.add('active');
+            }
             parent.remove();
         }
     }
     document.addEventListener("click", handleDropdownClicks, false);
 
     // Клонирование первого списка на странице с отчетами
-    const reportPage = document.querySelector(".report");
-    if (reportPage) {
-        const reportList = reportPage.querySelector(".report__fields-box");
-        reportPage.addEventListener("click", (event) => {
-            if (event.target.closest("[data-button-report]")) {
-                const reportFileds =
-                    reportPage.querySelectorAll(".report__field");
-                const clone = reportFileds[0].cloneNode(true);
-                reportList.insertBefore(
-                    clone,
-                    reportFileds[reportFileds.length]
-                );
-            }
-        });
-    }
-    // mouseover/mouseout on menu
-    const languageHeader = document.querySelector(".language-header");
-    if (languageHeader) {
-        languageHeader.addEventListener("mouseenter", () => {
-            languageHeader.classList.add("active");
-        });
-        languageHeader.addEventListener("mouseleave", () => {
-            languageHeader.classList.remove("active");
-        });
-    }
-    // setDataattribute for detail-form__group
-
-    function detailGroupActions() {
-        const groupArr = [];
-        const currentDetailGroups = document.querySelectorAll("[data-group]");
-        [...currentDetailGroups].forEach((group, index) => {
-            groupArr.push(index);
-        });
-        let lastIndex = [...currentDetailGroups].length - 1;
-        if (currentDetailGroups[lastIndex]) {
-            removeRadioButtons(currentDetailGroups[lastIndex]);
-        }
-    }
-    function removeRadioButtons(last) {
-        const radiobuttons = last.querySelector(".detail-form__status-buttons");
-        if (radiobuttons) {
-            radiobuttons.style.display = "none";
-        }
-    }
-    detailGroupActions();
+    // const reportPage = document.querySelector(".report");
+    // if (reportPage) {
+    //     const reportList = reportPage.querySelector(".report__fields-box");
+    //     reportPage.addEventListener("click", (event) => {
+    //         if (event.target.closest("[data-button-report]")) {
+    //             const reportFileds =
+    //                 reportPage.querySelectorAll(".report__field");
+    //             const clone = reportFileds[0].cloneNode(true);
+    //             reportList.insertBefore(
+    //                 clone,
+    //                 reportFileds[reportFileds.length]
+    //             );
+    //         }
+    //     });
+    // }
 });
