@@ -804,12 +804,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // initDropdown();
 
     // Dropdown menu (NEW)
-    let reportFields = [...document.querySelectorAll('.report__field')];
+    let reportFields = [...document.querySelectorAll(".report__field")];
     let countFields = [...reportFields].length;
-    let reportError = document.querySelector('.report-error .form-error');
-    let reportBox = document.querySelector('.report__fields-box')
-    reportError.style.display = countFields === 1 ? "block" : "none";
-    let firstChild = document.querySelector('.report__field:first-child');
+    let reportError = document.querySelector(".report-error .form-error");
+    let reportBox = document.querySelector(".report__fields-box");
+    if (reportError) {
+        reportError.style.display = countFields === 1 ? "block" : "none";
+    }
+    let firstChild = document.querySelector(".report__field:first-child");
     function deactivateAllDropdownTriggers() {
         const activeDropdownButtons = document.querySelectorAll(
             ".dropdown__button.active"
@@ -857,8 +859,10 @@ document.addEventListener("DOMContentLoaded", () => {
             let parent = target.closest(".report__field");
             countFields--;
             if (countFields === 1) {
-                reportError.style.display = "block"
-                reportBox.classList.add('active');
+                if (reportError) {
+                    reportError.style.display = "block";
+                }
+                reportBox.classList.add("active");
             }
             parent.remove();
         }
@@ -881,4 +885,94 @@ document.addEventListener("DOMContentLoaded", () => {
     //         }
     //     });
     // }
+
+    // Календарь AirDatepicker с локализацией
+    let dpMin, dpMax;
+    let datepickerLocale = "";
+    let detailDate = document.querySelector(".detail-date");
+    if (detailDate) {
+        // Получаем значение локали за дата атрибута
+        let dataLocale = detailDate.dataset.locale;
+        datepickerLocale = dataLocale;
+    }
+    const locale = {
+        en: {
+            days: [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+            ],
+            daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+            months: [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+            ],
+            monthsShort: [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+            ],
+        },
+        ru: {
+            months: [
+                "Январь",
+                "Февраль",
+                "Март",
+                "Апрель",
+                "Май",
+                "Июнь",
+                "Июль",
+                "Август",
+                "Сентябрь",
+                "Октябрь",
+                "Ноябрь",
+                "Декабрь",
+            ],
+        },
+    };
+    const datepickerConfig = {
+        autoClose: true,
+        isMobile: false,
+        locale: datepickerLocale == "en" ? locale["en"] : locale["ru"],
+    };
+    dpMin = new AirDatepicker("input[name='validity-from']", {
+        ...datepickerConfig,
+        onSelect({ date }) {
+            dpMax.update({
+                minDate: date,
+            });
+        },
+    });
+    dpMax = new AirDatepicker("input[name='validity-to']", {
+        ...datepickerConfig,
+        onSelect({ date }) {
+            dpMin.update({
+                maxDate: date,
+            });
+        },
+    });
 });

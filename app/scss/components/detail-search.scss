@@ -305,6 +305,9 @@ body.is-open {
     }
 }
 .detail-date {
+    & input {
+        cursor: pointer;
+    }
     & .form-input {
         text-align: right;
         &::placeholder {
@@ -323,6 +326,7 @@ body.is-open {
         font-size: 14px;
         font-weight: 400;
         line-height: 120%;
+        pointer-events: none;
     }
 }
 .form-item {

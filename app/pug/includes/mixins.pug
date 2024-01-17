@@ -25,13 +25,13 @@ mixin detailFormGroup(label, inputName, dataId)
 	.detail-form__group(data-group=dataId)
 		.detail-form__label= label
 		if inputName === "validity"
-			.detail-form__dates.detail-date
+			.detail-form__dates.detail-date(data-locale="en")
 				.detail-date__item.form-item
 					.detail-date__text от
-					input(type="text" placeholder="__.__.__" name=`${inputName}-from` maxlength="10").detail-form__input.form-input
+					input(type="text" placeholder="__.__.__" name=`${inputName}-from` maxlength="10" readonly="readonly" autocomplete="off").detail-form__input.form-input
 				.detail-date__item.form-item
 					.detail-date__text до
-					input(type="text" placeholder="__.__.__" name=`${inputName}-to` maxlength="10").detail-form__input.form-input
+					input(type="text" placeholder="__.__.__" name=`${inputName}-to` maxlength="10" readonly="readonly" autocomplete="off").detail-form__input.form-input
 		else
 			.form-item
 				input(type="text" placeholder="Введите значение").detail-form__input.form-input
