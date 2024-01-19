@@ -888,13 +888,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Календарь AirDatepicker с локализацией
     let dpMin, dpMax;
-    let datepickerLocale = "";
     let detailDate = document.querySelector(".detail-date");
-    if (detailDate) {
-        // Получаем значение локали за дата атрибута
-        let dataLocale = detailDate.dataset.locale;
-        datepickerLocale = dataLocale;
-    }
     const locale = {
         en: {
             days: [
@@ -957,7 +951,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const datepickerConfig = {
         autoClose: true,
         isMobile: false,
-        locale: datepickerLocale == "en" ? locale["en"] : locale["ru"],
+        locale: locale[detailDate?.dataset.locale],
+        // position: "bottom",
     };
     dpMin = new AirDatepicker("input[name='validity-from']", {
         ...datepickerConfig,
