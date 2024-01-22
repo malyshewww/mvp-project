@@ -952,7 +952,37 @@ document.addEventListener("DOMContentLoaded", () => {
         autoClose: true,
         isMobile: false,
         locale: locale[detailDate?.dataset.locale],
-        // position: "bottom",
+        position({ $datepicker, $target, $pointer, done }) {
+            popper = Popper.createPopper($target, $datepicker, {
+                placement: "bottom",
+                modifiers: [
+                    {
+                        name: "flip",
+                        options: {
+                            padding: {
+                                top: 64,
+                            },
+                        },
+                    },
+                    {
+                        name: "offset",
+                        options: {
+                            offset: [0, 20],
+                        },
+                    },
+                    {
+                        name: "arrow",
+                        options: {
+                            element: $pointer,
+                        },
+                    },
+                ],
+            });
+            return function completeHide() {
+                popper.destroy();
+                done();
+            };
+        },
     };
     dpMin = new AirDatepicker("input[name='validity-from']", {
         ...datepickerConfig,
