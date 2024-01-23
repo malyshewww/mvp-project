@@ -887,117 +887,117 @@ document.addEventListener("DOMContentLoaded", () => {
     // }
 
     // Календарь AirDatepicker с локализацией
-    let dpMin, dpMax;
-    let detailDate = document.querySelector(".detail-date");
-    const locale = {
-        en: {
-            days: [
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-            ],
-            daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-            daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
-            months: [
-                "January",
-                "February",
-                "March",
-                "April",
-                "May",
-                "June",
-                "July",
-                "August",
-                "September",
-                "October",
-                "November",
-                "December",
-            ],
-            monthsShort: [
-                "Jan",
-                "Feb",
-                "Mar",
-                "Apr",
-                "May",
-                "Jun",
-                "Jul",
-                "Aug",
-                "Sep",
-                "Oct",
-                "Nov",
-                "Dec",
-            ],
-        },
-        ru: {
-            months: [
-                "Январь",
-                "Февраль",
-                "Март",
-                "Апрель",
-                "Май",
-                "Июнь",
-                "Июль",
-                "Август",
-                "Сентябрь",
-                "Октябрь",
-                "Ноябрь",
-                "Декабрь",
-            ],
-        },
-    };
-    const datepickerConfig = {
-        autoClose: true,
-        isMobile: false,
-        locale: locale[detailDate?.dataset.locale],
-        position({ $datepicker, $target, $pointer, done }) {
-            popper = Popper.createPopper($target, $datepicker, {
-                placement: "bottom",
-                modifiers: [
-                    {
-                        name: "flip",
-                        options: {
-                            padding: {
-                                top: 64,
-                            },
-                        },
-                    },
-                    {
-                        name: "offset",
-                        options: {
-                            offset: [0, 20],
-                        },
-                    },
-                    {
-                        name: "arrow",
-                        options: {
-                            element: $pointer,
-                        },
-                    },
-                ],
-            });
-            return function completeHide() {
-                popper.destroy();
-                done();
-            };
-        },
-    };
-    dpMin = new AirDatepicker("input[name='validity-from']", {
-        ...datepickerConfig,
-        onSelect({ date }) {
-            dpMax.update({
-                minDate: date,
-            });
-        },
-    });
-    dpMax = new AirDatepicker("input[name='validity-to']", {
-        ...datepickerConfig,
-        onSelect({ date }) {
-            dpMin.update({
-                maxDate: date,
-            });
-        },
-    });
+    // let dpMin, dpMax;
+    // let detailDate = document.querySelector(".detail-date");
+    // const locale = {
+    //     en: {
+    //         days: [
+    //             "Sunday",
+    //             "Monday",
+    //             "Tuesday",
+    //             "Wednesday",
+    //             "Thursday",
+    //             "Friday",
+    //             "Saturday",
+    //         ],
+    //         daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    //         daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    //         months: [
+    //             "January",
+    //             "February",
+    //             "March",
+    //             "April",
+    //             "May",
+    //             "June",
+    //             "July",
+    //             "August",
+    //             "September",
+    //             "October",
+    //             "November",
+    //             "December",
+    //         ],
+    //         monthsShort: [
+    //             "Jan",
+    //             "Feb",
+    //             "Mar",
+    //             "Apr",
+    //             "May",
+    //             "Jun",
+    //             "Jul",
+    //             "Aug",
+    //             "Sep",
+    //             "Oct",
+    //             "Nov",
+    //             "Dec",
+    //         ],
+    //     },
+    //     ru: {
+    //         months: [
+    //             "Январь",
+    //             "Февраль",
+    //             "Март",
+    //             "Апрель",
+    //             "Май",
+    //             "Июнь",
+    //             "Июль",
+    //             "Август",
+    //             "Сентябрь",
+    //             "Октябрь",
+    //             "Ноябрь",
+    //             "Декабрь",
+    //         ],
+    //     },
+    // };
+    // const datepickerConfig = {
+    //     autoClose: true,
+    //     isMobile: false,
+    //     locale: locale[detailDate?.dataset.locale],
+    //     position({ $datepicker, $target, $pointer, done }) {
+    //         popper = Popper.createPopper($target, $datepicker, {
+    //             placement: "bottom",
+    //             modifiers: [
+    //                 {
+    //                     name: "flip",
+    //                     options: {
+    //                         padding: {
+    //                             top: 64,
+    //                         },
+    //                     },
+    //                 },
+    //                 {
+    //                     name: "offset",
+    //                     options: {
+    //                         offset: [0, 20],
+    //                     },
+    //                 },
+    //                 {
+    //                     name: "arrow",
+    //                     options: {
+    //                         element: $pointer,
+    //                     },
+    //                 },
+    //             ],
+    //         });
+    //         return function completeHide() {
+    //             popper.destroy();
+    //             done();
+    //         };
+    //     },
+    // };
+    // dpMin = new AirDatepicker("input[name='validity-from']", {
+    //     ...datepickerConfig,
+    //     onSelect({ date }) {
+    //         dpMax.update({
+    //             minDate: date,
+    //         });
+    //     },
+    // });
+    // dpMax = new AirDatepicker("input[name='validity-to']", {
+    //     ...datepickerConfig,
+    //     onSelect({ date }) {
+    //         dpMin.update({
+    //             maxDate: date,
+    //         });
+    //     },
+    // });
 });
